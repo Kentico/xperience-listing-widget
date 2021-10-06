@@ -1,0 +1,160 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+
+@using Kentico.Activities.Web.Mvc
+@using Kentico.Membership.Web.Mvc
+@using Kentico.OnlineMarketing.Web.Mvc
+
+@using DancingGoat.Helpers
+@using DancingGoat.Widgets
+
+@inject IHtmlLocalizer<SharedResources> HtmlLocalizer
+
+@{
+    const string ENGLISH = "English";
+    const string ESPANOL = "Español";
+
+    var currentCultureCode = Convert.ToString(@ViewContext.RouteData.Values["culture"]);
+    var currentLanguage = currentCultureCode.Equals("es-es", StringComparison.OrdinalIgnoreCase) ? "ES" : "EN";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head id="head">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8" />
+    @Html.Kentico().PageDescription()
+    @Html.Kentico().PageKeywords()
+    @Html.Kentico().PageTitle(ViewBag.Title as string)
+    <link rel="icon" href="~/content/images/favicon.svg" type="image/svg+xml" />
+    <link href="~/Content/Styles/Site.css" rel="stylesheet" type="text/css" />
+    <link rel="canonical" href="@Url.Kentico().PageCanonicalUrl()" />
+    @RenderSection("styles", required: false)
+    @Html.Kentico().ABTestLoggerScript()
+    @Html.Kentico().ActivityLoggingScript()
+    @Html.Kentico().WebAnalyticsLoggingScript()
+    <page-builder-styles />
+</head>
+<body class="@ViewData["PageClass"]">
+    <div class="page-wrap">
+        <vc:tracking-consent />
+        <header data-ktc-search-exclude>
+            <nav class="navigation">
+                <div class="nav-logo">
+                    <div class="logo-wrapper">
+                        <a href="@Url.Kentico().PageUrl(ContentItemIdentifiers.HOME)" class="logo-link">
+                            <img class="logo-image" alt="Dancing Goat" src="~/Content/Images/logo.svg" />
+                        </a>
+                    </div>
+                </div>
+                <vc:navigation footer-navigation="false" />
+                <ul class="additional-menu">
+                    <li class="search-menu-item">
+                        <form asp-action="Index" asp-controller="Search" method="get" class="searchBox">
+                            <input name="searchtext" type="text" placeholder="@HtmlLocalizer["Search"]" autocomplete="off" />
+                            <input type="submit" value="" class="search-box-btn" />
+                        </form>
+                    </li>
+                    <li class="dropdown">
+                        <a title="User" class="dropbtn">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <img src="@Url.Kentico().AvatarUrl(User.Identity.Name, pathToDefaultAvatar: "~/Content/Images/default-avatar.png")" class="dropdown-desktop-avatar" alt="avatar" />
+                            }
+                            else
+                            {
+                                <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M5.44934 14H15.4493C18.2108 14 20.4493 16.2386 20.4493 19C20.4493 19.5523 20.0016 20 19.4493 20C18.9365 20 18.5138 19.614 18.4561 19.1166L18.4442 18.8237C18.3564 17.3072 17.1421 16.093 15.6256 16.0051L15.4493 16H5.44934C3.79249 16 2.44934 17.3431 2.44934 19C2.44934 19.5523 2.00163 20 1.44934 20C0.897056 20 0.449341 19.5523 0.449341 19C0.449341 16.3112 2.57165 14.1182 5.23245 14.0046L5.44934 14H15.4493H5.44934ZM10.4493 0C13.763 0 16.4493 2.68629 16.4493 6C16.4493 9.31371 13.763 12 10.4493 12C7.13563 12 4.44934 9.31371 4.44934 6C4.44934 2.68629 7.13563 0 10.4493 0ZM10.4493 2C8.2402 2 6.44934 3.79086 6.44934 6C6.44934 8.20914 8.2402 10 10.4493 10C12.6585 10 14.4493 8.20914 14.4493 6C14.4493 3.79086 12.6585 2 10.4493 2Z" fill="currentColor" />
+                                </svg>
+                            }
+                        </a>
+                        <div class="dropdown-content">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <a asp-controller="Account" asp-action="YourAccount">@HtmlLocalizer["Your&nbsp;account"]</a>
+                                <form method="post" asp-controller="Account" asp-action="Logout">
+                                    <input type="submit" value="@HtmlLocalizer["Sign out"]" class="sign-out-button" />
+                                </form>
+                            }
+                            else
+                            {
+                                <a asp-controller="Account" asp-action="Register">@HtmlLocalizer["Register"]</a>
+                                <a asp-controller="Account" asp-action="Login">@HtmlLocalizer["Login"]</a>
+                            }
+                        </div>
+                    </li>
+                    @if (Context.Response.StatusCode == (int)System.Net.HttpStatusCode.OK)
+                    {
+                        <li class="dropdown">
+                            <a class="dropbtn">@currentLanguage</a>
+                            <div class="dropdown-content">
+                                <culture-link link-text="@ENGLISH" culture-name="en-US" />
+                                <culture-link link-text="@ESPANOL" culture-name="es-ES" />
+                            </div>
+                        </li>
+                    }
+                    <li>
+                        <a asp-controller="Checkout" asp-action="ShoppingCart" class="navigation__cta">
+                            <svg width="26" height="24" viewBox="0 0 26 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.94934 19C10.7778 19 11.4493 19.6716 11.4493 20.5C11.4493 21.3284 10.7778 22 9.94934 22C9.12091 22 8.44934 21.3284 8.44934 20.5C8.44934 19.6716 9.12091 19 9.94934 19ZM18.9493 19C19.7778 19 20.4493 19.6716 20.4493 20.5C20.4493 21.3284 19.7778 22 18.9493 22C18.1209 22 17.4493 21.3284 17.4493 20.5C17.4493 19.6716 18.1209 19 18.9493 19ZM4.44934 2H6.44934C6.90494 2 7.29765 2.30684 7.4144 2.73774L7.43771 2.84794L7.92264 6H22.4493C23.0491 6 23.5043 6.52068 23.4445 7.10035L23.4255 7.21693L21.7736 14.6508C21.4818 15.9637 20.3552 16.9143 19.0273 16.9945L18.845 17H10.1652C8.74369 17 7.52631 16.0044 7.23199 14.6299L7.20006 14.4562L5.59142 4H4.44934C3.89706 4 3.44934 3.55228 3.44934 3C3.44934 2.48716 3.83538 2.06449 4.33272 2.00673L4.44934 2H6.44934H4.44934ZM21.2027 8H8.23034L9.17681 14.1521C9.24608 14.6024 9.60907 14.9438 10.0527 14.9937L10.1652 15H18.845C19.2746 15 19.6514 14.7265 19.7896 14.3285L19.8212 14.2169L21.2027 8Z" fill="currentColor" />
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="nav-toggle">
+                        <div class="nav-toggle-inner">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+            <div class="search-mobile">
+                <form asp-action="Index" asp-controller="Search" method="get" class="searchBox">
+                    <input name="searchtext" type="text" placeholder="@HtmlLocalizer["Search"]" autocomplete="off" />
+                    <input type="submit" value="" class="search-box-btn" />
+                </form>
+            </div>
+        </header>
+        <div class="container">
+            <div class="page-container-inner">
+                @RenderBody()
+
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-wrapper">
+        <footer data-ktc-search-exclude>
+            <div class="footer-container">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-8 col-lg-7 footer-col">
+                            <h5 class="contact-title">@HtmlLocalizer["Contact"]</h5>
+                            <vc:company-address />
+                            <vc:social-links />
+                        </div>
+                        <div class="col-xs-12 col-md-4 col-lg-5 footer-col">
+                            <h5>@HtmlLocalizer["News & Updates"]</h5>
+                            @await Html.Kentico().RenderStandaloneWidgetAsync(NewsletterSubscriptionViewComponent.IDENTIFIER, new NewsletterSubscriptionProperties())
+
+                            <div class="copyright">Copyright &copy; @DateTime.Now.Year Dancing Goat. All rights reserved.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="~/Scripts/jquery-3.5.1.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/responsiveMenuDropdown.js"></script>
+    <script src="~/Scripts/mobileMenu.js"></script>
+    <page-builder-scripts />
+
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

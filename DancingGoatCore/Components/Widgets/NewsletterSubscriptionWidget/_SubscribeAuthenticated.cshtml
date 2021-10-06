@@ -1,0 +1,7 @@
+﻿<form class="subscribe-form authenticated" asp-action="SubscribeAuthenticated" asp-controller="NewsletterSubscriptionWidget" asp-antiforgery="true" onsubmit="replaceForm(event)">
+    <component-properties-data />
+
+    <p>@HtmlLocalizer["Want to stay up to date? Please leave us your email address."]</p>
+
+    <input type="submit" value="@HtmlLocalizer["Subscribe"]" class="btn btn-primary" />
+</form>

@@ -1,0 +1,72 @@
+﻿@model DancingGoat.Models.OrderDetailViewModel
+
+@{
+    ViewBag.Title = HtmlLocalizer["Order Detail"].Value;
+    ViewData["PageClass"] = "inverted";
+}
+
+<a asp-controller="Orders" asp-action="Index">&larr; @HtmlLocalizer["back to Your Orders"]</a>
+<h2>
+    @HtmlLocalizer["Order Detail"]
+    @Model.InvoiceNumber - @HtmlLocalizer[Model.StatusName]
+</h2>
+<hr />
+<div>
+    <div class="row">
+        <div class="col-md-6">
+            <h3>@HtmlLocalizer["Billing details"]</h3>
+            @Html.DisplayFor(m => m.OrderAddress)
+        </div>
+        <div class="col-md-6">
+            <h3>@HtmlLocalizer["Shipping details"]</h3>
+            @Html.DisplayFor(m => m.OrderAddress)
+        </div>
+    </div>
+    <div>
+        <h4>@HtmlLocalizer["Order Items"]</h4>
+        <hr />
+        @foreach (var orderItem in Model.OrderItems)
+        {
+            <div class="row order-item">
+                <div class="col-md-10">
+                    @if (!string.IsNullOrEmpty(orderItem.SKUImagePath))
+                    {
+                        <div class="order-item-image">
+                            <a asp-controller="Checkout" asp-action="ItemDetail" asp-route-skuId="@orderItem.SKUID">
+                                <img src="@orderItem.SKUImagePath" alt="@orderItem.SKUName" title="@orderItem.SKUName" />
+                            </a>
+                        </div>
+                    }
+                    <div class="order-item-info">
+                        @Html.ActionLink(orderItem.SKUName, "ItemDetail", "Checkout", new {skuId = orderItem.SKUID }, null)
+                    </div>
+                    <div class="order-item-amount">
+                        <div>
+                            <span class="strong">Qty: </span>
+                            <span>@orderItem.UnitCount</span>
+                        </div>
+                        <div>
+                            <span class="strong">Unit price: </span>
+                            <span>@Model.FormatPrice(orderItem.UnitPrice)</span>
+                        </div>
+
+                    </div>
+
+                    @Html.ValidationMessage(orderItem.UnitPrice.ToString(), new {@class = "red"})
+
+                </div>
+                <div class="col-md-2 order-item-subtotal">
+                    <span>@Model.FormatPrice(orderItem.TotalPriceInMainCurrency)</span>
+                </div>
+            </div>
+            <hr />
+        }
+        <div class="order-total-price">
+            <div>
+                <span class="strong">@HtmlLocalizer["TOTAL (incl. tax):"]</span>
+                <span class="total-price">@Model.FormatPrice(Model.TotalPrice)</span>
+            </div>
+        </div>
+
+    </div>
+</div>

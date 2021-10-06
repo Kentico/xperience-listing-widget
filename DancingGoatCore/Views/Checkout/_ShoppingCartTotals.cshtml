@@ -1,0 +1,47 @@
+﻿@model DancingGoat.Models.CartViewModel
+
+@{
+    var tax = Model.TotalTax;
+    var shipping = Model.TotalShipping;
+}
+
+@if (tax > 0)
+{
+    <div class="cart-total-viewer">
+        <div class="label">
+            @HtmlLocalizer["Total tax"]
+        </div>
+        <div class="value">
+            @Model.FormatPrice(tax)
+        </div>
+    </div>
+}
+
+@if (shipping > 0)
+{
+    <div class="cart-total-viewer">
+        <div class="label">
+            @HtmlLocalizer["Shipping"]
+        </div>
+        <div class="value">
+            @Model.FormatPrice(shipping)
+        </div>
+    </div>
+}
+
+
+@if ((tax > 0) || (shipping > 0))
+{
+    <hr />
+}
+
+<div class="cart-total">
+    <div class="cart-total-viewer">
+        <div class="label">
+            <span>@HtmlLocalizer["Total (incl. tax estimate)"]</span>
+        </div>
+        <div class="value">
+            <span>@Model.FormatPrice(Model.GrandTotal)</span>
+        </div>
+    </div>
+</div>

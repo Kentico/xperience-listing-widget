@@ -1,0 +1,19 @@
+﻿@using DancingGoat.Widgets
+
+@model NewsletterSubscriptionSubscribeModel
+
+<form class="subscribe-form" asp-action="Subscribe" asp-controller="NewsletterSubscriptionWidget" asp-antiforgery="true" onsubmit="replaceForm(event)">
+    <component-properties-data />
+
+    <div class="form-group">
+        <div class="form-group-label">
+            <label asp-for="Email"></label>
+        </div>
+        <div class="form-group-input">
+            <input asp-for="Email" />
+        </div>
+    </div>
+
+    <input id="btnSubscribe" type="submit" value="@HtmlLocalizer["Subscribe"]" class="btn btn-primary" />
+</form>
+<span asp-validation-for="Email" class="message message-error"></span>

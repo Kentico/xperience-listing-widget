@@ -1,0 +1,18 @@
+﻿@model DancingGoat.Models.CoffeeViewModel
+
+<div class="product-detail-properties">
+    <h4>@HtmlLocalizer["Parameters"]</h4>
+    <dl class="row">
+        <dt class="col-xs-12 col-sm-4">@HtmlLocalizer["Farm"]</dt>
+
+        <dd class="col-xs-12 col-sm-8">@(string.IsNullOrEmpty(Model.Farm) ? "-" : Model.Farm)</dd>
+        <dt class="col-xs-12 col-sm-4">@HtmlLocalizer["Variety"]</dt>
+        <dd class="col-xs-12 col-sm-8">@(string.IsNullOrEmpty(Model.Variety) ? "-" : Model.Variety)</dd>
+        <dt class="col-xs-12 col-sm-4">@HtmlLocalizer["Processing"]</dt>
+        <dd class="col-xs-12 col-sm-8">@(string.IsNullOrEmpty(Model.Processing) ? "-" : Model.Processing)</dd>
+        <dt class="col-xs-12 col-sm-4">@HtmlLocalizer["Altitude"]</dt>
+        <dd class="col-xs-12 col-sm-8">@Model.Altitude feet</dd>
+        <dt class="col-xs-12 col-sm-4">@HtmlLocalizer["Decaf"]</dt>
+        <dd class="col-xs-12 col-sm-8">@(Model.IsDecaf ? HtmlLocalizer["Yes"] : HtmlLocalizer["No"])</dd>
+    </dl>
+</div>

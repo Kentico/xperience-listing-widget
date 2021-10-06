@@ -1,0 +1,39 @@
+﻿@model DancingGoat.Models.ProductListItemViewModel
+
+@{
+    var price = Model.PriceDetail;
+    var currency = price.Currency;
+}
+
+<article class="product-tile">
+    <a href="@Model.Url">
+        <h1 class="product-heading">@Model.Name</h1>
+        @if (!string.IsNullOrEmpty(Model.PublicStatusName))
+        {
+            <span class="product-tile-status">
+                @HtmlLocalizer[Model.PublicStatusName]
+            </span>
+        }
+        <figure class="product-tile-image">
+            @if (!string.IsNullOrEmpty(Model.ImagePath))
+            {
+                <img src="@Model.ImagePath" alt="@Model.Name" title="@Model.Name" />
+                @if (!Model.Available)
+                {
+                    <span class="product-tile-stock notavailable"> @HtmlLocalizer["Out of stock"]</span>
+                }
+            }
+        </figure>
+        <div class="product-tile-info">
+            <span class="product-tile-price">
+                @string.Format(currency.CurrencyFormatString, price.Price)
+            </span>
+            @if (price.ListPrice > price.Price)
+            {
+                <span class="product-tile-list-price">
+                    @string.Format(currency.CurrencyFormatString, price.ListPrice)
+                </span>
+            }
+        </div>
+    </a>
+</article>

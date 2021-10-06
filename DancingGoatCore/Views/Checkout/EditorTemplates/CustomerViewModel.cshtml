@@ -1,0 +1,25 @@
+﻿@using DancingGoat.Helpers
+
+@model DancingGoat.Models.CustomerViewModel
+
+<h4>@HtmlLocalizer["Customer details"]</h4>
+
+@Html.ValidatedEditorFor(m => m.FirstName)
+@Html.ValidatedEditorFor(m => m.LastName)
+@if (User.Identity.IsAuthenticated && !string.IsNullOrWhiteSpace(Model.Email))
+{
+    @Html.HiddenFor(model => model.Email)
+    @Html.ValidatedEditorFor(model => model.Email, disabled: true)
+}
+else
+{
+    @Html.ValidatedEditorFor(model => model.Email)
+}
+
+@Html.ValidatedEditorFor(m => m.PhoneNumber)
+
+<h4>@HtmlLocalizer["Company details"]</h4>
+
+@Html.ValidatedEditorFor(m => m.Company)
+@Html.ValidatedEditorFor(m => m.OrganizationID)
+@Html.ValidatedEditorFor(m => m.TaxRegistrationID)

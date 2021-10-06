@@ -1,0 +1,31 @@
+﻿@model DancingGoat.Models.CartViewModel
+
+@foreach (var cartItem in Model.CartItems)
+{
+    <div class="row">
+        <div class="col-md-10">
+            @if (!string.IsNullOrEmpty(cartItem.SKUImagePath))
+            {
+                <div class="cart-item-image">
+                    <a href="@Url.Action("ItemDetail", new { skuId = cartItem.SKUID })">
+                        <img src="@cartItem.SKUImagePath" alt="@cartItem.SKUName" title="@cartItem.SKUName" />
+                    </a>
+                </div>
+            }
+            <div class="cart-item-info">
+                @Html.ActionLink(cartItem.SKUName, "ItemDetail", new { skuId = cartItem.SKUID })
+            </div>
+            <div class="cart-item-amount">
+                <span>Qty</span>
+                <input type="text" name="Units" value="@cartItem.CartItemUnits" class="form-control" disabled />
+            </div>
+
+            @Html.ValidationMessage(cartItem.CartItemID.ToString(), new { @class = "red" })
+
+        </div>
+        <div class="col-md-2 cart-item-subtotal">
+            <span>@Model.FormatPrice(cartItem.TotalPrice)</span>
+        </div>
+    </div>
+    <hr />
+}

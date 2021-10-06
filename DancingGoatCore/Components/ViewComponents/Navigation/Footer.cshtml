@@ -1,0 +1,14 @@
+﻿@using DancingGoat.Models
+
+@model IEnumerable<MenuItemViewModel>
+
+@if (Model.Any())
+{
+    <h3 class="">@HtmlLocalizer["Navigation"]</h3>
+
+    foreach (var menuItem in Model)
+    {
+        <a href="@menuItem.Url">@HtmlLocalizer[menuItem.Caption]</a>
+        <br />
+    }
+}

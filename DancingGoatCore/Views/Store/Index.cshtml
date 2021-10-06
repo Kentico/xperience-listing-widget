@@ -1,0 +1,26 @@
+﻿@using DancingGoat.Models
+
+@model StoreViewModel
+
+@{
+    Layout = "~/Views/Shared/_StoreLayout.cshtml";
+    ViewData["PageClass"] = "inverted";
+}
+<h2>@HtmlLocalizer["Bestsellers"]</h2>
+<div class="product-page row">
+    <div class="product-list">
+        <partial name="_StoreProductList" model="Model.FeaturedProducts" />
+    </div>
+</div>
+
+<h2>@HtmlLocalizer["Hot tips"]</h2>
+<div class="product-page row">
+    <div class="product-list">
+        <partial name="_StoreProductList" model="Model.HotTipProducts" />
+    </div>
+</div>
+
+<h2>@HtmlLocalizer["Manufacturers"]</h2>
+<div class="product-page row">
+    <partial name="_ManufacturerList" model="Model.Manufacturers" />
+</div>

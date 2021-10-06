@@ -1,0 +1,15 @@
+﻿@model DancingGoat.Models.ThankYouViewModel
+
+@{ 
+    ViewBag.Title = HtmlLocalizer["Thank You!"].Value;
+    ViewData["PageClass"] = "inverted no-bg";
+}
+
+<div class="col-md-6 col-lg-5">
+    <div class="thank-you-content">
+        <h2>@HtmlLocalizer["Thank You!"]</h2>
+
+        <p>@HtmlLocalizer["Your order was successfully processed. We will pack your items carefully and ship them to you right away."]</p>
+        <p>@HtmlLocalizer["If you have any questions or suggestions regarding the order process, call us at {0}.", Model.Phone]</p>
+    </div>
+</div>

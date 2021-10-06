@@ -1,0 +1,20 @@
+﻿@model DancingGoat.Models.CountryStateViewModel
+
+<div class="js-country-state-selector" data-statelistaction='@Url.Action("CountryStates", "Checkout")' data-countryselectedid='@Model.CountryID' data-stateselectedid='@Model.StateID' data-countryfield='CountryID' data-statefield='StateID'>
+
+    <label asp-for="CountryID"></label>
+    @Html.DropDownListFor(m => m.CountryID, Model.Countries, HtmlLocalizer["Select country"].Value, new { @class = "js-country-selector" })
+
+    <div class="message message-error">
+        <span asp-validation-for="CountryID"></span>
+    </div>
+
+    <div class="js-state-selector-container">
+        <label asp-for="StateID"></label>
+        @Html.DropDownListFor(m => m.StateID, Enumerable.Empty<SelectListItem>(), HtmlLocalizer["Select state"].Value, new { @class = "js-state-selector" })
+
+        <div class="message message-error">
+            <span asp-validation-for="StateID"></span>
+        </div>
+    </div>
+</div>

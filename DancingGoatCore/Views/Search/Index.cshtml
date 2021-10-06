@@ -1,0 +1,72 @@
+﻿@using DancingGoat.Models;
+
+@model SearchResultsModel
+
+@{
+    ViewBag.Title = String.Format(HtmlLocalizer["Results for \"{0}\""].Value, Model.Query);
+    ViewData["PageClass"] = "inverted";
+}
+
+<h2>@HtmlLocalizer["Results for \"{0}\"", Model.Query]</h2>
+
+@if (!Model.Items.Any())
+{
+    if (!String.IsNullOrWhiteSpace(Model.Query))
+    {
+        @HtmlLocalizer["Sorry, no results match {0}", Model.Query]
+    }
+}
+else
+{
+    foreach (var item in Model.Items)
+    {
+        if (item is SearchResultProductItemModel)
+        {
+            @Html.DisplayFor(m => item, nameof(SearchResultProductItemModel))
+        }
+        else
+        {
+            @Html.DisplayFor(m => item, nameof(SearchResultPageItemModel))
+        }
+    }
+
+    <div class="pagination-container">
+        <ul class="pagination">
+            @if (Model.CurrentPage > 1)
+            {
+                <li class="PagedList-skipToPrevious">
+                    <a asp-controller="Search" asp-all-route-data="Model.GetRouteData(Model.CurrentPage - 1)">
+                        @HtmlLocalizer["previous"]
+                    </a>
+                </li>
+            }
+
+            @for (int pageNumber = 1; pageNumber <= Model.NumberOfPages; pageNumber++)
+            {
+                if (pageNumber == Model.CurrentPage)
+                {
+                    <li class="active">
+                        <span>
+                            @pageNumber
+                        </span>
+                    </li>
+                }
+                else
+                {
+                    <li>
+                        <a asp-controller="Search" asp-all-route-data="Model.GetRouteData(pageNumber)">@pageNumber</a>
+                    </li>
+                }
+            }
+
+            @if (Model.CurrentPage < Model.NumberOfPages)
+            {
+                <li class="PagedList-skipToNext">
+                    <a asp-controller="Search" asp-all-route-data="Model.GetRouteData(Model.CurrentPage + 1)">
+                        @HtmlLocalizer["next"]
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+}

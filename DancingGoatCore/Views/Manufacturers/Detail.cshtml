@@ -1,0 +1,11 @@
+﻿@model DancingGoat.Models.ManufacturerDetailViewModel
+@{
+    Layout = "~/Views/Shared/_StoreLayout.cshtml";
+    ViewData["PageClass"] = "inverted";
+}
+    <h2 class="breadcrumbs">
+        <a href="@Url.Kentico().PageUrl(ContentItemIdentifiers.MANUFACTURERS)">@HtmlLocalizer["Manufacturers"]</a><span class="arrow">&gt;</span> @Model.Name
+    </h2>
+
+<partial name="_StoreProductList" model="Model.Products" />
+
