@@ -1,0 +1,53 @@
+﻿@model DancingGoat.Models.DeliveryDetailsViewModel
+
+@{
+    ViewBag.Title = HtmlLocalizer["Customer details"].Value;
+}
+
+<div class="checkout-container">
+    <div class="cart delivery-details">
+        <div class="checkout-back-link">
+            <a asp-action="ShoppingCart">&larr; @HtmlLocalizer["back to shopping cart"]</a>
+        </div>
+
+        <form asp-action="DeliveryDetails" asp-controller="Checkout" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="customer-details">
+                        <div class="form-horizontal">
+                            @Html.EditorFor(m => m.Customer)
+                            @Html.EditorFor(m => m.BillingAddress)
+                            @if (Model.ShippingOption.IsVisible)
+                            {
+                                @Html.EditorFor(m => m.ShippingOption)
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-md-offset-4">
+
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <h2>@HtmlLocalizer["Already a customer?"]</h2>
+                        <p>@HtmlLocalizer["Sign in to access your billing and delivery details"]</p>
+                        var routeData = new Dictionary<string, string> { { "returnUrl", Context.Request.PathBase + Context.Request.Path } };
+                        <a asp-action="Login" asp-controller="Account" asp-all-route-data="routeData" class="btn btn-secondary btn-default">
+                            @HtmlLocalizer["Sign in"]
+                        </a>
+                    }
+
+                    <div class="gray-box floating-box">
+                        <p>@HtmlLocalizer["Fill in your billing details and delivery preferences and proceed to review your order."]</p>
+                        <input type="submit" class="btn btn-primary btn-default checkout-button" value="@HtmlLocalizer["review order"]" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/Scripts/countryStateSelector.js"></script>
+    <script src="~/Scripts/addressSelector.js"></script>
+}

@@ -1,0 +1,10 @@
+﻿@model DancingGoat.Models.GrinderFilterViewModel
+
+<h4>@HtmlLocalizer["Manufacturer"]</h4>
+@Html.EditorFor(model => Model.Manufacturers)
+
+<h4>@HtmlLocalizer["Price"]</h4>
+@Html.EditorFor(model => Model.Prices)
+
+<h4>@HtmlLocalizer["Type"]</h4>
+@Html.EditorFor(model => Model.Type)

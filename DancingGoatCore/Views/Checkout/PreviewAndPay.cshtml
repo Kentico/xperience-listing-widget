@@ -1,0 +1,67 @@
+﻿@model DancingGoat.Models.PreviewViewModel
+
+@{
+    ViewBag.Title = HtmlLocalizer["Preview"].Value;
+    ViewData["PageClass"] = "inverted";
+}
+
+<div class="checkout-container">
+    <div class="cart">
+        <div class="continue-shopping-link">
+            <a asp-action="DeliveryDetails">&larr; @HtmlLocalizer["back to Billing & Delivery"]</a>
+        </div>
+
+        <div asp-validation-summary="ModelOnly" class="ErrorLabel red">@HtmlLocalizer["Your order cannot be completed"]</div>
+        <div>
+            @Html.ValidationMessage("shipping", new { @class = "red" })
+        </div>
+        <div>
+            @Html.ValidationMessage("cart.empty", new { @class = "red" })
+        </div>
+
+        <div class="col-md-8 cart-content">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2>@HtmlLocalizer["Billing details"]</h2>
+
+                    @Html.DisplayFor(m => m.CustomerDetails)
+
+                    <br />
+
+                    @Html.DisplayFor(m => m.BillingAddress)
+                </div>
+                @if (Model.DeliveryDetails.ShippingOption.IsVisible)
+                {
+                    <div class="col-md-6">
+                        <h2>@HtmlLocalizer["Shipping details"]</h2>
+                        <span>@Model.ShippingName</span>
+                        <br />
+                        <div>@Model.CustomerDetails.Company</div>
+
+                        <br />
+
+                        @Html.DisplayFor(m => m.BillingAddress)
+                    </div>
+                }
+            </div>
+            <div class="row">
+                <h2>@HtmlLocalizer["Ordered items"]</h2>
+                <hr class="first-separator" />
+
+                <partial name="_ShoppingCartContentPreview" model="Model.CartModel" />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="cart-right-panel floating-box">
+                <div id="shoppingCartTotals">
+                    <partial name="_ShoppingCartTotals" model="Model.CartModel" />
+                </div>
+
+                <form asp-action="PreviewAndPay" asp-controller="Checkout" method="post">
+                    @Html.EditorFor(m => m.PaymentMethod)
+                    <input type="submit" value="@HtmlLocalizer["Confirm and pay"]" class="btn-primary checkout-button btn btn-default" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

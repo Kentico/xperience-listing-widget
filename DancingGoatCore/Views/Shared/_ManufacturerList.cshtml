@@ -1,0 +1,21 @@
+﻿@using DancingGoat.Models;
+@model IEnumerable<ManufactureListItemViewModel>
+
+<div class="row manufacturer-list">
+    @if (Model != null && Model.Any())
+    {
+        foreach (var manufacturer in Model)
+        {
+            <div class="col-xs-12 col-md-4 col-lg-3 manufacturer-item">
+                <a href="@manufacturer.Url">
+                    <img src="@manufacturer.ImagePath" alt="@manufacturer.Name" title="@manufacturer.Name" />
+                </a>
+            </div>
+        }
+    }
+    else
+    {
+        <span class="ContentLabel">@HtmlLocalizer["No matching manufacturers."]</span>
+    }
+</div>
+

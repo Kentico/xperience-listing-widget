@@ -1,0 +1,17 @@
+﻿@using DancingGoat.Models
+@model IEnumerable<ProductListItemViewModel>
+    
+@if (Model.Any())
+{
+    foreach (var product in Model)
+    {
+        <!-- 4 products on row for large screen -->
+        <div class="col-md-4 col-lg-3">
+            @Html.DisplayFor(m => product, "ProductListItem")
+        </div>
+    }
+}
+else
+{
+    <span class="ContentLabel">@HtmlLocalizer["No matching products."]</span>
+}

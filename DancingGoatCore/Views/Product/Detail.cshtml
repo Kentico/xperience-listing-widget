@@ -1,0 +1,74 @@
+﻿@model DancingGoat.Models.ProductViewModel
+
+@{
+    ViewData["PageClass"] = "inverted";
+}
+
+<article class="product-detail">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="product-detail-header">
+                <h2>@Model.Name</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="row-fluid">
+        <div class="col-lg-7 col-md-6">
+            @if (!string.IsNullOrEmpty(Model.ImagePath))
+            {
+                <figure class="image">
+                    <img src="@Model.ImagePath" alt="@Model.Name" title="@Model.Name" />
+                </figure>
+            }
+            <div class="description">
+                @Html.Raw(Model.Description)
+
+                @if (Model.TypedProduct != null)
+                {
+                    @Html.DisplayFor(m => m.TypedProduct, Model.TypedProduct.GetType().Name)
+                }
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-5 product-detail-right col-md-offset-1 col-lg-offset-1">
+            <div class="product-price">
+                <div class="cart-item-selector-container">
+                    <div class="stock-container">
+                        @if (Model.IsInStock)
+                        {
+                            <span id="stockMessage" class="stock available">@HtmlLocalizer["In stock"]</span>
+                        }
+                        else
+                        {
+                            <span id="stockMessage" class="stock unavailable">@HtmlLocalizer["Out of stock"]</span>
+                        }
+                    </div>
+                </div>
+
+                <form method="post">
+
+                    <partial name="_PriceDetails" />
+
+                    <partial name="_VariantSelector" />
+
+                    <div class="total-price-container">
+                        <span class="total-price-label">@HtmlLocalizer["Total"]</span>
+                        <span id="totalPrice" class="total-price">@(string.Format(Model.PriceDetail.Currency.CurrencyFormatString, Model.PriceDetail.Price))</span>
+                    </div>
+
+                    <div class="add-to-cart-container">
+                        <input type="hidden" id="selectedVariantID" name="SKUID" value="@(Model.SelectedVariantID > 0 ? Model.SelectedVariantID : Model.SKUID)" />
+                        <input type="hidden" id="js-parent-product-id" name="ParentSKUID" value="@(Model.SKUID)" />
+                        <label class="units-label">Qty</label>
+                        <input type="text" name="Units" value="1" class="add-to-cart-textbox" />
+                        <input type="submit" asp-controller="Checkout" asp-action="AddItem" id="js-submit-add-to-cart" value="Add to cart" class="btn btn-primary add-to-cart-button @(Model.AllowSale ? "" : "btn-disabled")" disabled="@(!Model.AllowSale)" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</article>
+
+@section Scripts{
+    <script src="~/Scripts/variantSelector.js"></script>
+}

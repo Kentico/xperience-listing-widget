@@ -1,0 +1,69 @@
+﻿@using DancingGoat.Models;
+
+@model GeneratorIndexViewModel
+
+@{
+    ViewData["PageClass"] = "inverted";
+}
+
+@if (Model.DisplaySuccessMessage)
+{
+    <span class="info-label">Generating data finished successfully.</span>
+}
+
+@if (!Model.IsAuthorized)
+{
+    <span class="error-label">You have insufficient permission to execute this action.</span>
+}
+
+@if (Context.Kentico().Preview().Enabled)
+{
+    <span class="error-label">The Generate functions are not available when previewing content in the Pages application. To run the generator, please switch to the Live site using the application menu, sign in, and then use the generator page.</span>
+}
+
+<h1>Generate sample data</h1>
+<p>
+    To enable a demonstration of content personalization, the generator creates sample persona and contact group data. Generator also creates sample marketing campaigns, contacts, newsletter recipients and marketing email data. The generator does not overwrite your custom data.
+</p>
+
+<partial name="_Button.cshtml" model="@(new ButtonViewModel { ActionName = "Generate", IsDisabled = !Model.IsAuthorized || Context.Kentico().Preview().Enabled })" />
+
+<h1>Generate sample data for A/B test</h1>
+<p>
+    The generator creates sample conversions and visit hits to the Home A/B test.
+</p>
+
+@if (!String.IsNullOrEmpty(Model.ABTestErrorMessage))
+{
+    <span class="error-label">
+        @foreach (var line in Model.ABTestErrorMessage.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))
+        {
+            @line
+            <br />
+        }
+    </span>
+}
+
+<partial name="_Button", model="@(new ButtonViewModel { ActionName = "GenerateABTestData", IsDisabled = !Model.IsAuthorized || !String.IsNullOrEmpty(Model.ABTestErrorMessage) || Context.Kentico().Preview().Enabled })" />
+
+<h1>Set up data protection (GDPR) demo</h1>
+<p>Generates data and enables demonstration of giving consents, personal data portability, right to access, and right to be forgotten features.</p>
+<p>Once enabled, the demo functionality cannot be disabled. Use on demo instances only.</p>
+
+<partial name="_Button.cshtml" model="@(new ButtonViewModel { ActionName = "GenerateDataProtectionDemo", IsDisabled = !Model.IsAuthorized || Context.Kentico().Preview().Enabled })" />
+
+<h1>Set up sentiment analysis demo</h1>
+<p>Generates data for sentiment analysis demo.</p>
+<partial name="_Button.cshtml" model="@(new ButtonViewModel { ActionName = "GenerateSentimentAnalysisDemo", IsDisabled = !Model.IsAuthorized || Context.Kentico().Preview().Enabled })" />
+
+<script type="text/javascript">
+    (function () {
+        var wrapper = document.querySelector("#ActionGenerate");
+        var button = wrapper.querySelector(".btn");
+        button.addEventListener("click", function () {
+            var loader = document.querySelector(".loader");
+            loader.classList.remove("hidden");
+            button.classList.add("hidden");
+        });
+    }())
+</script>

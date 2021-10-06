@@ -1,0 +1,9 @@
+﻿@model DancingGoat.Models.BrewerViewModel
+
+<div class="product-detail-properties">
+    <h4>@HtmlLocalizer["Parameters"]</h4>
+    <dl class="row">
+        <dt class="col-xs-12 col-sm-4">@HtmlLocalizer["Dishwasher safe"]</dt>
+        <dd class="col-xs-12 col-sm-8">@(Model.IsDishwasherSafe ? HtmlLocalizer["Yes"] : HtmlLocalizer["No"])</dd>
+    </dl>
+</div>

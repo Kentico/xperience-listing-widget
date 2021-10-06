@@ -1,0 +1,10 @@
+﻿@model DancingGoat.Models.CoffeeFilterViewModel
+
+<h4>@HtmlLocalizer["Coffee processing"]</h4>
+@Html.EditorFor(model => Model.ProcessingTypes)
+
+<h4>@HtmlLocalizer["Caffeine"]</h4>
+<span class="checkbox js-postback">
+    <input asp-for="OnlyDecaf" />
+    <label asp-for="OnlyDecaf"></label>
+</span>

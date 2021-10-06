@@ -1,0 +1,13 @@
+﻿@model DancingGoat.Models.ShippingOptionViewModel
+
+<h4>@HtmlLocalizer["Delivery options"]</h4>
+
+<div class="form-group">
+    <label asp-for="ShippingOptionID"></label>
+
+    @Html.DropDownListFor(m => m.ShippingOptionID, Model.ShippingOptions, HtmlLocalizer["Select delivery method"].Value)
+
+    <div class="message message-error">
+        <span asp-validation-for="ShippingOptionID"></span>
+    </div>
+</div>
