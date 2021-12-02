@@ -1,10 +1,10 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.6.30114.105
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DancingGoatCore", "DancingGoatCore\DancingGoatCore.csproj", "{92A6DC2D-6524-4951-B968-47871271925D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{536D8D95-564D-496F-8534-281C39420319}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DancingGoatCore.Tests", "Tests\DancingGoatCore.Tests.csproj", "{536D8D95-564D-496F-8534-281C39420319}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
