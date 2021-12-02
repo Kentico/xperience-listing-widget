@@ -282,3 +282,6 @@ paket-files/
 CMS/bin/*
 !CMS/bin/roslyn
 !CMS/bin/roslyn/**/*
+
+# hotfix
+log.txt
