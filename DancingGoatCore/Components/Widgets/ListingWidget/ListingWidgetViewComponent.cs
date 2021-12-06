@@ -1,8 +1,8 @@
-﻿using DancingGoat.Widgets;
+﻿using Microsoft.AspNetCore.Mvc;
 
 using Kentico.PageBuilder.Web.Mvc;
 
-using Microsoft.AspNetCore.Mvc;
+using DancingGoat.Widgets;
 
 [assembly: RegisterWidget(ListingWidgetViewComponent.IDENTIFIER, typeof(ListingWidgetViewComponent), "Listing",
     typeof(ListingWidgetProperties), Description = "Displays pages from selected location.", IconClass = "icon-l-grid-3-2")]
