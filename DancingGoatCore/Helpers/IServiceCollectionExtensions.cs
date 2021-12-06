@@ -24,6 +24,7 @@ namespace DancingGoat
 
         private static void AddRepositories(IServiceCollection services)
         {
+            services.AddSingleton<IPageRepository, PageRepository>();
             services.AddSingleton<ArticleRepository>();
             services.AddSingleton<CafeRepository>();
             services.AddSingleton<ContactRepository>();

@@ -1,0 +1,11 @@
+﻿@model DancingGoat.Widgets.ListingWidgetBaseViewModel
+
+<h3>Listing widget</h3>
+<ul>
+@{
+    foreach(var listingPage in Model.Pages)
+    {
+        <li>@listingPage.DocumentName</li>
+    }
+}
+</ul>
