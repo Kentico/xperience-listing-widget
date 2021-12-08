@@ -25,7 +25,7 @@ namespace DancingGoat.Widgets
         /// <summary>
         /// Widget identifier.
         /// </summary>
-        public const string IDENTIFIER = "DancingGoat.ListingWidget";
+        public const string IDENTIFIER = "DancingGoat.General.ListingWidget";
 
 
         /// <summary>
