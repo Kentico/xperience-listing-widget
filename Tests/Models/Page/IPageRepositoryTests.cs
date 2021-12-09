@@ -9,9 +9,7 @@ using Kentico.Content.Web.Mvc;
 using NSubstitute;
 using NUnit.Framework;
 
-using DancingGoat.Models;
-
-namespace DancingGoatCore.Models
+namespace DancingGoat.Models
 {
     [TestFixture(typeof(Article))]
     [TestFixture(typeof(TreeNode))]
@@ -22,7 +20,7 @@ namespace DancingGoatCore.Models
     public class IPageRepositoryTests<T> : UnitTests where T : TreeNode, new()
     {
         private IPageRetriever retriever;
-        private IPageRepository repository;
+        private PageRepository repository;
 
 
         [SetUp]

@@ -5,11 +5,11 @@ namespace DancingGoat.Widgets
     /// <summary>
     /// View model for the Listing widget.
     /// </summary>
-    public class ListingWidgetBaseViewModel
+    public class ListingWidgetViewModel
     {
         /// <summary>
         /// Pages to show.
         /// </summary>
-        public IEnumerable<ListingWidgetBasePageViewModel> Pages { get; set; }
+        public IEnumerable<ListingWidgetPageViewModel> Pages { get; set; }
     }
 }

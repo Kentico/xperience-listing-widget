@@ -1,18 +1,16 @@
 ﻿using NUnit.Framework;
 
-using DancingGoat.Widgets;
-
-namespace DancingGoatCore.Widgets
+namespace DancingGoat.Widgets
 {
     [TestFixture]
     public class ListingWidgetBasePageViewModelTests
     {
         [Test]
-        public void Ctor_ValidString_SetDocumentName()
+        public void Ctor_ValidDocumentName_SetsDocumentName()
         {
             var documentName = "Document name";
 
-            var model = new ListingWidgetBasePageViewModel(documentName);
+            var model = new ListingWidgetPageViewModel(documentName);
 
             Assert.That(model.DocumentName, Is.EqualTo(documentName));
         }
@@ -21,7 +19,7 @@ namespace DancingGoatCore.Widgets
         [Test]
         public void Ctor_Null_ThrowsArgumentNullException()
         {
-            Assert.That(() => new ListingWidgetBasePageViewModel(null), Throws.ArgumentNullException);
+            Assert.That(() => new ListingWidgetPageViewModel(null), Throws.ArgumentNullException);
         }
     }
 }
