@@ -16,14 +16,14 @@ namespace DancingGoat.Widgets
         /// <summary>
         /// Initializes a new instance of the <see cref="ListingWidgetPageViewModel"/> class. 
         /// </summary>
-        /// <param name="DocumentName">Document name to show.</param>
-        public ListingWidgetPageViewModel(string DocumentName) 
+        /// <param name="documentName">Document name to show.</param>
+        public ListingWidgetPageViewModel(string documentName) 
         { 
-            if (DocumentName == null)
+            if (documentName == null)
             {
-                throw new ArgumentNullException(nameof(DocumentName), $"Argument {nameof(DocumentName)} cannot be null.");
+                throw new ArgumentNullException(nameof(documentName), $"Argument {nameof(documentName)} cannot be null.");
             }
-            this.DocumentName = DocumentName; 
+            this.DocumentName = documentName; 
         }
     }
 }
