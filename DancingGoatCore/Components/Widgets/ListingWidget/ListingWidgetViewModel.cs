@@ -3,7 +3,7 @@
 namespace DancingGoat.Widgets
 {
     /// <summary>
-    /// View model for the Listing widget.
+    /// View model for Listing widget.
     /// </summary>
     public class ListingWidgetViewModel
     {
