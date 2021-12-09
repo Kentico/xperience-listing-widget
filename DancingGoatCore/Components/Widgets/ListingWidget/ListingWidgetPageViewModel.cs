@@ -5,7 +5,7 @@ namespace DancingGoat.Widgets
     /// <summary>
     /// View model for one item of Listing widget.
     /// </summary>
-    public class ListingWidgetBasePageViewModel
+    public class ListingWidgetPageViewModel
     {
         /// <summary>
         /// Document name to show.
@@ -14,10 +14,10 @@ namespace DancingGoat.Widgets
 
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ListingWidgetBasePageViewModel"/> class. 
+        /// Initializes a new instance of the <see cref="ListingWidgetPageViewModel"/> class. 
         /// </summary>
         /// <param name="DocumentName">Document name to show.</param>
-        public ListingWidgetBasePageViewModel(string DocumentName) 
+        public ListingWidgetPageViewModel(string DocumentName) 
         { 
             if (DocumentName == null)
             {

@@ -20,8 +20,8 @@ namespace DancingGoat.Widgets
     public class ListingWidgetViewComponent : ViewComponent
     {
         private readonly IPageRepository repository;
-        
-        
+
+
         /// <summary>
         /// Widget identifier.
         /// </summary>
@@ -45,9 +45,9 @@ namespace DancingGoat.Widgets
         public IViewComponentResult Invoke(ComponentViewModel<ListingWidgetProperties> viewModel)
         {
             var pages = repository.GetAllPages<TreeNode>();
-            var model = new ListingWidgetBaseViewModel {Pages = pages.Select(p => new ListingWidgetBasePageViewModel(p.DocumentName)) };
+            var model = new ListingWidgetViewModel { Pages = pages.Select(p => new ListingWidgetPageViewModel(p.DocumentName)) };
 
-            return View("~/Components/Widgets/ListingWidget/_DefaultTransformationListingWidget.cshtml", model);
+            return View("~/Components/Widgets/ListingWidget/_ListingWidget.cshtml", model);
         }
     }
 }
