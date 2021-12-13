@@ -23,7 +23,7 @@ namespace DancingGoat.Widgets
             {
                 throw new ArgumentNullException(nameof(documentName), $"Argument {nameof(documentName)} cannot be null.");
             }
-            this.DocumentName = documentName; 
+            DocumentName = documentName; 
         }
     }
 }
