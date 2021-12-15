@@ -1,20 +1,20 @@
-﻿.listing-property-editor {
+﻿.listing-inline-editor div.listing-property-editor {
     display: flex;
     padding: 0.5rem;
 }
 
-.listing-property-label {
-    color: white;
-    margin-top: auto;
-    text-align: end;
-    width: 11rem;
-    margin-right: 1rem;
-}
+.listing-inline-editor div.listing-property-editor div.listing-property-label {
+        color: white;
+        margin-top: auto;
+        text-align: end;
+        width: 11rem;
+        margin-right: 1rem;
+    }
 
-.listing-property-value {
-    margin-top: auto;
-    display: flex;
-}
+.listing-inline-editor div.listing-property-editor div.listing-property-value {
+        margin-top: auto;
+        display: flex;
+    }
 
 .listing-inline-editor {
     font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
