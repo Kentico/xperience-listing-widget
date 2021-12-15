@@ -19,13 +19,13 @@ namespace DancingGoat.Widgets
     /// </summary>
     public class ListingWidgetViewComponent : ViewComponent
     {
-        private readonly IPageRepository repository;
-
-
         /// <summary>
         /// Widget identifier.
         /// </summary>
         public const string IDENTIFIER = "DancingGoat.General.ListingWidget";
+
+
+        private readonly IPageRepository repository;
 
 
         /// <summary>
@@ -45,7 +45,11 @@ namespace DancingGoat.Widgets
         public IViewComponentResult Invoke(ComponentViewModel<ListingWidgetProperties> viewModel)
         {
             var pages = repository.GetAllPages<TreeNode>();
-            var model = new ListingWidgetViewModel { Pages = pages.Select(p => new ListingWidgetPageViewModel(p.DocumentName)) };
+            
+            var model = new ListingWidgetViewModel { 
+                Pages = pages.Select(p => new ListingWidgetPageViewModel(p.DocumentName)), 
+                SupportedPageTypes = ListingWidgetProperties.SupportedPageTypes, 
+                SelectedPageType = viewModel.Properties.SelectedPageType };
 
             return View("~/Components/Widgets/ListingWidget/_ListingWidget.cshtml", model);
         }
