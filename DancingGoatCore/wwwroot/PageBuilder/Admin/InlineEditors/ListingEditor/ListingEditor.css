@@ -1,14 +1,14 @@
 ﻿.listing-inline-editor div.listing-property-editor {
     display: flex;
-    padding: 0.5rem;
+    padding: 0.5em;
 }
 
 .listing-inline-editor div.listing-property-editor div.listing-property-label {
         color: white;
         margin-top: auto;
         text-align: end;
-        width: 11rem;
-        margin-right: 1rem;
+        width: 11em;
+        margin-right: 1em;
     }
 
 .listing-inline-editor div.listing-property-editor div.listing-property-value {
