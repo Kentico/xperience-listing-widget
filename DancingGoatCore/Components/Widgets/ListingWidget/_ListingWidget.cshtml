@@ -1,6 +1,15 @@
-﻿@model DancingGoat.Widgets.ListingWidgetViewModel
+﻿@using DancingGoat.Widgets
 
-<h3>Listing widget</h3>
+@model ListingWidgetViewModel
+
+
+
+@if (Context.Kentico().PageBuilder().EditMode)
+{
+
+    <div class="listing-inline-editor">
+    </div>
+}
 <ul>
 @{
     foreach(var listingPage in Model.Pages)
