@@ -1,20 +1,32 @@
-﻿@using DancingGoat.Widgets
+﻿@using DancingGoat.InlineEditors
+@using DancingGoat.Widgets
 
 @model ListingWidgetViewModel
 
+@inject IPageBuilderDataContextRetriever pageBuilderContext
 
+<h3>Listing widget</h3>
 
 @if (Context.Kentico().PageBuilder().EditMode)
 {
-
+    var pageTypeLabel = "Page type:";
     <div class="listing-inline-editor">
+        <partial name="~/Components/InlineEditors/DropdownEditor/_DropdownEditor.cshtml"
+                 model="new DropdownEditorViewModel
+                        {
+                            PropertyName = nameof(ListingWidgetProperties.SelectedPageType),
+                            Selected = Model.SelectedPageType,
+                            Options = Model.SupportedPageTypes,
+                            Label = pageTypeLabel,
+                        }" />
     </div>
 }
+
 <ul>
-@{
-    foreach(var listingPage in Model.Pages)
-    {
-        <li>@listingPage.DocumentName</li>
+    @{
+        foreach(var listingPage in Model.Pages)
+        {
+            <li>@listingPage.DocumentName</li>
+        }
     }
-}
 </ul>
