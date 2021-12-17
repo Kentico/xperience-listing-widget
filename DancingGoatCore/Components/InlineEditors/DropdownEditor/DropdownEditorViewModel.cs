@@ -13,7 +13,7 @@ namespace DancingGoat.InlineEditors
         /// <summary>
         /// All options of the selector.
         /// </summary>
-        public IEnumerable<string> Options { get; set; }
+        public IEnumerable<DropdownOptionViewModel> Options { get; set; }
 
 
         /// <summary>

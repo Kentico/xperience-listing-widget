@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 
+using DancingGoat.InlineEditors;
+
 namespace DancingGoat.Widgets
 {
     /// <summary>
@@ -16,7 +18,7 @@ namespace DancingGoat.Widgets
         /// <summary>
         /// All supported page types.
         /// </summary>
-        public IEnumerable<string> SupportedPageTypes { get; set; }
+        public IEnumerable<DropdownOptionViewModel> SupportedPageTypes { get; set; }
 
 
         /// <summary>
