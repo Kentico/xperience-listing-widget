@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 
+using CMS.DocumentEngine.Types.DancingGoatCore;
+
 using Kentico.PageBuilder.Web.Mvc;
 
 namespace DancingGoat.Widgets
@@ -12,7 +14,8 @@ namespace DancingGoat.Widgets
         /// <summary>
         /// All supported page types.
         /// </summary>
-        public static readonly IEnumerable<string> SupportedPageTypes = new List<string> { "Article", "Cafe", "Product" };
+        public static readonly IEnumerable<string> SupportedPageTypes = new List<string> { Article.CLASS_NAME, Cafe.CLASS_NAME, Coffee.CLASS_NAME };
+
 
         /// <summary>
         /// Name of the selected page type.

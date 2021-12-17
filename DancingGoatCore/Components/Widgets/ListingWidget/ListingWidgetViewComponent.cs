@@ -1,13 +1,16 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 using Microsoft.AspNetCore.Mvc;
 
+using CMS.DataEngine;
 using CMS.DocumentEngine;
 
 using Kentico.PageBuilder.Web.Mvc;
 
-using DancingGoat.Widgets;
+using DancingGoat.InlineEditors;
 using DancingGoat.Models;
+using DancingGoat.Widgets;
 
 [assembly: RegisterWidget(ListingWidgetViewComponent.IDENTIFIER, typeof(ListingWidgetViewComponent), "Listing",
     typeof(ListingWidgetProperties), Description = "Displays pages from selected location.", IconClass = "icon-l-grid-3-2")]
@@ -45,13 +48,27 @@ namespace DancingGoat.Widgets
         public IViewComponentResult Invoke(ComponentViewModel<ListingWidgetProperties> viewModel)
         {
             var pages = repository.GetAllPages<TreeNode>();
-            
-            var model = new ListingWidgetViewModel { 
-                Pages = pages.Select(p => new ListingWidgetPageViewModel(p.DocumentName)), 
-                SupportedPageTypes = ListingWidgetProperties.SupportedPageTypes, 
-                SelectedPageType = viewModel.Properties.SelectedPageType };
+            var selectedPages = FilterPagesByPageType(pages, viewModel.Properties.SelectedPageType);
+
+            var model = new ListingWidgetViewModel
+            {
+                Pages = selectedPages.Select(p => new ListingWidgetPageViewModel(p.DocumentName)),
+                SupportedPageTypes = ListingWidgetProperties.SupportedPageTypes.Select(
+                    pt => new DropdownOptionViewModel(pt, DataClassInfoProvider.GetDataClassInfo(pt).ClassDisplayName)),
+                SelectedPageType = viewModel.Properties.SelectedPageType
+            };
 
             return View("~/Components/Widgets/ListingWidget/_ListingWidget.cshtml", model);
+        }
+
+
+        private IEnumerable<TreeNode> FilterPagesByPageType(IEnumerable<TreeNode> pages, string pageType)
+        {
+            if (string.IsNullOrEmpty(pageType))
+            {
+                return new List<TreeNode>();
+            }
+            return pages.Where(p => p.ClassName == pageType);
         }
     }
 }
