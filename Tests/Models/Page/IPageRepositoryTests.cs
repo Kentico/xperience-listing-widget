@@ -38,5 +38,15 @@ namespace DancingGoat.Models
 
             retriever.Received(1).Retrieve(Arg.Any<Action<DocumentQuery<T>>>(), Arg.Any<Action<IPageCacheBuilder<T>>>());
         }
+
+
+        [Test]
+        public void GetPages_CallsRetrieverWithCorrectClassName()
+        {
+            var className = "Test.ClassName";
+            repository.GetPages(className);
+
+            retriever.Received(1).Retrieve(className, Arg.Any<Action<DocumentQuery>>(), Arg.Any<Action<IPageCacheBuilder<TreeNode>>>());
+        }
     }
 }

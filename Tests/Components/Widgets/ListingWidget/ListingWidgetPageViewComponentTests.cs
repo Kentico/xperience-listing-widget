@@ -20,15 +20,15 @@ using NUnit.Framework;
 
 namespace DancingGoatCore.Widgets.Tests
 {
-    class ListingWidgetPageViewComponentTests : UnitTests
+    public class ListingWidgetPageViewComponentTests : UnitTests
     {
         private const string VIEW_NAME = "~/Components/Widgets/ListingWidget/_ListingWidget.cshtml";
 
         private PageRepository pageRepository;
         private ListingWidgetViewComponent listingWidgetViewComponent;
         private ComponentViewModel<ListingWidgetProperties> componentViewModel;
-        private List<TreeNode> pages;
-
+        private Article article;
+        
 
         [SetUp]
         public void SetUp()
@@ -37,62 +37,21 @@ namespace DancingGoatCore.Widgets.Tests
             listingWidgetViewComponent = new ListingWidgetViewComponent(pageRepository);
 
             var page = Substitute.For<TreeNode>();
-            var properties = Substitute.For<ListingWidgetProperties>();
+            var properties = new ListingWidgetProperties();
             componentViewModel = ComponentViewModel<ListingWidgetProperties>.Create(page, properties);
 
             Fake().DocumentType<Article>(Article.CLASS_NAME);
-            var article = TreeNode.New<Article>();
+            article = TreeNode.New<Article>();
             article.DocumentName = "Article page";
-            
-            Fake().DocumentType<Coffee>(Coffee.CLASS_NAME);
-            var coffee = TreeNode.New<Coffee>();
-            coffee.DocumentName = "Coffee page";
-            
-            Fake().DocumentType<Brewer>(Brewer.CLASS_NAME);
-            var brewer = TreeNode.New<Brewer>();
-            brewer.DocumentName = "Brewer page";
-            
-            pages = new List<TreeNode> { article, coffee, brewer };
         }
 
 
         [Test]
-        public void Invoke_EmptyRepository_ReturnsCorrectViewModelWithoutPages()
+        public void Invoke_PropertiesWithSelectedPageType_ReturnsCorrectViewWithPagesOfSelectedPageType()
         {
-            var viewResult = listingWidgetViewComponent.Invoke(componentViewModel) as ViewViewComponentResult;
-            var viewModel = viewResult.ViewData.Model as ListingWidgetViewModel;
-
-            Assert.Multiple(() =>
-            {
-                Assert.That(viewResult.ViewName, Is.EqualTo(VIEW_NAME));
-                Assert.That(viewModel.Pages.Count(), Is.EqualTo(0));
-                Assert.That(viewModel.SelectedPageType, Is.EqualTo(null));
-            });
-        }
-
-        [Test]
-        public void Invoke_PropertiesWithoutSlectedPageType_ReturnsCorrectViewWithoutPages()
-        {
-            pageRepository.GetAllPages<TreeNode>().Returns(pages);
-
-            var viewResult = listingWidgetViewComponent.Invoke(componentViewModel) as ViewViewComponentResult;
-            var viewModel = viewResult.ViewData.Model as ListingWidgetViewModel;
-
-            Assert.Multiple(() =>
-            {
-                Assert.That(viewResult.ViewName, Is.EqualTo(VIEW_NAME));
-                Assert.That(viewModel.Pages.Count(), Is.EqualTo(0));
-                Assert.That(viewModel.SelectedPageType, Is.EqualTo(null));
-            });
-        }
-
-        
-        [Test]
-        public void Invoke_PropertiesWithSelectedArticlePageType_ReturnsCorrectViewWithPagesOfArticlePageType()
-        {
-            pageRepository.GetAllPages<TreeNode>().Returns(pages);
             var testPageType = Article.CLASS_NAME;
             componentViewModel.Properties.SelectedPageType = testPageType;
+            pageRepository.GetPages(Article.CLASS_NAME).Returns(new List<TreeNode> { article });
 
             var viewResult = listingWidgetViewComponent.Invoke(componentViewModel) as ViewViewComponentResult;
             var viewModel = viewResult.ViewData.Model as ListingWidgetViewModel;
@@ -102,6 +61,39 @@ namespace DancingGoatCore.Widgets.Tests
                 Assert.That(viewResult.ViewName, Is.EqualTo(VIEW_NAME));
                 Assert.That(viewModel.Pages.Count(), Is.EqualTo(1));
                 Assert.That(viewModel.Pages.First().DocumentName, Is.EqualTo("Article page"));
+                Assert.That(viewModel.SelectedPageType, Is.EqualTo(testPageType));
+            });
+        }
+
+
+        [Test]
+        public void Invoke_PropertiesWithoutSelectedPageType_ReturnsCorrectViewWithoutPages()
+        {
+            pageRepository.GetPages(Article.CLASS_NAME).Returns(new List<TreeNode> { article });
+
+            var viewResult = listingWidgetViewComponent.Invoke(componentViewModel) as ViewViewComponentResult;
+            var viewModel = viewResult.ViewData.Model as ListingWidgetViewModel;
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(viewModel.Pages.Count(), Is.EqualTo(0));
+                Assert.That(viewModel.SelectedPageType, Is.EqualTo(null));
+            });
+        }
+
+
+        [Test]
+        public void Invoke_PropertiesWithSelectedPageTypeAndEmptyRepository_ReturnsCorrectViewModelWithoutPages()
+        {
+            var testPageType = "Test.ClassName";
+            componentViewModel.Properties.SelectedPageType = testPageType;
+
+            var viewResult = listingWidgetViewComponent.Invoke(componentViewModel) as ViewViewComponentResult;
+            var viewModel = viewResult.ViewData.Model as ListingWidgetViewModel;
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(viewModel.Pages.Count(), Is.EqualTo(0));
                 Assert.That(viewModel.SelectedPageType, Is.EqualTo(testPageType));
             });
         }
