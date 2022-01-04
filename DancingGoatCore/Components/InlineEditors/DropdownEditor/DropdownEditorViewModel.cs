@@ -1,7 +1,12 @@
 ﻿using System.Collections.Generic;
 
+using Microsoft.AspNetCore.Mvc.Rendering;
+
 namespace DancingGoat.InlineEditors
 {
+    /// <summary>
+    /// View model for drop-down editor.
+    /// </summary>
     public class DropdownEditorViewModel : InlineEditorViewModel
     {
         /// <summary>
@@ -11,14 +16,28 @@ namespace DancingGoat.InlineEditors
 
 
         /// <summary>
-        /// All options of the selector.
+        /// Select list for all options of the selector.
         /// </summary>
-        public IEnumerable<DropdownOptionViewModel> Options { get; set; }
+        public SelectList Options { get; set; }
 
 
         /// <summary>
         /// Label of the selector.
         /// </summary>
         public string Label { get; set; }
+
+
+        /// <summary>
+        /// Creates an instance of <see cref="DropdownEditorViewModel"/> class.
+        /// </summary>
+        /// <param name="selected">Selected option.</param>
+        /// <param name="options">All options of the selector.</param> 
+        /// <param name="label">Label of the selector.</param> 
+        public DropdownEditorViewModel(string propertyName, string selected, IEnumerable<DropdownOptionViewModel> options, string label) : base(propertyName)
+        {
+            Selected = selected;
+            Options = new SelectList(options, nameof(DropdownOptionViewModel.Value), nameof(DropdownOptionViewModel.Text));
+            Label = label;
+        }
     }
 }

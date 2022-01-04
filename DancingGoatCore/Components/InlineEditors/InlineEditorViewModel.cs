@@ -9,5 +9,14 @@
         /// Name of the widget property to edit.
         /// </summary>
         public string PropertyName { get; set; }
+
+
+        protected InlineEditorViewModel() { }
+
+
+        protected InlineEditorViewModel(string propertyName)
+        {
+            PropertyName = propertyName;
+        }
     }
 }

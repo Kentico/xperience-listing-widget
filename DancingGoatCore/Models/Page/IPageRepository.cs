@@ -14,5 +14,12 @@ namespace DancingGoat.Models
         /// </summary>
         /// <typeparam name="TPageType">Type of the pages to be retrieved.</typeparam>
         public IEnumerable<TPageType> GetAllPages<TPageType>() where TPageType : TreeNode, new();
+
+
+        /// <summary>
+        /// Retrieve pages of specified type.
+        /// </summary>
+        /// <param name="className">Class name defining the type of pages to be retrieved.</param>
+        public IEnumerable<TreeNode> GetPages(string className);
     }
 }

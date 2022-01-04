@@ -36,5 +36,20 @@ namespace DancingGoat.Models
                 cache => cache
                     .Key($"{nameof(PageRepository)}|{nameof(GetAllPages)}"));
         }
+
+
+        /// <summary>
+        /// Retrieve pages of specified type.
+        /// </summary>
+        /// <param name="className">Class name defining the type of pages to be retrieved.</param>
+        public IEnumerable<TreeNode> GetPages(string className)
+        {
+            return pageRetriever.Retrieve(
+                className,
+                query => query
+                    .FilterDuplicates(),
+                cache => cache
+                    .Key($"{nameof(PageRepository)}|{nameof(GetPages)}|{nameof(className)}"));
+        }
     }
 }

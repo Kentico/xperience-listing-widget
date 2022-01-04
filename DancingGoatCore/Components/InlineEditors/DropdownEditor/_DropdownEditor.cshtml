@@ -3,11 +3,14 @@
 @using (Html.Kentico().BeginInlineEditor("dropdown-editor", Model.PropertyName, new { @class = "listing-property-editor" }))
 {
     var optionLabel = Model.Options.Any() ? HtmlLocalizer["Please select an option."].Value : HtmlLocalizer["No options are available."].Value;
+    var dropdownLabel = HtmlLocalizer[Model.Label].Value + ':';
 
-    <div class="listing-property-label">
-        @Html.LabelFor(model => model.Selected, HtmlLocalizer[Model.Label].Value)
+    <div class="listing-property-label">    
+        <label asp-for="@Model.Selected">@dropdownLabel</label>
     </div>
     <div class="listing-property-value">
-        @Html.DropDownListFor(model => model.Selected, new SelectList(Model.Options, "Value", "Text"), optionLabel, new { @class = "dropdown-selector" } );
+        <select asp-for="@Model.Selected" asp-items="@Model.Options" class="dropdown-selector">
+            <option value="">@optionLabel</option>
+        </select>
     </div>
 }
