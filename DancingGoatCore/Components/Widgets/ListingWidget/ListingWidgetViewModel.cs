@@ -16,14 +16,8 @@ namespace DancingGoat.Widgets
 
 
         /// <summary>
-        /// All supported page types.
+        /// View model for page type selector drop-down.
         /// </summary>
-        public IEnumerable<DropdownOptionViewModel> SupportedPageTypes { get; set; }
-
-
-        /// <summary>
-        /// Name of the selected page type to display.
-        /// </summary>
-        public string SelectedPageType { get; set; }
+        public DropdownEditorViewModel PageTypeSelectorViewModel { get; set; }
     }
 }

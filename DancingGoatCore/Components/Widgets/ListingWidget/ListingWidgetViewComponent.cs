@@ -28,23 +28,19 @@ namespace DancingGoat.Widgets
         /// </summary>
         public const string IDENTIFIER = "DancingGoat.General.ListingWidget";
 
-
-        /// <summary>
-        /// All supported page types.
-        /// </summary>
-        public static readonly IEnumerable<string> SupportedPageTypes = new List<string> { Article.CLASS_NAME, Cafe.CLASS_NAME, Coffee.CLASS_NAME };
-
-
+        
         private readonly IPageRepository repository;
+        private readonly IPageBuilderDataContextRetriever pageBuilderDataContextRetriever;
 
 
         /// <summary>
         /// Creates an instance of <see cref="ListingWidgetViewComponent"/> class.
         /// </summary>
         /// <param name="repository">Page repository.</param>
-        public ListingWidgetViewComponent(IPageRepository repository)
+        public ListingWidgetViewComponent(IPageRepository repository, IPageBuilderDataContextRetriever pageBuilderDataContextRetriever)
         {
             this.repository = repository;
+            this.pageBuilderDataContextRetriever = pageBuilderDataContextRetriever;
         }
 
 
@@ -56,20 +52,25 @@ namespace DancingGoat.Widgets
         {
             var selectedPageType = viewModel.Properties.SelectedPageType;
             var pages = string.IsNullOrEmpty(selectedPageType) ? new List<TreeNode>() : repository.GetPages(selectedPageType);
-
-            var classes = DataClassInfoProvider.GetClasses()
-                .Where("ClassName IN ('" + string.Join("','", SupportedPageTypes) + "')")
-                .Columns("ClassName", "ClassDisplayName")
-                .ToDictionary(c => c.ClassName, c => c.ClassDisplayName);
-
-            var model = new ListingWidgetViewModel
+            var model = new ListingWidgetViewModel { Pages = pages.Select(page => new ListingWidgetPageViewModel(page.DocumentName)) };
+            
+            if (pageBuilderDataContextRetriever.Retrieve().EditMode)
             {
-                Pages = pages.Select(page => new ListingWidgetPageViewModel(page.DocumentName)),
-                SupportedPageTypes = classes.Select(dataType => new DropdownOptionViewModel(dataType.Key, dataType.Value)),
-                SelectedPageType = selectedPageType
-            };
+                model.PageTypeSelectorViewModel = new DropdownEditorViewModel(nameof(ListingWidgetProperties.SelectedPageType), selectedPageType, GetSupportedPageTypes(), "Page type");
+            }
 
             return View("~/Components/Widgets/ListingWidget/_ListingWidget.cshtml", model);
+        }
+
+
+        private IEnumerable<DropdownOptionViewModel> GetSupportedPageTypes()
+        {
+            var SupportedPageTypes = new List<string> { Article.CLASS_NAME, Cafe.CLASS_NAME, Coffee.CLASS_NAME };
+            var classes = DataClassInfoProvider.GetClasses()
+                .WhereIn("ClassName", SupportedPageTypes)
+                .Columns("ClassName", "ClassDisplayName")
+                .ToDictionary(c => c.ClassName, c => c.ClassDisplayName);
+            return classes.Select(dataType => new DropdownOptionViewModel(dataType.Key, dataType.Value));
         }
     }
 }

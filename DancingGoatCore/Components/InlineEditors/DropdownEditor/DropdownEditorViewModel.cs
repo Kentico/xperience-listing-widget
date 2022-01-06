@@ -12,7 +12,7 @@ namespace DancingGoat.InlineEditors
         /// <summary>
         /// Selected option.
         /// </summary>
-        public string Selected { get; set; }
+        public string SelectedOption { get; set; }
 
 
         /// <summary>
@@ -30,12 +30,13 @@ namespace DancingGoat.InlineEditors
         /// <summary>
         /// Creates an instance of <see cref="DropdownEditorViewModel"/> class.
         /// </summary>
-        /// <param name="selected">Selected option.</param>
+        /// <param name="propertyName">Name of related widget property.</param>
+        /// <param name="selectedOption">Selected option.</param>
         /// <param name="options">All options of the selector.</param> 
         /// <param name="label">Label of the selector.</param> 
-        public DropdownEditorViewModel(string propertyName, string selected, IEnumerable<DropdownOptionViewModel> options, string label) : base(propertyName)
+        public DropdownEditorViewModel(string propertyName, string selectedOption, IEnumerable<DropdownOptionViewModel> options, string label) : base(propertyName)
         {
-            Selected = selected;
+            SelectedOption = selectedOption;
             Options = new SelectList(options, nameof(DropdownOptionViewModel.Value), nameof(DropdownOptionViewModel.Text));
             Label = label;
         }

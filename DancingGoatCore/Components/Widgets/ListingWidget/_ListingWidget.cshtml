@@ -9,12 +9,8 @@
 
 @if (Context.Kentico().PageBuilder().EditMode)
 {
-    var pageTypeLabel = "Page type";
-    var dropdownEditorViewModel = new DropdownEditorViewModel(nameof(ListingWidgetProperties.SelectedPageType), Model.SelectedPageType, Model.SupportedPageTypes, pageTypeLabel);
-
     <div class="listing-inline-editor">
-        <partial name="~/Components/InlineEditors/DropdownEditor/_DropdownEditor.cshtml"
-                 model="@dropdownEditorViewModel" />
+        <partial name="~/Components/InlineEditors/DropdownEditor/_DropdownEditor.cshtml" model="@Model.PageTypeSelectorViewModel" />
     </div>
 }
 
