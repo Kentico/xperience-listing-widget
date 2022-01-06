@@ -28,13 +28,15 @@ namespace DancingGoatCore.Widgets.Tests
         private ListingWidgetViewComponent listingWidgetViewComponent;
         private ComponentViewModel<ListingWidgetProperties> componentViewModel;
         private Article article;
-        
+
 
         [SetUp]
         public void SetUp()
         {
-            pageRepository = Substitute.ForPartsOf<PageRepository>(Substitute.For<IPageRetriever>());
-            listingWidgetViewComponent = new ListingWidgetViewComponent(pageRepository);
+            pageRepository = Substitute.For<PageRepository>(Substitute.For<IPageRetriever>());
+            var pageBuilderDataContextRetriever = Substitute.For<IPageBuilderDataContextRetriever>();
+            pageBuilderDataContextRetriever.Retrieve().EditMode.Returns(true);
+            listingWidgetViewComponent = new ListingWidgetViewComponent(pageRepository, pageBuilderDataContextRetriever);
 
             var page = Substitute.For<TreeNode>();
             var properties = new ListingWidgetProperties();
@@ -61,7 +63,7 @@ namespace DancingGoatCore.Widgets.Tests
                 Assert.That(viewResult.ViewName, Is.EqualTo(VIEW_NAME));
                 Assert.That(viewModel.Pages.Count(), Is.EqualTo(1));
                 Assert.That(viewModel.Pages.First().DocumentName, Is.EqualTo("Article page"));
-                Assert.That(viewModel.SelectedPageType, Is.EqualTo(testPageType));
+                Assert.That(viewModel.PageTypeSelectorViewModel.SelectedOption, Is.EqualTo(testPageType));
             });
         }
 
@@ -77,7 +79,7 @@ namespace DancingGoatCore.Widgets.Tests
             Assert.Multiple(() =>
             {
                 Assert.That(viewModel.Pages.Count(), Is.EqualTo(0));
-                Assert.That(viewModel.SelectedPageType, Is.EqualTo(null));
+                Assert.That(viewModel.PageTypeSelectorViewModel.SelectedOption, Is.EqualTo(null));
             });
         }
 
@@ -94,7 +96,7 @@ namespace DancingGoatCore.Widgets.Tests
             Assert.Multiple(() =>
             {
                 Assert.That(viewModel.Pages.Count(), Is.EqualTo(0));
-                Assert.That(viewModel.SelectedPageType, Is.EqualTo(testPageType));
+                Assert.That(viewModel.PageTypeSelectorViewModel.SelectedOption, Is.EqualTo(testPageType));
             });
         }
     }

@@ -6,10 +6,10 @@
     var dropdownLabel = HtmlLocalizer[Model.Label].Value + ':';
 
     <div class="listing-property-label">    
-        <label asp-for="@Model.Selected">@dropdownLabel</label>
+        <label asp-for="@Model.SelectedOption">@dropdownLabel</label>
     </div>
     <div class="listing-property-value">
-        <select asp-for="@Model.Selected" asp-items="@Model.Options" class="dropdown-selector">
+        <select asp-for="@Model.SelectedOption" asp-items="@Model.Options" class="dropdown-selector">
             <option value="">@optionLabel</option>
         </select>
     </div>
