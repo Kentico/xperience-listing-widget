@@ -13,10 +13,10 @@ using Kentico.PageBuilder.Web.Mvc;
 
 using Microsoft.AspNetCore.Mvc.ViewComponents;
 
-using Tests.DocumentEngine;
-
 using NSubstitute;
 using NUnit.Framework;
+
+using Tests.DocumentEngine;
 
 namespace DancingGoatCore.Widgets.Tests
 {

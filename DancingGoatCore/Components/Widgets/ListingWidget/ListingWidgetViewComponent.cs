@@ -56,7 +56,7 @@ namespace DancingGoat.Widgets
             
             if (pageBuilderDataContextRetriever.Retrieve().EditMode)
             {
-                model.PageTypeSelectorViewModel = new DropdownEditorViewModel(nameof(ListingWidgetProperties.SelectedPageType), selectedPageType, GetSupportedPageTypes(), "Page type");
+                model.PageTypeSelectorViewModel = new DropdownEditorViewModel(nameof(ListingWidgetProperties.SelectedPageType), GetSupportedPageTypes(), selectedPageType, "Page type");
             }
 
             return View("~/Components/Widgets/ListingWidget/_ListingWidget.cshtml", model);
