@@ -34,8 +34,9 @@ namespace DancingGoat.InlineEditors
         /// <param name="selectedOption">Selected option.</param>
         /// <param name="options">All options of the selector.</param> 
         /// <param name="label">Label of the selector.</param> 
-        public DropdownEditorViewModel(string propertyName, string selectedOption, IEnumerable<DropdownOptionViewModel> options, string label) : base(propertyName)
+        public DropdownEditorViewModel(string propertyName, string selectedOption, IEnumerable<DropdownOptionViewModel> options, string label)
         {
+            PropertyName = propertyName;
             SelectedOption = selectedOption;
             Options = new SelectList(options, nameof(DropdownOptionViewModel.Value), nameof(DropdownOptionViewModel.Text));
             Label = label;

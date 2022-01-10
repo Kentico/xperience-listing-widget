@@ -1,17 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-using Microsoft.AspNetCore.Mvc.ViewComponents;
-
 using CMS.DocumentEngine;
 using CMS.DocumentEngine.Types.DancingGoatCore;
 using CMS.Tests;
 
+using DancingGoat.Models;
+using DancingGoat.Widgets;
+
 using Kentico.Content.Web.Mvc;
 using Kentico.PageBuilder.Web.Mvc;
 
-using DancingGoat.Models;
-using DancingGoat.Widgets;
+using Microsoft.AspNetCore.Mvc.ViewComponents;
 
 using Tests.DocumentEngine;
 

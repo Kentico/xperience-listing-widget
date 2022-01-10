@@ -1,17 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-using Microsoft.AspNetCore.Mvc;
-
 using CMS.DataEngine;
 using CMS.DocumentEngine;
 using CMS.DocumentEngine.Types.DancingGoatCore;
 
-using Kentico.PageBuilder.Web.Mvc;
-
 using DancingGoat.InlineEditors;
 using DancingGoat.Models;
 using DancingGoat.Widgets;
+
+using Kentico.PageBuilder.Web.Mvc;
+
+using Microsoft.AspNetCore.Mvc;
 
 [assembly: RegisterWidget(ListingWidgetViewComponent.IDENTIFIER, typeof(ListingWidgetViewComponent), "Listing",
     typeof(ListingWidgetProperties), Description = "Displays pages from selected location.", IconClass = "icon-l-grid-3-2")]
