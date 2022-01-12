@@ -49,7 +49,8 @@ namespace DancingGoat.Models
                 query => query
                     .FilterDuplicates(),
                 cache => cache
-                    .Key($"{nameof(PageRepository)}|{nameof(GetPages)}|{nameof(className)}"));
+                    .Key($"{nameof(PageRepository)}|{nameof(GetPages)}|{className}")
+                    .Dependencies((_, builder) => builder.Pages(className)));
         }
     }
 }

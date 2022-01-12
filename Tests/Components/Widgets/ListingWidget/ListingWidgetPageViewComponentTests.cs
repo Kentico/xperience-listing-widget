@@ -24,7 +24,7 @@ namespace DancingGoatCore.Widgets.Tests
     {
         private const string VIEW_NAME = "~/Components/Widgets/ListingWidget/_ListingWidget.cshtml";
 
-        private PageRepository pageRepository;
+        private IPageRepository pageRepository;
         private ListingWidgetViewComponent listingWidgetViewComponent;
         private ComponentViewModel<ListingWidgetProperties> componentViewModel;
         private Article article;
@@ -33,7 +33,7 @@ namespace DancingGoatCore.Widgets.Tests
         [SetUp]
         public void SetUp()
         {
-            pageRepository = Substitute.For<PageRepository>(Substitute.For<IPageRetriever>());
+            pageRepository = Substitute.For<IPageRepository>();
             var pageBuilderDataContextRetriever = Substitute.For<IPageBuilderDataContextRetriever>();
             pageBuilderDataContextRetriever.Retrieve().EditMode.Returns(true);
             listingWidgetViewComponent = new ListingWidgetViewComponent(pageRepository, pageBuilderDataContextRetriever);
