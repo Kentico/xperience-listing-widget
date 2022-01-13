@@ -4,17 +4,17 @@
 }
 
 .listing-inline-editor div.listing-property-editor div.listing-property-label {
-        color: white;
-        margin-top: auto;
-        text-align: end;
-        width: 11em;
-        margin-right: 1em;
-    }
+    color: white;
+    margin-top: auto;
+    text-align: end;
+    width: 11em;
+    margin-right: 1em;
+}
 
 .listing-inline-editor div.listing-property-editor div.listing-property-value {
-        margin-top: auto;
-        display: flex;
-    }
+    margin-top: auto;
+    display: flex;
+}
 
 .listing-inline-editor {
     font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
@@ -25,4 +25,10 @@
     display: table;
     margin: 1em auto 1em 1em;
     box-sizing: border-box;
+}
+
+.listing-inline-editor div.listing-property-editor div.listing-property-tooltip {
+    color: white;
+    margin-top: auto;
+    margin-left: 0.5em;
 }

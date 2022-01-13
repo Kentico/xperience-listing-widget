@@ -5,7 +5,7 @@
     var optionLabel = Model.Options.Any() ? HtmlLocalizer["Please select an option."].Value : HtmlLocalizer["No options are available."].Value;
     var dropdownLabel = HtmlLocalizer[Model.Label].Value + ':';
 
-    <div class="listing-property-label">    
+    <div class="listing-property-label" title="@Model.Tooltip">
         <label asp-for="@Model.SelectedOption">@dropdownLabel</label>
     </div>
     <div class="listing-property-value">
@@ -13,4 +13,10 @@
             <option value="">@optionLabel</option>
         </select>
     </div>
+    @if (Model.Tooltip != "")
+    {
+        <div class="listing-property-tooltip">
+            <span class="icon-question-circle" title="@Model.Tooltip"></span>
+        </div>
+    }
 }
