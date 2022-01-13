@@ -1,4 +1,6 @@
-﻿using Kentico.PageBuilder.Web.Mvc;
+﻿using DancingGoat.InlineEditors;
+
+using Kentico.PageBuilder.Web.Mvc;
 
 namespace DancingGoat.Widgets
 {
@@ -11,5 +13,11 @@ namespace DancingGoat.Widgets
         /// Name of the selected page type.
         /// </summary>
         public string SelectedPageType { get; set; }
+
+
+        /// <summary>
+        /// Page from which to retrieve child pages excluding the selected page.
+        /// </summary>
+        public SelectedPage SelectedPage { get; set; }
     }
 }

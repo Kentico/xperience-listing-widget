@@ -22,7 +22,8 @@ namespace DancingGoatCore.Widgets.Tests
 {
     public class ListingWidgetPageViewComponentTests : UnitTests
     {
-        private const string VIEW_NAME = "~/Components/Widgets/ListingWidget/_ListingWidget.cshtml";
+        private const string VIEW = "~/Components/Widgets/ListingWidget/_ListingWidget.cshtml";
+        private const string NAME = "Article page";
 
         private IPageRepository pageRepository;
         private ListingWidgetViewComponent listingWidgetViewComponent;
@@ -44,7 +45,7 @@ namespace DancingGoatCore.Widgets.Tests
 
             Fake().DocumentType<Article>(Article.CLASS_NAME);
             article = TreeNode.New<Article>();
-            article.DocumentName = "Article page";
+            article.DocumentName = NAME;
         }
 
 
@@ -60,9 +61,9 @@ namespace DancingGoatCore.Widgets.Tests
 
             Assert.Multiple(() =>
             {
-                Assert.That(viewResult.ViewName, Is.EqualTo(VIEW_NAME));
+                Assert.That(viewResult.ViewName, Is.EqualTo(VIEW));
                 Assert.That(viewModel.Pages.Count(), Is.EqualTo(1));
-                Assert.That(viewModel.Pages.First().DocumentName, Is.EqualTo("Article page"));
+                Assert.That(viewModel.Pages.First().DocumentName, Is.EqualTo(NAME));
                 Assert.That(viewModel.PageTypeSelectorViewModel.SelectedOption, Is.EqualTo(testPageType));
             });
         }

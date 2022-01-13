@@ -1,9 +1,12 @@
-﻿using NUnit.Framework;
+﻿using CMS.Tests;
+
+using NUnit.Framework;
 
 namespace DancingGoat.Widgets
 {
     [TestFixture]
-    public class ListingWidgetBasePageViewModelTests
+    [Category.Unit]
+    public class ListingWidgetPageViewModelTests
     {
         [Test]
         public void Ctor_ValidDocumentName_SetsDocumentName()

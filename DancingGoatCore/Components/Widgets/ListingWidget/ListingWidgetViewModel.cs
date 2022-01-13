@@ -16,6 +16,13 @@ namespace DancingGoat.Widgets
 
 
         /// <summary>
+        /// Page from which to retrieve child pages excluding the selected page.
+        /// </summary>
+        public SelectedPage SelectedPage { get; set; }
+
+
+
+        /// <summary>
         /// View model for page type selector drop-down.
         /// </summary>
         public DropdownEditorViewModel PageTypeSelectorViewModel { get; set; }

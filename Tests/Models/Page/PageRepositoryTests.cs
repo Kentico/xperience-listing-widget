@@ -17,7 +17,7 @@ namespace DancingGoat.Models
     [TestFixture(typeof(Cafe))]
     [TestFixture(typeof(Brewer))]
     [TestFixture(typeof(Manufacturer))]
-    public class IPageRepositoryTests<T> : UnitTests where T : TreeNode, new()
+    public class PageRepositoryTests<T> : UnitTests where T : TreeNode, new()
     {
         private IPageRetriever retriever;
         private PageRepository repository;
@@ -27,14 +27,14 @@ namespace DancingGoat.Models
         public void SetUp()
         {
             retriever = Substitute.For<IPageRetriever>();
-            repository = Substitute.ForPartsOf<PageRepository>(retriever);
+            repository = new PageRepository(retriever);
         }
 
 
         [Test]
-        public void GetAllPages_Generic_CallsRetrieverWithCorrectType() 
+        public void GetPage_ValidPath_CallsRetrieverWithCorrectType()
         {
-            repository.GetAllPages<T>();
+            repository.GetPage<T>("path");
 
             retriever.Received(1).Retrieve(Arg.Any<Action<DocumentQuery<T>>>(), Arg.Any<Action<IPageCacheBuilder<T>>>());
         }
