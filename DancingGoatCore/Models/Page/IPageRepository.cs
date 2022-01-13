@@ -10,16 +10,18 @@ namespace DancingGoat.Models
     public interface IPageRepository
     {
         /// <summary>
-        /// Returns an enumerable collection of pages of specified type.
+        /// Returns a page of specified page type.
         /// </summary>
-        /// <typeparam name="TPageType">Type of the pages to be retrieved.</typeparam>
-        public IEnumerable<TPageType> GetAllPages<TPageType>() where TPageType : TreeNode, new();
+        /// <typeparam name="TPageType">Type of the page to be retrieved.</typeparam>
+        /// <param name="PageAliasPath">Specifies the path of retrieved page.</param>
+        public TPageType GetPage<TPageType>(string PageAliasPath) where TPageType : TreeNode, new();
 
 
         /// <summary>
         /// Retrieve pages of specified type.
         /// </summary>
         /// <param name="className">Class name defining the type of pages to be retrieved.</param>
-        public IEnumerable<TreeNode> GetPages(string className);
+        /// <param name="parentPageAliasPath">Specifies the path from which retrieves child pages excluding the parent page. Not specifying it will retrieve all pages.</param>
+        public IEnumerable<TreeNode> GetPages(string className, string parentPageAliasPath = null);
     }
 }

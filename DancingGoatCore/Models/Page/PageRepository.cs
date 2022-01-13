@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 using CMS.DocumentEngine;
 
@@ -25,31 +26,36 @@ namespace DancingGoat.Models
 
 
         /// <summary>
-        /// Returns an enumerable collection of pages of specified type.
+        /// Returns a page of specified page type.
         /// </summary>
-        /// <typeparam name="TPageType">Type of the pages to be retrieved.</typeparam>
-        public IEnumerable<TPageType> GetAllPages<TPageType>() where TPageType : TreeNode, new()
+        /// <typeparam name="TPageType">Type of the page to be retrieved.</typeparam>
+        /// <param name="PageAliasPath">Specifies the path of retrieved page.</param>
+        public TPageType GetPage<TPageType>(string PageAliasPath) where TPageType : TreeNode, new()
         {
             return pageRetriever.Retrieve<TPageType>(
                 query => query
-                    .FilterDuplicates(),
+                    .Path(PageAliasPath, PathTypeEnum.Single),
                 cache => cache
-                    .Key($"{nameof(PageRepository)}|{nameof(GetAllPages)}"));
+                    .Key($"{nameof(PageRepository)}|{nameof(GetPage)}|{nameof(TPageType)}|{PageAliasPath}"))
+                .FirstOrDefault();
         }
 
 
         /// <summary>
-        /// Retrieve pages of specified type.
+        /// Retrieves pages of specified type.
         /// </summary>
         /// <param name="className">Class name defining the type of pages to be retrieved.</param>
-        public IEnumerable<TreeNode> GetPages(string className)
+        /// <param name="parentPageAliasPath">Parent path for child pages to be retrieved. If not specified all pages for the current site will be retrieved.</param>
+        public IEnumerable<TreeNode> GetPages(string className, string parentPageAliasPath = null)
         {
             return pageRetriever.Retrieve(
                 className,
                 query => query
+                    .Path(parentPageAliasPath, PathTypeEnum.Children)
                     .FilterDuplicates(),
                 cache => cache
-                    .Key($"{nameof(PageRepository)}|{nameof(GetPages)}|{className}")
+                    .Key($"{nameof(PageRepository)}|{nameof(GetPages)}|{className}|{parentPageAliasPath}")
+                    // Includes dependency to flush cache when any page of selected page type is edited/created/deleted.
                     .Dependencies((_, builder) => builder.Pages(className)));
         }
     }

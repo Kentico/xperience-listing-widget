@@ -246,6 +246,50 @@
     -ms-opacity: 0.5;
     opacity: 0.5;
 }
+.listing-inline-editor div.listing-property-editor {
+    display: flex;
+    padding: 0.5em;
+}
+
+.listing-inline-editor div.listing-property-editor div.listing-property-label {
+        color: white;
+        margin-top: auto;
+        text-align: end;
+        width: 11em;
+        margin-right: 1em;
+    }
+
+.listing-inline-editor div.listing-property-editor div.listing-property-value {
+        margin-top: auto;
+        display: flex;
+    }
+
+.listing-inline-editor {
+    font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-size: 16px;
+    background-color: #262524;
+    border: 1px solid #383838;
+    padding: 5px;
+    display: table;
+    margin: 1em auto 1em 1em;
+    box-sizing: border-box;
+}
+.listing-inline-editor div.listing-property-editor div.listing-property-value button.path-editor-button {
+    margin-left: 10px;
+}
+
+.listing-inline-editor div.listing-property-editor div.listing-property-value .selected-path {
+    color: white;
+    width: 10em;
+    margin-top: auto;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.listing-inline-editor div.listing-property-editor div.listing-property-value .invalid-page {
+    color: indianred;
+}
 .spinner-editor div.inline-editor-btn-group {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 16px;
