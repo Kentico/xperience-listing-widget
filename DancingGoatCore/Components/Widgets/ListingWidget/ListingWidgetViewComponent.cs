@@ -50,22 +50,36 @@ namespace DancingGoat.Widgets
         /// <param name="viewModel">Component view model with <see cref="ListingWidgetProperties"/> properties.</param>
         public IViewComponentResult Invoke(ComponentViewModel<ListingWidgetProperties> viewModel)
         {
-            var selectedPageType = viewModel.Properties.SelectedPageType;
-            var orderDirection = viewModel.Properties.OrderDirection;
-            var pages = string.IsNullOrEmpty(selectedPageType)
-                ? new List<TreeNode>()
-                : repository.GetPages(selectedPageType, viewModel.Properties.SelectedPage?.Path, orderDirection);
+            var widgetProperties = viewModel.Properties;
+            var selectedPageType = widgetProperties.SelectedPageType;
+            var selectedOrderByField = widgetProperties.OrderByField;
+            var orderDirection = widgetProperties.OrderDirection;
+
             var model = new ListingWidgetViewModel
             {
-                OrderDirection = orderDirection,
-                SelectedPage = viewModel.Properties.SelectedPage,
-                Pages = pages.Select(page => new ListingWidgetPageViewModel(page.DocumentName))
+                SelectedPage = widgetProperties.SelectedPage,
             };
 
+            var orderByFieldService = new OrderByFieldService();
             if (pageBuilderDataContextRetriever.Retrieve().EditMode)
             {
                 model.PageTypeSelectorViewModel = new DropdownEditorViewModel(nameof(ListingWidgetProperties.SelectedPageType), GetSupportedPageTypes(), selectedPageType, "Page type");
+                model.OrderFieldSelectorViewModel = orderByFieldService.GetDropDownModel(selectedPageType, viewModel.Properties.OrderByField);
+                model.TopN = widgetProperties.TopN;
+                model.OrderDirection = orderDirection;
+
             }
+
+            selectedOrderByField = orderByFieldService.IsValidField(selectedPageType, selectedOrderByField) ? selectedOrderByField : string.Empty;
+
+            var pages = string.IsNullOrEmpty(selectedPageType)
+               ? new List<TreeNode>()
+               : repository.GetPages(selectedPageType, widgetProperties.SelectedPage?.Path, widgetProperties.TopN, selectedOrderByField, orderDirection);
+
+            model.Pages = pages.Select(page => new ListingWidgetPageViewModel(page.DocumentName));
+            model.SelectedOrderByField = selectedOrderByField;
+            
+
             return View("~/Components/Widgets/ListingWidget/_ListingWidget.cshtml", model);
         }
 

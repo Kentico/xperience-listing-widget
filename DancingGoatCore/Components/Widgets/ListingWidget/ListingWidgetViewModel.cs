@@ -6,10 +6,10 @@ using DancingGoat.InlineEditors;
 
 namespace DancingGoat.Widgets
 {
-    /// <summary>
-    /// View model for Listing widget.
-    /// </summary>
-    public class ListingWidgetViewModel
+	/// <summary>
+	/// View model for Listing widget.
+	/// </summary>
+	public class ListingWidgetViewModel
     {
         /// <summary>
         /// Pages to show.
@@ -27,6 +27,24 @@ namespace DancingGoat.Widgets
         /// View model for page type selector drop-down.
         /// </summary>
         public DropdownEditorViewModel PageTypeSelectorViewModel { get; set; }
+
+
+        /// <summary>
+        /// Number of items to retrieve.
+        /// </summary>
+        public int TopN { get; set; }
+
+
+        /// <summary>
+        /// Field to order by retrieved pages.
+        /// </summary>
+        public string SelectedOrderByField { get; set; }
+
+
+        /// <summary>
+        /// View model for field to order selector drop-down.
+        /// </summary>
+        public DropdownEditorViewModel OrderFieldSelectorViewModel { get; set; }
 
 
         /// <summary>

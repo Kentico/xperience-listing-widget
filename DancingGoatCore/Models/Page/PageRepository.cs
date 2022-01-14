@@ -48,17 +48,20 @@ namespace DancingGoat.Models
         /// </summary>
         /// <param name="pageType">Page type of pages to be retrieved.</param>
         /// <param name="parentPageAliasPath">Parent path for child pages to be retrieved. If not specified, all pages will be retrieved for the current site.</param>
+        /// <param name="topN">The number of pages to be retrieved.</param>
+        /// <param name="orderByField">The field by which retrieved pages will be sorted.</param>
         /// <param name="orderDirection">Order direction of retrieved pages.</param>
-        public IEnumerable<TreeNode> GetPages(string pageType, string parentPageAliasPath = null, OrderDirection orderDirection = OrderDirection.Default)
+        public IEnumerable<TreeNode> GetPages(string pageType, string parentPageAliasPath = null, int topN = 0, string orderByField = null, OrderDirection orderDirection = OrderDirection.Default)
         {
             return pageRetriever.Retrieve(
                 pageType,
                 query => query
                     .Path(parentPageAliasPath, PathTypeEnum.Children)
-                    .OrderBy(orderDirection, "NodeOrder")
+                    .TopN(topN)
+                    .OrderBy(orderDirection, orderByField)
                     .FilterDuplicates(),
                 cache => cache
-                    .Key($"{nameof(PageRepository)}|{nameof(GetPages)}|{pageType}|{parentPageAliasPath}")
+                    .Key($"{nameof(PageRepository)}|{nameof(GetPages)}|{pageType}|{parentPageAliasPath}|{topN}|{orderByField}|{orderDirection}")
                     // Includes dependency to flush cache when any page of selected page type is edited/created/deleted.
                     .Dependencies((_, builder) => builder.Pages(pageType)));
         }

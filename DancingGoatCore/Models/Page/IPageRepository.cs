@@ -22,7 +22,9 @@ namespace DancingGoat.Models
         /// </summary>
         /// <param name="pageType">Page type of pages to be retrieved.</param>
         /// <param name="parentPageAliasPath">Parent path for child pages to be retrieved. If not specified, all pages will be retrieved for the current site.</param>
+        /// <param name="topN">The number of pages to be retrieved.</param>
+        /// <param name="orderByField">The field by which retrieved pages will be sorted.</param>
         /// <param name="orderDirection">Order direction of retrieved pages.</param>
-        public IEnumerable<TreeNode> GetPages(string pageType, string parentPageAliasPath = null, OrderDirection orderDirection = OrderDirection.Default);
+        public IEnumerable<TreeNode> GetPages(string className, string parentPageAliasPath = null, int topN = 0, string orderByField = null, OrderDirection orderDirection = OrderDirection.Default);
     }
 }
