@@ -13,7 +13,7 @@
             <option value="">@optionLabel</option>
         </select>
     </div>
-    @if (Model.Tooltip != "")
+    @if (!string.IsNullOrEmpty(Model.Tooltip))
     {
         <div class="listing-property-tooltip">
             <span class="icon-question-circle" title="@Model.Tooltip"></span>
