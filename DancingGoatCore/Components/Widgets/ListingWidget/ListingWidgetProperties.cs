@@ -24,6 +24,18 @@ namespace DancingGoat.Widgets
 
 
         /// <summary>
+        /// Number of items to retrieve.
+        /// </summary>
+        public int TopN { get; set; }
+
+
+        /// <summary>
+        /// Field to order by retrieved pages.
+        /// </summary>
+		public string OrderByField { get; set; }
+
+
+        /// <summary>
         /// Order direction of pages.
         /// </summary>
         public OrderDirection OrderDirection { get; set; } = OrderDirection.Ascending;
