@@ -19,7 +19,7 @@
                     tabs: ["page"],
                     selectedItems: {
                         type: "page",
-                        items: [{ value: options.propertyValue ? options.propertyValue.Path : null }]
+                        items: [{ value: options.propertyValue ? options.propertyValue.path : null }]
                     },
                     pageOptions: {
                         identifierMode: "path"
@@ -32,8 +32,8 @@
                             var event = new CustomEvent("updateProperty", {
                                 detail: {
                                     value: {
-                                        Path: newItem.nodeAliasPath,
-                                        Name: newItem.name,
+                                        path: newItem.nodeAliasPath,
+                                        name: newItem.name,
                                     },
                                     name: options.propertyName
                                 }
