@@ -6,9 +6,9 @@
     public enum PageSelectionState
     {
         /// <summary>
-        /// Page is not acessible, user has insufficient permissions or the page has been deleted.
+        /// Page is not accessible. The selected page has been deleted or changed alias path.
         /// </summary>
-        Inacessible,
+        Inaccessible,
 
 
         /// <summary>

@@ -1,23 +1,18 @@
 ﻿using System;
 
 using CMS.DocumentEngine;
-using CMS.DocumentEngine.Types.DancingGoatCore;
 using CMS.Tests;
 
 using Kentico.Content.Web.Mvc;
 
 using NSubstitute;
+
 using NUnit.Framework;
 
 namespace DancingGoat.Models
 {
-    [TestFixture(typeof(Article))]
-    [TestFixture(typeof(TreeNode))]
-    [TestFixture(typeof(Coffee))]
-    [TestFixture(typeof(Cafe))]
-    [TestFixture(typeof(Brewer))]
-    [TestFixture(typeof(Manufacturer))]
-    public class PageRepositoryTests<T> : UnitTests where T : TreeNode, new()
+    [TestFixture]
+    public class PageRepositoryTests : UnitTests
     {
         private IPageRetriever retriever;
         private PageRepository repository;
@@ -34,9 +29,9 @@ namespace DancingGoat.Models
         [Test]
         public void GetPage_ValidPath_CallsRetrieverWithCorrectType()
         {
-            repository.GetPage<T>("path");
+            repository.GetPageName("path");
 
-            retriever.Received(1).Retrieve(Arg.Any<Action<DocumentQuery<T>>>(), Arg.Any<Action<IPageCacheBuilder<T>>>());
+            retriever.Received(1).Retrieve(Arg.Any<Action<DocumentQuery<TreeNode>>>(), Arg.Any<Action<IPageCacheBuilder<TreeNode>>>());
         }
 
 

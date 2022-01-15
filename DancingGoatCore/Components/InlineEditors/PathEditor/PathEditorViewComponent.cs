@@ -1,5 +1,4 @@
-﻿using CMS.DocumentEngine;
-
+﻿
 using DancingGoat.Models;
 
 using Microsoft.AspNetCore.Mvc;
@@ -50,30 +49,31 @@ namespace DancingGoat.InlineEditors
                 viewModel.PageSelectionState = PageSelectionState.NotSelected;
                 viewModel.Value = localizer["No page selected"].Value;
                 viewModel.Title = "";
+                return;
             }
-            else if (IsPageValid(page.Path))
+
+            var pageName = GetPageName(page.Path);
+            if (!string.IsNullOrEmpty(pageName))
             {
                 viewModel.PageSelectionState = PageSelectionState.Valid;
-                viewModel.Value = page.Name;
+                viewModel.Value = GetPageName(page.Path);
                 viewModel.Title = page.Path;
+                return;
             }
-            else
-            {
-                viewModel.PageSelectionState = PageSelectionState.Inacessible;
-                viewModel.Value = localizer["Invalid page"].Value;
-                viewModel.Title = localizer["The selected page has been deleted or you don't have permissions to select it."].Value;
-            }
+
+            viewModel.PageSelectionState = PageSelectionState.Inaccessible;
+            viewModel.Value = localizer["Page does not exist"].Value;
+            viewModel.Title = localizer["The selected page has been deleted or changed alias path."].Value;
         }
 
 
-        private bool IsPageValid(string path)
+        private string GetPageName(string path)
         {
             if (string.IsNullOrWhiteSpace(path))
             {
-                return false;
+                return null;
             }
-            var page = repository.GetPage<TreeNode>(path);
-            return page != null;
+            return repository.GetPageName(path);
         }
     }
 }

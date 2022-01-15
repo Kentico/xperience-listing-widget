@@ -4,7 +4,7 @@
 
 @using (Html.Kentico().BeginInlineEditor("path-editor", Model.PropertyName, new { @class = "listing-property-editor" }))
 {
-    var validationClass = Model.PageSelectionState == PageSelectionState.Inacessible ? "invalid-page" : "";
+    var validationClass = Model.PageSelectionState == PageSelectionState.Inaccessible ? "invalid-page" : "";
 
     <div class="listing-property-label">
         <label asp-for="@Model.Value" class="path-label">@HtmlLocalizer["Parent page"].Value:</label>
