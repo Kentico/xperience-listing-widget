@@ -5,10 +5,11 @@
 
 .listing-inline-editor div.listing-property-editor div.listing-property-label {
     color: white;
-    margin-top: auto;
-    text-align: end;
     width: 11em;
     margin-right: 1em;
+    display: flex;
+    align-items: flex-end;
+    justify-content: end;
 }
 
 .listing-inline-editor div.listing-property-editor div.listing-property-value {

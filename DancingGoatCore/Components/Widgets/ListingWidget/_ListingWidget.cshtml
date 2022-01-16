@@ -7,6 +7,12 @@
 {
     <div class="listing-inline-editor">
         <partial name="~/Components/InlineEditors/DropdownEditor/_DropdownEditor.cshtml" model="@Model.PageTypeSelectorViewModel" />
+        <partial name="~/Components/InlineEditors/OrderDirectionEditor/_OrderDirectionEditor.cshtml" 
+            model="new OrderDirectionViewModel
+                {
+                    PropertyName = nameof(ListingWidgetProperties.OrderDirection), 
+                    Direction = Model.OrderDirection
+                }" />
         <vc:path-editor property-name="@nameof(ListingWidgetProperties.SelectedPage)" page="@Model.SelectedPage" />
     </div>
 }
