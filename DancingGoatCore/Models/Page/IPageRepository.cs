@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 
+using CMS.DataEngine;
 using CMS.DocumentEngine;
 
 namespace DancingGoat.Models
@@ -21,6 +22,7 @@ namespace DancingGoat.Models
         /// </summary>
         /// <param name="pageType">Page type of pages to be retrieved.</param>
         /// <param name="parentPageAliasPath">Parent path for child pages to be retrieved. If not specified, all pages will be retrieved for the current site.</param>
-        public IEnumerable<TreeNode> GetPages(string pageType, string parentPageAliasPath = null);
+        /// <param name="orderDirection">Order direction of retrieved pages.</param>
+        public IEnumerable<TreeNode> GetPages(string pageType, string parentPageAliasPath = null, OrderDirection orderDirection = OrderDirection.Default);
     }
 }

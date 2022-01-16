@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 
+using CMS.DataEngine;
+
 using DancingGoat.InlineEditors;
 
 namespace DancingGoat.Widgets
@@ -26,5 +28,11 @@ namespace DancingGoat.Widgets
         /// View model for page type selector drop-down.
         /// </summary>
         public DropdownEditorViewModel PageTypeSelectorViewModel { get; set; }
+
+
+        /// <summary>
+        /// Order direction of pages.
+        /// </summary>
+        public OrderDirection OrderDirection { get; set; }
     }
 }

@@ -1,4 +1,6 @@
-﻿using DancingGoat.InlineEditors;
+﻿using CMS.DataEngine;
+
+using DancingGoat.InlineEditors;
 
 using Kentico.PageBuilder.Web.Mvc;
 
@@ -19,5 +21,12 @@ namespace DancingGoat.Widgets
         /// Page from which to retrieve child pages excluding the selected page.
         /// </summary>
         public SelectedPage SelectedPage { get; set; }
+
+
+        /// <summary>
+        /// Order direction of pages.
+        /// </summary>
+        public OrderDirection OrderDirection { get; set; }
+
     }
 }

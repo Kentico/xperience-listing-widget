@@ -1,14 +1,13 @@
-﻿using System.Linq;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 using CMS.DataEngine;
 using CMS.DocumentEngine;
 using CMS.DocumentEngine.Types.DancingGoatCore;
 
+using DancingGoat.InlineEditors;
 using DancingGoat.Models;
 using DancingGoat.Widgets;
-using DancingGoat.InlineEditors;
-
 
 using Kentico.PageBuilder.Web.Mvc;
 
@@ -29,7 +28,7 @@ namespace DancingGoat.Widgets
         /// </summary>
         public const string IDENTIFIER = "DancingGoat.General.ListingWidget";
 
-        
+
         private readonly IPageRepository repository;
         private readonly IPageBuilderDataContextRetriever pageBuilderDataContextRetriever;
 
@@ -52,15 +51,17 @@ namespace DancingGoat.Widgets
         public IViewComponentResult Invoke(ComponentViewModel<ListingWidgetProperties> viewModel)
         {
             var selectedPageType = viewModel.Properties.SelectedPageType;
-            var pages = string.IsNullOrEmpty(selectedPageType) 
-                ? new List<TreeNode>() 
-                : repository.GetPages(selectedPageType, viewModel.Properties.SelectedPage?.Path);
-            var model = new ListingWidgetViewModel 
-            { 
+            var orderDirection = viewModel.Properties.OrderDirection;
+            var pages = string.IsNullOrEmpty(selectedPageType)
+                ? new List<TreeNode>()
+                : repository.GetPages(selectedPageType, viewModel.Properties.SelectedPage?.Path, orderDirection);
+            var model = new ListingWidgetViewModel
+            {
+                OrderDirection = orderDirection,
                 SelectedPage = viewModel.Properties.SelectedPage,
                 Pages = pages.Select(page => new ListingWidgetPageViewModel(page.DocumentName))
             };
-            
+
             if (pageBuilderDataContextRetriever.Retrieve().EditMode)
             {
                 model.PageTypeSelectorViewModel = new DropdownEditorViewModel(nameof(ListingWidgetProperties.SelectedPageType), GetSupportedPageTypes(), selectedPageType, "Page type");
