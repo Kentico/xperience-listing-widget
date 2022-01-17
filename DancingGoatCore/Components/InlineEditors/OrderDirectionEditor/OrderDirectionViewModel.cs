@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-
+﻿
 using CMS.DataEngine;
 
 namespace DancingGoat.InlineEditors
@@ -12,12 +11,6 @@ namespace DancingGoat.InlineEditors
         /// <summary>
         /// Order direction.
         /// </summary>
-        public OrderDirection Direction { get; set; }
-
-
-        /// <summary>
-        /// Collection of supported order directions.
-        /// </summary>
-        public IEnumerable<OrderDirection> OrderDirectionOptions = new List<OrderDirection> { OrderDirection.Ascending, OrderDirection.Descending };
+        public OrderDirection Order { get; set; }
     }
 }

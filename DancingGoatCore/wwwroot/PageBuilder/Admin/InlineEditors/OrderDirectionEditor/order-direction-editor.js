@@ -2,7 +2,7 @@
     window.kentico.pageBuilder.registerInlineEditor("order-direction-editor", {
         init: function (options) {
             var editor = options.editor;
-            var radios = editor.querySelectorAll("input[name='Direction']");
+            var radios = editor.querySelectorAll("input[name='Order']");
 
             radios.forEach(input => {
                 input.addEventListener("change", function () {
