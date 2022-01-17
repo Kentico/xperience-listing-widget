@@ -31,16 +31,18 @@ namespace DancingGoat.Widgets
 
         private readonly IPageRepository repository;
         private readonly IPageBuilderDataContextRetriever pageBuilderDataContextRetriever;
+        private readonly IOrderByFieldService orderByFieldService;
 
 
         /// <summary>
         /// Creates an instance of <see cref="ListingWidgetViewComponent"/> class.
         /// </summary>
         /// <param name="repository">Page repository.</param>
-        public ListingWidgetViewComponent(IPageRepository repository, IPageBuilderDataContextRetriever pageBuilderDataContextRetriever)
+        public ListingWidgetViewComponent(IPageRepository repository, IPageBuilderDataContextRetriever pageBuilderDataContextRetriever, IOrderByFieldService orderByFieldService)
         {
             this.repository = repository;
             this.pageBuilderDataContextRetriever = pageBuilderDataContextRetriever;
+            this.orderByFieldService = orderByFieldService;
         }
 
 
@@ -60,7 +62,6 @@ namespace DancingGoat.Widgets
                 SelectedPage = widgetProperties.SelectedPage,
             };
 
-            var orderByFieldService = new OrderByFieldService();
             if (pageBuilderDataContextRetriever.Retrieve().EditMode)
             {
                 model.PageTypeSelectorViewModel = new DropdownEditorViewModel(nameof(ListingWidgetProperties.SelectedPageType), GetSupportedPageTypes(), selectedPageType, "Page type");
