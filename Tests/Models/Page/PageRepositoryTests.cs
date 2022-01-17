@@ -6,7 +6,6 @@ using CMS.Tests;
 using Kentico.Content.Web.Mvc;
 
 using NSubstitute;
-
 using NUnit.Framework;
 
 namespace DancingGoat.Models
@@ -27,7 +26,7 @@ namespace DancingGoat.Models
 
 
         [Test]
-        public void GetPage_ValidPath_CallsRetrieverWithCorrectType()
+        public void GetPageName_ValidPath_CallsRetrieverWithCorrectType()
         {
             repository.GetPageName("path");
 
