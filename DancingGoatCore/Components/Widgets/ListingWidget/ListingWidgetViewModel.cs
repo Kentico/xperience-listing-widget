@@ -23,7 +23,6 @@ namespace DancingGoat.Widgets
         public SelectedPage SelectedPage { get; set; }
 
 
-
         /// <summary>
         /// View model for page type selector drop-down.
         /// </summary>

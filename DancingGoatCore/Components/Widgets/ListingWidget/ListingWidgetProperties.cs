@@ -26,7 +26,7 @@ namespace DancingGoat.Widgets
         /// <summary>
         /// Order direction of pages.
         /// </summary>
-        public OrderDirection OrderDirection { get; set; }
+        public OrderDirection OrderDirection { get; set; } = OrderDirection.Ascending;
 
     }
 }

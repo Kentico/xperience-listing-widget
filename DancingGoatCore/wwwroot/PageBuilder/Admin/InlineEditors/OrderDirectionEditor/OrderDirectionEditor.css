@@ -8,6 +8,6 @@
     flex-direction: column;
 }
 
-.listing-inline-editor .listing-property-editor .listing-property-label label {
+.listing-inline-editor .listing-property-editor .listing-property-label .order-direction-label {
     margin-bottom: auto;
 }

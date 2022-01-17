@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
+using CMS.DataEngine;
 using CMS.DocumentEngine;
 using CMS.DocumentEngine.Types.DancingGoatCore;
 using CMS.Tests;
@@ -8,12 +9,12 @@ using CMS.Tests;
 using DancingGoat.Models;
 using DancingGoat.Widgets;
 
-using Kentico.Content.Web.Mvc;
 using Kentico.PageBuilder.Web.Mvc;
 
 using Microsoft.AspNetCore.Mvc.ViewComponents;
 
 using NSubstitute;
+
 using NUnit.Framework;
 
 using Tests.DocumentEngine;
@@ -54,7 +55,7 @@ namespace DancingGoatCore.Widgets.Tests
         {
             var testPageType = Article.CLASS_NAME;
             componentViewModel.Properties.SelectedPageType = testPageType;
-            pageRepository.GetPages(Article.CLASS_NAME).Returns(new List<TreeNode> { article });
+            pageRepository.GetPages(Article.CLASS_NAME, orderDirection: OrderDirection.Ascending).Returns(new List<TreeNode> { article });
 
             var viewResult = listingWidgetViewComponent.Invoke(componentViewModel) as ViewViewComponentResult;
             var viewModel = viewResult.ViewData.Model as ListingWidgetViewModel;
@@ -72,7 +73,7 @@ namespace DancingGoatCore.Widgets.Tests
         [Test]
         public void Invoke_PropertiesWithoutSelectedPageType_ReturnsCorrectViewWithoutPages()
         {
-            pageRepository.GetPages(Article.CLASS_NAME).Returns(new List<TreeNode> { article });
+            pageRepository.GetPages(Article.CLASS_NAME, orderDirection: OrderDirection.Ascending).Returns(new List<TreeNode> { article });
 
             var viewResult = listingWidgetViewComponent.Invoke(componentViewModel) as ViewViewComponentResult;
             var viewModel = viewResult.ViewData.Model as ListingWidgetViewModel;
