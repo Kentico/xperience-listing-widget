@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.ViewComponents;
 using Microsoft.Extensions.Localization;
 
 using NSubstitute;
-
 using NUnit.Framework;
 
 namespace DancingGoat.InlineEditors
@@ -21,7 +20,7 @@ namespace DancingGoat.InlineEditors
         private const string INVALID_PATH = "/Store/Brewers/Aeropress";
         private const string INVALID_PAGE_MESSAGE = "Page does not exist";
         private const string NO_PAGE_SELECTED_MESSAGE = "No page selected";
-        private const string PAGE_INACCESSIBLE_MESSAGE = "The selected page has been deleted or changed alias path.";
+        private const string PAGE_INACCESSIBLE_MESSAGE = "The selected page has been deleted or its alias path has been changed.";
 
         private IPageRepository repository;
         private PathEditorViewComponent component;

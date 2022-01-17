@@ -17,10 +17,10 @@ namespace DancingGoat.Models
 
 
         /// <summary>
-        /// Gets a collection of specified page type pages.
+        /// Retrieves pages of specified type.
         /// </summary>
-        /// <param name="pageType">Class name defining the type of pages to be retrieved.</param>
-        /// <param name="parentPageAliasPath">Parent path for child pages to be retrieved. If not specified all pages for the current site will be retrieved.</param>
+        /// <param name="pageType">Page type of pages to be retrieved.</param>
+        /// <param name="parentPageAliasPath">Parent path for child pages to be retrieved. If not specified, all pages will be retrieved for the current site.</param>
         public IEnumerable<TreeNode> GetPages(string pageType, string parentPageAliasPath = null);
     }
 }

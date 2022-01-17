@@ -26,7 +26,7 @@ namespace DancingGoat.Models
 
 
         /// <summary>
-        /// Returns page name.
+        /// Gets name of the page.
         /// </summary>
         /// <param name="PageAliasPath">Specifies the path of the page.</param>
         public string GetPageName(string pageAliasPath)
@@ -46,7 +46,7 @@ namespace DancingGoat.Models
         /// Retrieves pages of specified type.
         /// </summary>
         /// <param name="pageType">Page type of pages to be retrieved.</param>
-        /// <param name="parentPageAliasPath">Parent path for child pages to be retrieved. If not specified all pages for the current site will be retrieved.</param>
+        /// <param name="parentPageAliasPath">Parent path for child pages to be retrieved. If not specified, all pages will be retrieved for the current site.</param>
         public IEnumerable<TreeNode> GetPages(string pageType, string parentPageAliasPath = null)
         {
             return pageRetriever.Retrieve(

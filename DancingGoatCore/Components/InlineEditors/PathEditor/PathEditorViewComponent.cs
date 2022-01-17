@@ -1,5 +1,4 @@
-﻿
-using DancingGoat.Models;
+﻿using DancingGoat.Models;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
@@ -56,24 +55,24 @@ namespace DancingGoat.InlineEditors
             if (!string.IsNullOrEmpty(pageName))
             {
                 viewModel.PageSelectionState = PageSelectionState.Valid;
-                viewModel.Value = GetPageName(page.Path);
+                viewModel.Value = pageName;
                 viewModel.Title = page.Path;
                 return;
             }
 
             viewModel.PageSelectionState = PageSelectionState.Inaccessible;
             viewModel.Value = localizer["Page does not exist"].Value;
-            viewModel.Title = localizer["The selected page has been deleted or changed alias path."].Value;
+            viewModel.Title = localizer["The selected page has been deleted or its alias path has been changed."].Value;
         }
 
 
-        private string GetPageName(string path)
+        private string GetPageName(string pageAliasPath)
         {
-            if (string.IsNullOrWhiteSpace(path))
+            if (string.IsNullOrWhiteSpace(pageAliasPath))
             {
                 return null;
             }
-            return repository.GetPageName(path);
+            return repository.GetPageName(pageAliasPath);
         }
     }
 }
