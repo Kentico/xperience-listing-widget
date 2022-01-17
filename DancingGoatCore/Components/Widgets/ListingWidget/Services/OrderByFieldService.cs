@@ -11,15 +11,15 @@ namespace DancingGoat.Widgets
     /// <summary>
     /// Provides methods to get data for order by field editor.
     /// </summary>
-	internal class OrderByFieldService
-	{
+    internal class OrderByFieldService : IOrderByFieldService
+    {
         /// <summary>
         /// Gets model for order by field drop-down editor.
         /// </summary>
         /// <param name="pageType">Page type for options to be retrieved.</param>
         /// <param name="orderByField">Order by field.</param>
         public DropdownEditorViewModel GetDropDownModel(string pageType, string orderByField)
-		{
+        {
             var fields = GetFields(pageType);
             var validOrderByFieldSelected = fields.Any(item => item.Value == orderByField);
             return new DropdownEditorViewModel(nameof(ListingWidgetProperties.OrderByField),
@@ -36,17 +36,17 @@ namespace DancingGoat.Widgets
         /// <param name="pageType">Page type.</param>
         /// <param name="orderByField">Order by field.</param>
         public bool IsValidField(string pageType, string orderByField)
-		{
+        {
             var fields = GetFields(pageType);
             return fields.Any(item => item.Value == orderByField);
         }
 
 
-        private IEnumerable<DropdownOptionViewModel> GetFields(string className)
+        private IEnumerable<DropdownOptionViewModel> GetFields(string pageType)
         {
-            if (!string.IsNullOrEmpty(className))
+            if (!string.IsNullOrEmpty(pageType))
             {
-                var dataClassInfo = DataClassInfoProvider.GetDataClassInfo(className);
+                var dataClassInfo = DataClassInfoProvider.GetDataClassInfo(pageType);
 
                 var formInfo = new FormInfo(dataClassInfo.ClassFormDefinition);
                 var fields = formInfo.GetFields(true, true);
@@ -73,5 +73,5 @@ namespace DancingGoat.Widgets
             yield return new DropdownOptionViewModel("DocumentCreatedWhen", "DocumentCreatedWhen");
             yield return new DropdownOptionViewModel("NodeOrder", "NodeOrder");
         }
-	}
+    }
 }

@@ -2,6 +2,7 @@
 using DancingGoat.Models;
 using DancingGoat.PageTemplates;
 using DancingGoat.Services;
+using DancingGoat.Widgets;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -25,6 +26,8 @@ namespace DancingGoat
         private static void AddRepositories(IServiceCollection services)
         {
             services.AddSingleton<IPageRepository, PageRepository>();
+            services.AddSingleton<IOrderByFieldService, OrderByFieldService>();
+            
             services.AddSingleton<ArticleRepository>();
             services.AddSingleton<CafeRepository>();
             services.AddSingleton<ContactRepository>();

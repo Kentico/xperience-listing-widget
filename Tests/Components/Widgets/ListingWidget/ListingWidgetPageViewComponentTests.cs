@@ -36,9 +36,11 @@ namespace DancingGoatCore.Widgets.Tests
         public void SetUp()
         {
             pageRepository = Substitute.For<IPageRepository>();
+            var orderService = Substitute.For<IOrderByFieldService>();
+            orderService.IsValidField(null,null).ReturnsForAnyArgs(true);
             var pageBuilderDataContextRetriever = Substitute.For<IPageBuilderDataContextRetriever>();
             pageBuilderDataContextRetriever.Retrieve().EditMode.Returns(true);
-            listingWidgetViewComponent = new ListingWidgetViewComponent(pageRepository, pageBuilderDataContextRetriever);
+            listingWidgetViewComponent = new ListingWidgetViewComponent(pageRepository, pageBuilderDataContextRetriever, orderService);
 
             var page = Substitute.For<TreeNode>();
             var properties = new ListingWidgetProperties();

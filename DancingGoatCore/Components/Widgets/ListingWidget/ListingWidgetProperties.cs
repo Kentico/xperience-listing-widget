@@ -24,7 +24,7 @@ namespace DancingGoat.Widgets
 
 
         /// <summary>
-        /// Number of items to retrieve.
+        /// Number of pages to retrieve.
         /// </summary>
         public int TopN { get; set; }
 
