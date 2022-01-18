@@ -21,6 +21,5 @@ namespace DancingGoat.Widgets
         /// <param name="pageType">Page type.</param>
         /// <param name="orderByField">Order by field.</param>
         bool IsValidField(string pageType, string orderByField);
-
     }
 }
