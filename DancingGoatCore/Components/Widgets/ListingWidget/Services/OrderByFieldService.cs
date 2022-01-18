@@ -25,7 +25,7 @@ namespace DancingGoat.Widgets
             return new DropdownEditorViewModel(nameof(ListingWidgetProperties.OrderByField),
                 fields,
                 validOrderByFieldSelected ? orderByField : string.Empty,
-                "Order By Field"
+                "Order by field"
                 );
         }
 

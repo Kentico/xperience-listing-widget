@@ -38,6 +38,8 @@ namespace DancingGoat.Widgets
         /// Creates an instance of <see cref="ListingWidgetViewComponent"/> class.
         /// </summary>
         /// <param name="repository">Page repository.</param>
+        /// <param name="pageBuilderDataContextRetriever">Page builder data context retriever.</param>
+        /// <param name="orderByFieldService">Order by field service.</param>
         public ListingWidgetViewComponent(IPageRepository repository, IPageBuilderDataContextRetriever pageBuilderDataContextRetriever, IOrderByFieldService orderByFieldService)
         {
             this.repository = repository;
