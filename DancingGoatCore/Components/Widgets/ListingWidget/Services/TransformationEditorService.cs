@@ -7,12 +7,10 @@ using Microsoft.Extensions.Localization;
 
 namespace DancingGoat.Widgets
 {
-    /// <summary>
     /// <inheritdoc/>
-    /// </summary>
     public class TransformationEditorService : ITransformationEditorService
     {
-        private readonly SupportedTransformations supportedTransformations;
+        private readonly SupportedTransformationsRetriever transformationsRetriever;
         private readonly IStringLocalizer<SharedResources> localizer;
 
 
@@ -20,41 +18,39 @@ namespace DancingGoat.Widgets
         /// Creates an instance of <see cref="TransformationEditorService"/> class.
         /// </summary>
         /// <param name="localizer">Represents an <see cref="IStringLocalizer"/> that provides localized strings.</param>
-        /// <param name="supportedTransformations">Supported transformations.</param>
-        public TransformationEditorService(IStringLocalizer<SharedResources> localizer, SupportedTransformations supportedTransformations)
+        /// <param name="transformationsRetriever">Supported transformations.</param>
+        public TransformationEditorService(IStringLocalizer<SharedResources> localizer, SupportedTransformationsRetriever transformationsRetriever)
         {
             this.localizer = localizer;
-            this.supportedTransformations = supportedTransformations;
+            this.transformationsRetriever = transformationsRetriever;
         }
 
 
-        /// <summary>
         /// <inheritdoc/>
-        /// </summary>
         public DropDownEditorViewModel GetEditorModel(string selectedOption, string pageType)
         {
-            var reset = !string.IsNullOrEmpty(selectedOption) && !supportedTransformations.IsTransformationSupportedForPageType(selectedOption, pageType);
-            return new DropDownEditorViewModel(nameof(ListingWidgetProperties.SelectedTransformationPath), GetOptions(pageType), selectedOption, "Transformation", GetTooltip(pageType), reset);
+            var reset = !string.IsNullOrEmpty(selectedOption) && !transformationsRetriever.IsTransformationSupported(selectedOption, pageType);
+            return new DropDownEditorViewModel(nameof(ListingWidgetProperties.TransformationPath), GetOptions(pageType), selectedOption, "Transformation", GetTooltip(pageType), reset);
         }
 
 
         private IEnumerable<DropDownOptionViewModel> GetOptions(string pageType)
         {
-            if (string.IsNullOrEmpty(pageType) || !supportedTransformations.Transformations.ContainsKey(pageType))
+            if (string.IsNullOrEmpty(pageType))
             {
                 return Enumerable.Empty<DropDownOptionViewModel>();
             }
-            return supportedTransformations.Transformations[pageType].Select(transformation => new DropDownOptionViewModel(transformation.View, localizer[transformation.Name]));
+            return transformationsRetriever.GetTransformations(pageType).Select(transformation => new DropDownOptionViewModel(transformation.View, localizer[transformation.Name]));
         }
 
 
         private string GetTooltip(string pageType)
         {
-            if (string.IsNullOrEmpty(pageType) || !supportedTransformations.Transformations.ContainsKey(pageType))
+            if (string.IsNullOrEmpty(pageType))
             {
                 return string.Empty;
             }
-            var tooltips = supportedTransformations.Transformations[pageType]
+            var tooltips = transformationsRetriever.GetTransformations(pageType)
                 .Select(transformation => GetTransformationTooltip(transformation))
                 .Where(tooltip => !string.IsNullOrWhiteSpace(tooltip));
             var joinedTooltip = string.Join("\n\n", tooltips);
@@ -64,13 +60,14 @@ namespace DancingGoat.Widgets
 
         private string GetTransformationTooltip(Transformation transformation)
         {
-            if (transformation == null)
+            if (transformation == null || string.IsNullOrWhiteSpace(transformation.Description))
             {
                 return null;
             }
-            return string.IsNullOrWhiteSpace(transformation.ToolTip)
-                ? null
-                : $"{localizer[transformation.Name]}:\n{localizer[transformation.ToolTip]}";
+
+            return $"{localizer[transformation.Name]}:\n{localizer[transformation.Description]}";
+
+
         }
     }
 }

@@ -10,11 +10,31 @@ using Kentico.Content.Web.Mvc;
 
 namespace DancingGoat.Widgets
 {
-    /// <summary>
-    /// Provides methods to get articles transformation model and custom parametrization for page retriever.
-    /// </summary>
+    /// <inheritdoc/>
     public class ArticlesTransformationService : BaseTransformationService
     {
+        /// <inheritdoc/>
+        public override string PageType { get; } = Article.CLASS_NAME;
+
+
+        /// <inheritdoc/>
+        public override IEnumerable<Transformation> Transformations { get; } = new List<Transformation>
+        {
+            new Transformation
+            {
+                Name = "Articles",
+                View = "Transformations/Articles/_Articles.cshtml",
+                Description = "Transformation displays articles in 4 column grid.",
+            },
+            new Transformation
+            {
+                Name = "Articles with heading",
+                View = "Transformations/Articles/_ArticlesWithHeading.cshtml",
+                Description = "Transformation displays articles in 4 column grid with first large heading article.",
+            }
+        };
+
+
         private readonly IPageUrlRetriever pageUrlRetriever;
         private readonly IPageAttachmentUrlRetriever attachmentUrlRetriever;
 
@@ -39,7 +59,7 @@ namespace DancingGoat.Widgets
         {
             if (pages == null)
             {
-                return new ArticlesTransformationViewModel { Articles = Enumerable.Empty<ArticleViewModel>() };
+                return new ArticlesTransformationViewModel();
             }
             var articlesList = pages.Select(article => ArticleViewModel.GetViewModel(article as Article, pageUrlRetriever, attachmentUrlRetriever));
             return new ArticlesTransformationViewModel { Articles = articlesList };

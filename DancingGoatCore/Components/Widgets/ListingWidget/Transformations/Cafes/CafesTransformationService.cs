@@ -13,11 +13,25 @@ using Microsoft.Extensions.Localization;
 
 namespace DancingGoat.Widgets
 {
-    /// <summary>
-    /// Provides methods to get cafes transformation model and custom parametrization for page retriever.
-    /// </summary>
+    /// <inheritdoc/>
     public class CafesTransformationService : BaseTransformationService
     {
+        /// <inheritdoc/>
+        public override string PageType { get; } = Cafe.CLASS_NAME;
+
+
+        /// <inheritdoc/>
+        public override IEnumerable<Transformation> Transformations { get; } = new List<Transformation>
+        {
+            new Transformation
+            {
+                Name = "Our cafes",
+                View = "Transformations/Cafes/_OurCafes.cshtml",
+                Description = "Transformation displays our cafes in 2 column grid.",
+            }
+        };
+
+
         private readonly IPageAttachmentUrlRetriever attachmentUrlRetriever;
         private readonly IStringLocalizer<SharedResources> localizer;
         private readonly ICountryRepository countryRepository;
@@ -55,7 +69,7 @@ namespace DancingGoat.Widgets
         {
             if (pages == null)
             {
-                return new CafesTransformationViewModel { Cafes = Enumerable.Empty<CafeViewModel>() };
+                return new CafesTransformationViewModel();
             }
             var cafesList = pages.Select(cafe => CafeViewModel.GetViewModel(cafe as Cafe, countryRepository, localizer, attachmentUrlRetriever));
             return new CafesTransformationViewModel { Cafes = cafesList };

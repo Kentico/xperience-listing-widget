@@ -34,7 +34,7 @@ namespace DancingGoat.Widgets
         /// Returns transformation view as instance of <see cref="IViewComponentResult"/>.
         /// </summary>
         /// <param name="model">Model with properties selected from inline editors of listing widget.</param>
-        public IViewComponentResult Invoke(ListingWidgetSelectedValuesModel model)
+        public IViewComponentResult Invoke(ListingWidgetSelectedValues model)
         {
             if (string.IsNullOrEmpty(model.PageType) || string.IsNullOrEmpty(model.TransformationPath))
             {
@@ -50,7 +50,7 @@ namespace DancingGoat.Widgets
             var customCacheDependencyKey = transformationService.GetCustomCacheDependencyKey(model.TransformationPath);
             var customCacheDependency = transformationService.GetCustomCacheDependency(model.TransformationPath);
 
-            var pages = pageRepository.GetPages(model.PageType, model.ParentPage?.Path, model.TopN, model.OrderByField, model.OrderDirection, customQueryParametrization, customCacheDependencyKey, customCacheDependency);
+            var pages = pageRepository.GetPages(model.PageType, model.ParentPageAliasPath, model.TopN, model.OrderByField, model.OrderDirection, customQueryParametrization, customCacheDependencyKey, customCacheDependency);
             var transformationModel = transformationService.GetModel(pages);
 
             return View(model.TransformationPath, transformationModel);

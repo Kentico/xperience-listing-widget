@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.ViewComponents;
 using Microsoft.Extensions.Localization;
 
 using NSubstitute;
+
 using NUnit.Framework;
 
 namespace DancingGoat.InlineEditors
@@ -43,7 +44,7 @@ namespace DancingGoat.InlineEditors
         [Test]
         public void Invoke_NullPage_ReturnsModelWithNotSelectedPageState()
         {
-            var result = component.Invoke(nameof(ListingWidgetProperties.SelectedPage), null) as ViewViewComponentResult;
+            var result = component.Invoke(new PathEditorProperties { PropertyName = nameof(ListingWidgetProperties.ParentPageAliasPath), PageAliasPath = null }) as ViewViewComponentResult;
             var viewModel = result.ViewData.Model as PathEditorViewModel;
 
             Assert.Multiple(() =>
@@ -51,7 +52,7 @@ namespace DancingGoat.InlineEditors
                 Assert.That(result, Is.Not.Null);
                 Assert.That(viewModel, Is.Not.Null);
                 Assert.That(viewModel.PageSelectionState, Is.EqualTo(PageSelectionState.NotSelected));
-                Assert.That(viewModel.PropertyName, Is.EqualTo(nameof(ListingWidgetProperties.SelectedPage)));
+                Assert.That(viewModel.PropertyName, Is.EqualTo(nameof(ListingWidgetProperties.ParentPageAliasPath)));
                 Assert.That(viewModel.Title, Is.EqualTo(""));
                 Assert.That(viewModel.Value, Is.EqualTo(NO_PAGE_SELECTED_MESSAGE));
             });
@@ -61,8 +62,7 @@ namespace DancingGoat.InlineEditors
         [Test]
         public void Invoke_NonExistingPage_ReturnsModelWithInvalidPageState()
         {
-            var invalidPage = new SelectedPage { Name = "Aeropress", Path = INVALID_PATH };
-            var result = component.Invoke(nameof(ListingWidgetProperties.SelectedPage), invalidPage) as ViewViewComponentResult;
+            var result = component.Invoke(new PathEditorProperties { PropertyName = nameof(ListingWidgetProperties.ParentPageAliasPath), PageAliasPath = INVALID_PATH }) as ViewViewComponentResult;
             var viewModel = result.ViewData.Model as PathEditorViewModel;
 
             Assert.Multiple(() =>
@@ -70,7 +70,7 @@ namespace DancingGoat.InlineEditors
                 Assert.That(result, Is.Not.Null);
                 Assert.That(viewModel, Is.Not.Null);
                 Assert.That(viewModel.PageSelectionState, Is.EqualTo(PageSelectionState.Inaccessible));
-                Assert.That(viewModel.PropertyName, Is.EqualTo(nameof(ListingWidgetProperties.SelectedPage)));
+                Assert.That(viewModel.PropertyName, Is.EqualTo(nameof(ListingWidgetProperties.ParentPageAliasPath)));
                 Assert.That(viewModel.Title, Is.EqualTo(PAGE_INACCESSIBLE_MESSAGE));
                 Assert.That(viewModel.Value, Is.EqualTo(INVALID_PAGE_MESSAGE));
             });
@@ -80,8 +80,7 @@ namespace DancingGoat.InlineEditors
         [Test]
         public void Invoke_ExistingPage_ReturnsModelWithSelectedValidPageState()
         {
-            var page = new SelectedPage { Name = NAME, Path = PATH };
-            var result = component.Invoke(nameof(ListingWidgetProperties.SelectedPage), page) as ViewViewComponentResult;
+            var result = component.Invoke(new PathEditorProperties { PropertyName = nameof(ListingWidgetProperties.ParentPageAliasPath), PageAliasPath = PATH }) as ViewViewComponentResult;
             var viewModel = result.ViewData.Model as PathEditorViewModel;
 
             Assert.Multiple(() =>
@@ -89,7 +88,7 @@ namespace DancingGoat.InlineEditors
                 Assert.That(result, Is.Not.Null);
                 Assert.That(viewModel, Is.Not.Null);
                 Assert.That(viewModel.PageSelectionState, Is.EqualTo(PageSelectionState.Valid));
-                Assert.That(viewModel.PropertyName, Is.EqualTo(nameof(ListingWidgetProperties.SelectedPage)));
+                Assert.That(viewModel.PropertyName, Is.EqualTo(nameof(ListingWidgetProperties.ParentPageAliasPath)));
                 Assert.That(viewModel.Title, Is.EqualTo(PATH));
                 Assert.That(viewModel.Value, Is.EqualTo(NAME));
             });

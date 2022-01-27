@@ -1,4 +1,5 @@
-﻿using DancingGoat.Widgets;
+﻿using DancingGoat.InlineEditors;
+using DancingGoat.Widgets;
 
 using Kentico.PageBuilder.Web.Mvc;
 
@@ -14,17 +15,17 @@ namespace DancingGoat.Widgets
     /// </summary>
     public class ListingWidgetViewComponent : ViewComponent
     {
-        private readonly ITransformationEditorService transformationEditorService;
-        private readonly IPageTypesEditorService pageTypeEditorService;
-        private readonly IPageBuilderDataContextRetriever pageBuilderDataContextRetriever;
-        private readonly IOrderByFieldEditorService orderByFieldEditorService;
-        private readonly SupportedTransformations supportedTransformations;
-
-
         /// <summary>
         /// Widget identifier.
         /// </summary>
         public const string IDENTIFIER = "DancingGoat.General.ListingWidget";
+
+
+        private readonly IPageBuilderDataContextRetriever pageBuilderDataContextRetriever;
+        private readonly ITransformationEditorService transformationEditorService;
+        private readonly IPageTypesEditorService pageTypeEditorService;
+        private readonly IOrderByFieldEditorService orderByFieldEditorService;
+        private readonly SupportedTransformationsRetriever transformationsRetriever;
 
 
         /// <summary>
@@ -34,14 +35,14 @@ namespace DancingGoat.Widgets
         /// <param name="transformationEditorService">Transformation drop-down editor service.</param>
         /// <param name="pageTypeEditorService">Page type drop-down editor service.</param>
         /// <param name="orderByFieldEditorService">Order by field editor service.</param>
-        /// <param name="supportedTransformations">Supported transformations.</param>
-        public ListingWidgetViewComponent(IPageBuilderDataContextRetriever pageBuilderDataContextRetriever, ITransformationEditorService transformationEditorService, IPageTypesEditorService pageTypeEditorService, IOrderByFieldEditorService orderByFieldEditorService, SupportedTransformations supportedTransformations)
+        /// <param name="transformationsRetriever">Supported transformations.</param>
+        public ListingWidgetViewComponent(IPageBuilderDataContextRetriever pageBuilderDataContextRetriever, ITransformationEditorService transformationEditorService, IPageTypesEditorService pageTypeEditorService, IOrderByFieldEditorService orderByFieldEditorService, SupportedTransformationsRetriever transformationsRetriever)
         {
             this.pageBuilderDataContextRetriever = pageBuilderDataContextRetriever;
             this.orderByFieldEditorService = orderByFieldEditorService;
             this.transformationEditorService = transformationEditorService;
             this.pageTypeEditorService = pageTypeEditorService;
-            this.supportedTransformations = supportedTransformations;
+            this.transformationsRetriever = transformationsRetriever;
         }
 
 
@@ -52,32 +53,49 @@ namespace DancingGoat.Widgets
         public IViewComponentResult Invoke(ComponentViewModel<ListingWidgetProperties> viewModel)
         {
             var widgetProperties = viewModel.Properties;
-            var selectedPageType = widgetProperties.SelectedPageType;
+            var selectedPageType = widgetProperties.PageType;
+            var selectedTopN = widgetProperties.TopN;
+            var selectedOrderDirection = widgetProperties.OrderDirection;
             var selectedOrderByField = widgetProperties.OrderByField;
-            var selectedTransformation = viewModel.Properties.SelectedTransformationPath;
-            selectedTransformation = supportedTransformations.IsTransformationSupportedForPageType(selectedTransformation, selectedPageType) ? selectedTransformation : null;
+            var selectedTransformation = widgetProperties.TransformationPath;
+            selectedTransformation = transformationsRetriever.IsTransformationSupported(selectedTransformation, selectedPageType) ? selectedTransformation : null;
             selectedOrderByField = orderByFieldEditorService.IsValidField(selectedPageType, selectedOrderByField) ? selectedOrderByField : string.Empty;
 
             var model = new ListingWidgetViewModel
             {
-                SelectedValues = new ListingWidgetSelectedValuesModel
+                SelectedValues = new ListingWidgetSelectedValues
                 {
-                    TopN = widgetProperties.TopN,
-                    OrderDirection = widgetProperties.OrderDirection,
+                    TopN = selectedTopN,
+                    OrderDirection = selectedOrderDirection,
                     OrderByField = selectedOrderByField,
                     TransformationPath = selectedTransformation,
                     PageType = selectedPageType,
-                    ParentPage = widgetProperties.SelectedPage,
+                    ParentPageAliasPath = widgetProperties.ParentPageAliasPath,
                 }
             };
 
             if (pageBuilderDataContextRetriever.Retrieve().EditMode)
             {
-                model.EditorsModels = new ListingWidgetInlineEditorsViewModel
+                model.InlineEditors = new ListingWidgetInlineEditors
                 {
-                    OrderFieldSelectorViewModel = orderByFieldEditorService.GetEditorModel(selectedPageType, viewModel.Properties.OrderByField),
-                    PageTypeSelectorViewModel = pageTypeEditorService.GetEditorModel(selectedPageType),
-                    TransformationSelectorViewModel = transformationEditorService.GetEditorModel(viewModel.Properties.SelectedTransformationPath, selectedPageType),
+                    OrderFieldSelector = orderByFieldEditorService.GetEditorModel(selectedPageType, widgetProperties.OrderByField),
+                    PageTypeSelector = pageTypeEditorService.GetEditorModel(selectedPageType),
+                    TransformationSelector = transformationEditorService.GetEditorModel(widgetProperties.TransformationPath, selectedPageType),
+                    TopNEditor = new TopNEditorViewModel
+                    {
+                        PropertyName = nameof(ListingWidgetProperties.TopN),
+                        TopN = selectedTopN
+                    },
+                    OrderDirectionEditor = new OrderDirectionViewModel
+                    {
+                        PropertyName = nameof(ListingWidgetProperties.OrderDirection),
+                        Order = selectedOrderDirection
+                    },
+                    PathEditor = new PathEditorProperties
+                    {
+                        PropertyName = nameof(ListingWidgetProperties.ParentPageAliasPath),
+                        PageAliasPath = widgetProperties.ParentPageAliasPath
+                    }
                 };
             }
 

@@ -6,14 +6,14 @@
     public class ListingWidgetViewModel
     {
         /// <summary>
-        /// View models for drop-down inline editors.
+        /// View models for inline editors.
         /// </summary>
-        public ListingWidgetInlineEditorsViewModel EditorsModels { get; set; }
+        public ListingWidgetInlineEditors InlineEditors { get; set; }
 
 
         /// <summary>
         /// Selected values from inline editors.
         /// </summary>
-        public ListingWidgetSelectedValuesModel SelectedValues { get; set; }
+        public ListingWidgetSelectedValues SelectedValues { get; set; }
     }
 }

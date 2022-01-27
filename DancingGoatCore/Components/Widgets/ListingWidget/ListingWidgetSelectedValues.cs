@@ -1,13 +1,11 @@
 ﻿using CMS.DataEngine;
 
-using DancingGoat.InlineEditors;
-
 namespace DancingGoat.Widgets
 {
     /// <summary>
     /// Model with properties selected from inline editors of listing widget.
     /// </summary>
-    public class ListingWidgetSelectedValuesModel
+    public class ListingWidgetSelectedValues
     {
         /// <summary>
         /// Name of the selected page type to display.
@@ -24,19 +22,19 @@ namespace DancingGoat.Widgets
         /// <summary>
         /// Page from which to retrieve child pages excluding the selected page.
         /// </summary>
-        public SelectedPage ParentPage { get; set; }
-
-
-        /// <summary>
-        /// Number of pages to retrieve.
-        /// </summary>
-        public int TopN { get; set; }
+        public string ParentPageAliasPath { get; set; }
 
 
         /// <summary>
         /// Field to order by retrieved pages.
         /// </summary>
         public string OrderByField { get; set; }
+
+
+        /// <summary>
+        /// Number of pages to retrieve.
+        /// </summary>
+        public int TopN { get; set; }
 
 
         /// <summary>

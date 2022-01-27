@@ -194,7 +194,7 @@ if("FORM"===this.element.tagName)for(var b=this.element.querySelectorAll("input,
                     tabs: ["page"],
                     selectedItems: {
                         type: "page",
-                        items: [{ value: options.propertyValue ? options.propertyValue.path : null }]
+                        items: [{ value: options.propertyValue }]
                     },
                     pageOptions: {
                         identifierMode: "path"
@@ -206,10 +206,7 @@ if("FORM"===this.element.tagName)for(var b=this.element.querySelectorAll("input,
                             var newItem = items[0];
                             var event = new CustomEvent("updateProperty", {
                                 detail: {
-                                    value: {
-                                        path: newItem.nodeAliasPath,
-                                        name: newItem.name,
-                                    },
+                                    value: newItem.nodeAliasPath,
                                     name: options.propertyName
                                 }
                             });

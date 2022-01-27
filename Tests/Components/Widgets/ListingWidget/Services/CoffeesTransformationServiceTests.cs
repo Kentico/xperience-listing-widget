@@ -19,7 +19,6 @@ namespace DancingGoat.Widgets
     [TestFixture]
     public class CoffeesTransformationServiceTests : UnitTests
     {
-        private SupportedTransformations supportedTransformations;
         private CoffeesTransformationService coffeesService;
         private IPageUrlRetriever pageUrlRetriever;
 
@@ -27,7 +26,6 @@ namespace DancingGoat.Widgets
         [SetUp]
         public void SetUp()
         {
-            supportedTransformations = new SupportedTransformations();
             pageUrlRetriever = Substitute.For<IPageUrlRetriever>();
             coffeesService = new CoffeesTransformationService(pageUrlRetriever);
 
@@ -38,7 +36,7 @@ namespace DancingGoat.Widgets
         [Test]
         public void GetCustomCacheDependency_CoffeesTransformation_ReturnsNull()
         {
-            var customCacheDependency = coffeesService.GetCustomCacheDependency(supportedTransformations.Coffees.View);
+            var customCacheDependency = coffeesService.GetCustomCacheDependency(TransformationsMock.Coffees.View);
 
             Assert.That(customCacheDependency, Is.Null);
         }
@@ -47,7 +45,7 @@ namespace DancingGoat.Widgets
         [Test]
         public void GetCustomCacheDependencyKey_CoffeesTransformation_ReturnsNull()
         {
-            var customCacheDependencyKey = coffeesService.GetCustomCacheDependencyKey(supportedTransformations.Coffees.View);
+            var customCacheDependencyKey = coffeesService.GetCustomCacheDependencyKey(TransformationsMock.Coffees.View);
 
             Assert.That(customCacheDependencyKey, Is.Null);
         }
@@ -56,7 +54,7 @@ namespace DancingGoat.Widgets
         [Test]
         public void GetCustomQueryParametrization_CoffeesTransformation_ReturnsNull()
         {
-            var customQueryParametrization = coffeesService.GetCustomQueryParametrization(supportedTransformations.Coffees.View);
+            var customQueryParametrization = coffeesService.GetCustomQueryParametrization(TransformationsMock.Coffees.View);
 
             Assert.That(customQueryParametrization, Is.Null);
         }

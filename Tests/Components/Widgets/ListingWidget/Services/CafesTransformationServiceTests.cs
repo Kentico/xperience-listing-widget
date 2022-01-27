@@ -22,7 +22,6 @@ namespace DancingGoat.Widgets
     [TestFixture]
     public class CafesTransformationServiceTests : UnitTests
     {
-        private SupportedTransformations supportedTransformations;
         private CafesTransformationService cafesService;
         private ICountryRepository countryRepository;
 
@@ -30,7 +29,6 @@ namespace DancingGoat.Widgets
         [SetUp]
         public void SetUp()
         {
-            supportedTransformations = new SupportedTransformations();
             var pageAttachmentUrlRetriever = Substitute.For<IPageAttachmentUrlRetriever>();
             var localizer = Substitute.For<IStringLocalizer<SharedResources>>();
             countryRepository = Substitute.For<ICountryRepository>();
@@ -43,7 +41,7 @@ namespace DancingGoat.Widgets
         [Test]
         public void GetCustomCacheDependency_CafesTransformation_ReturnsNull()
         {
-            var customCacheDependency = cafesService.GetCustomCacheDependency(supportedTransformations.Cafes.View);
+            var customCacheDependency = cafesService.GetCustomCacheDependency(TransformationsMock.Cafes.View);
 
             Assert.That(customCacheDependency, Is.Null);
         }
@@ -52,7 +50,7 @@ namespace DancingGoat.Widgets
         [Test]
         public void GetCustomCacheDependencyKey_CafesTransformation_ReturnsNull()
         {
-            var customCacheDependencyKey = cafesService.GetCustomCacheDependencyKey(supportedTransformations.Cafes.View);
+            var customCacheDependencyKey = cafesService.GetCustomCacheDependencyKey(TransformationsMock.Cafes.View);
 
             Assert.That(customCacheDependencyKey, Is.Null);
         }
@@ -61,7 +59,7 @@ namespace DancingGoat.Widgets
         [Test]
         public void GetCustomQueryParametrization_CafesTransformation_ReturnsActionForSelectingCompanyCafes()
         {
-            var customQueryParametrization = cafesService.GetCustomQueryParametrization(supportedTransformations.Cafes.View);
+            var customQueryParametrization = cafesService.GetCustomQueryParametrization(TransformationsMock.Cafes.View);
             var query = new DocumentQuery(Cafe.CLASS_NAME);
             customQueryParametrization.Invoke(query);
 
