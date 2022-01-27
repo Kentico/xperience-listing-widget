@@ -4,7 +4,7 @@
             var editor = options.editor;
             var input = editor.querySelector("input");
             input.addEventListener("change", function () {
-                if (!/^\d+$/.test(input.value)) {
+                if (!/^\d+$/.test(input.value) || parseInt(input.value) > 2147483647) {
                     input.value = 10;
                 }
 
