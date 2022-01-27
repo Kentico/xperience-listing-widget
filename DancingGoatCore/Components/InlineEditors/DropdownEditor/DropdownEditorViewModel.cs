@@ -7,7 +7,7 @@ namespace DancingGoat.InlineEditors
     /// <summary>
     /// View model for drop-down editor.
     /// </summary>
-    public class DropdownEditorViewModel : InlineEditorViewModel
+    public class DropDownEditorViewModel : InlineEditorViewModel
     {
         /// <summary>
         /// Select list for all options of the selector.
@@ -34,17 +34,17 @@ namespace DancingGoat.InlineEditors
 
 
         /// <summary>
-        /// Creates an instance of <see cref="DropdownEditorViewModel"/> class.
+        /// Creates an instance of <see cref="DropDownEditorViewModel"/> class.
         /// </summary>
         /// <param name="propertyName">Name of related widget property.</param>
         /// <param name="options">All options of the selector.</param> 
         /// <param name="selectedOption">Selected option.</param>
         /// <param name="label">Label of the selector.</param> 
         /// <param name="tooltip">Tooltip of the selector.</param> 
-        public DropdownEditorViewModel(string propertyName, IEnumerable<DropdownOptionViewModel> options, string selectedOption, string label, string tooltip = "")
+        public DropDownEditorViewModel(string propertyName, IEnumerable<DropDownOptionViewModel> options, string selectedOption, string label, string tooltip = "")
         {
             PropertyName = propertyName;
-            Options = new SelectList(options, nameof(DropdownOptionViewModel.Value), nameof(DropdownOptionViewModel.Text));
+            Options = new SelectList(options, nameof(DropDownOptionViewModel.Value), nameof(DropDownOptionViewModel.Text));
             SelectedOption = selectedOption;
             Label = label;
             Tooltip = tooltip;

@@ -50,7 +50,7 @@ namespace DancingGoat.Models
         }
 
 
-        public static ContactViewModel GetViewModel(IContact contact, CountryRepository countryProvider, IStringLocalizer localizer)
+        public static ContactViewModel GetViewModel(IContact contact, ICountryRepository countryProvider, IStringLocalizer localizer)
         {
             var countryStateName = CountryStateName.Parse(contact.Country);
             var country = countryProvider.GetCountry(countryStateName.CountryName);

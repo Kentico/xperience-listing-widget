@@ -138,6 +138,29 @@ if("FORM"===this.element.tagName)for(var b=this.element.querySelectorAll("input,
 })();
 
 (function () {
+    window.kentico.pageBuilder.registerInlineEditor("order-direction-editor", {
+        init: function (options) {
+            var editor = options.editor;
+            var radios = editor.querySelectorAll("input[name='Order']");
+
+            radios.forEach(input => {
+                input.addEventListener("change", function () {
+                    if (input.value != options.propertyValue) {
+                        var event = new CustomEvent("updateProperty", {
+                            detail: {
+                                value: input.value,
+                                name: options.propertyName,
+                            }
+                        });
+                        editor.dispatchEvent(event);
+                    }
+                });
+            });
+        }
+    });
+})();
+
+(function () {
     window.kentico.pageBuilder.registerInlineEditor("path-editor", {
         init: function (options) {
             var selectButton = options.editor.querySelector(".path-editor-select-button");
@@ -158,7 +181,7 @@ if("FORM"===this.element.tagName)for(var b=this.element.querySelectorAll("input,
                     tabs: ["page"],
                     selectedItems: {
                         type: "page",
-                        items: [{ value: options.propertyValue ? options.propertyValue.Path : null }]
+                        items: [{ value: options.propertyValue ? options.propertyValue.path : null }]
                     },
                     pageOptions: {
                         identifierMode: "path"
@@ -171,8 +194,8 @@ if("FORM"===this.element.tagName)for(var b=this.element.querySelectorAll("input,
                             var event = new CustomEvent("updateProperty", {
                                 detail: {
                                     value: {
-                                        Path: newItem.nodeAliasPath,
-                                        Name: newItem.name,
+                                        path: newItem.nodeAliasPath,
+                                        name: newItem.name,
                                     },
                                     name: options.propertyName
                                 }
@@ -250,5 +273,30 @@ if("FORM"===this.element.tagName)for(var b=this.element.querySelectorAll("input,
                 editor.dispatchEvent(event);
             });
         },
+    });
+})();
+
+(function () {
+    window.kentico.pageBuilder.registerInlineEditor("topn-editor", {
+        init: function (options) {
+            var editor = options.editor;
+            var input = editor.querySelector("input");
+            input.addEventListener("change", function () {
+                if (!/^\d+$/.test(input.value)) {
+                    input.value = 10;
+                }
+
+                var event = new CustomEvent("updateProperty", {
+                    detail: {
+                        value: input.value,
+                        name: options.propertyName,
+                        refreshMarkup: true,
+                    }
+                });
+                editor.dispatchEvent(event);
+            });
+
+
+        }
     });
 })();

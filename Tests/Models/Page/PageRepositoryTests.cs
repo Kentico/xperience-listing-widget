@@ -6,6 +6,7 @@ using CMS.Tests;
 using Kentico.Content.Web.Mvc;
 
 using NSubstitute;
+
 using NUnit.Framework;
 
 namespace DancingGoat.Models

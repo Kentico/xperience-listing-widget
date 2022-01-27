@@ -4541,6 +4541,310 @@ p {
     padding: 1rem 2.5rem;
   }
 }
+.coffee-tile {
+  overflow: hidden;
+}
+.coffee-tile-small {
+  margin-bottom: 0.5rem;
+}
+.coffees-listing {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 1rem;
+}
+.coffees-listing a {
+  text-decoration: none;
+}
+@media (min-width: 768px) {
+  .coffee-tile-small {
+    align-self: stretch;
+    padding-right: 0.25rem;
+  }
+  .coffee-tile-small.last {
+    padding-right: 0;
+  }
+  .coffee-tile-small + .coffee-tile-small {
+    padding-left: 0.25rem;
+  }
+  .coffee-tile-small.last {
+    padding-right: 0;
+  }
+}
+@media (min-width: 1112px) {
+  .coffees-listing {
+    padding: 0 3rem;
+  }
+  .coffee-tile-small {
+    margin-bottom: 1rem;
+    padding-right: 0.75rem;
+  }
+  .coffee-tile-small + .coffee-tile-small {
+    padding-left: 0.75rem;
+  }
+  .coffee-tile-small.last {
+    padding-right: 0;
+  }
+}
+.coffee-card {
+  background: #ffffff;
+  padding: 1rem;
+  height: 100%;
+  margin-bottom: 1rem;
+}
+.coffee-card img {
+  max-width: 100%;
+}
+@media (min-width: 768px) {
+  .coffee-card {
+    margin-bottom: 0;
+  }
+}
+/*# Article Tile #*/
+.articles-section {
+  padding: 0 1rem;
+  background: url(../Images/plant-3.png) right top no-repeat, url(../Images/plant-1.png) left bottom no-repeat;
+}
+.articles-section h2 {
+  text-align: initial;
+}
+.articles-page .articles-section {
+  padding-top: 4rem;
+  background: url(../Images/plant-3.png) right top no-repeat;
+}
+.articles-page .row:after,
+.articles-page .row:before {
+  display: none;
+}
+.article-tile {
+  overflow: hidden;
+}
+.article-tile h2 a {
+  color: #846331;
+}
+.article-tile .article-tile-inner {
+  height: 100%;
+  background: #ffffff;
+}
+.article-tile-small {
+  margin-bottom: 0.5rem;
+}
+.article-tile-info {
+  position: relative;
+  padding: 1rem;
+}
+.article-tile-image {
+  width: 100%;
+  display: block;
+}
+.article-tile-date {
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 0.5rem 1.25rem;
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 2.143;
+  color: #ffffff;
+  background: #846331;
+}
+a + .article-tile-info .article-tile-date {
+  position: absolute;
+  top: 0;
+  transform: translateY(-50%);
+}
+.title-wrapper {
+  text-align: center;
+  width: 100%;
+}
+.title-wrapper .title-tab {
+  display: inline-block;
+  position: relative;
+  margin-bottom: 50px;
+  font-size: 3rem;
+  font-weight: 300;
+  line-height: 1.16666;
+  text-align: center;
+}
+@media (max-width: 1111px) {
+  .article-tile-large {
+    padding-bottom: 1.25rem;
+  }
+}
+@media (min-width: 768px) {
+  .articles-section .row:first-child {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .title-tab:before,
+  .title-tab:after {
+    width: 130px;
+    height: 1px;
+    position: absolute;
+    top: 50%;
+    background: currentColor;
+    content: '';
+  }
+  .title-tab:before {
+    right: calc(100% + 32px);
+  }
+  .title-tab:after {
+    left: calc(100% + 32px);
+  }
+  .article-tile-image {
+    height: 240px;
+    object-fit: cover;
+  }
+  .article-tile-small {
+    align-self: stretch;
+    padding-right: 0.25rem;
+  }
+  .article-tile-small.last {
+    padding-right: 0;
+  }
+  .article-tile-small + .article-tile-small {
+    padding-left: 0.25rem;
+  }
+  .article-tile-small.last {
+    padding-right: 0;
+  }
+  .article-tile-large {
+    margin-bottom: 1.5rem;
+  }
+  .article-tile-large .article-tile-image {
+    height: 440px;
+    width: 100%;
+  }
+}
+@media (min-width: 1112px) {
+  .articles-section {
+    padding: 0 3rem;
+  }
+  .article-tile-large {
+    height: 440px;
+  }
+  .article-tile-large .article-tile-info {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 2.5rem;
+  }
+  .article-tile-large .article-tile-info h2 {
+    margin: 0;
+  }
+  .article-tile-large .article-tile-info .article-tile-date {
+    position: relative;
+    color: #000000;
+    background: none;
+    transform: none;
+    align-self: flex-start;
+    padding: 0;
+  }
+  .article-tile-large .article-tile-info .article-tile-date:after {
+    display: block;
+    width: 49px;
+    height: 1px;
+    position: absolute;
+    left: calc(100% + 12px);
+    bottom: 10px;
+    background: #000000;
+    content: '';
+  }
+  .article-tile-image {
+    height: 180px;
+    object-fit: cover;
+  }
+  .article-tile-small {
+    margin-bottom: 1rem;
+    padding-right: 0.75rem;
+  }
+  .article-tile-small + .article-tile-small {
+    padding-left: 0.75rem;
+  }
+  .article-tile-small.last {
+    padding-right: 0;
+  }
+  .article-tile-info {
+    padding: 3rem 2.25rem 2.25rem 2.25rem;
+  }
+}
+@media (min-width: 1440px) {
+  .article-tile-large .article-tile-info {
+    padding: 6.25rem;
+  }
+  .article-tile-image {
+    height: 221px;
+  }
+}
+/*# Cafe image tile #*/
+.cafe-image-tile {
+  background: #B49669;
+  color: #FFF;
+}
+.cafe-image-tile-address {
+  font-style: normal;
+  padding-bottom: 1rem;
+}
+.cafe-image-tile-address-anchor,
+.cafe-image-tile-address-anchor:hover,
+.cafe-image-tile-address-anchor:focus,
+.cafe-image-tile-address-anchor:active {
+  color: #FFF;
+}
+.cafe-image-tile-image {
+  height: 200px;
+  max-width: 200px;
+  position: absolute;
+  bottom: 1px;
+}
+.cafe-image-tile-content {
+  padding: 0 1rem 1rem 1rem;
+}
+.cafe-image-tile-content .cafe-image-tile-name {
+  color: #494132;
+}
+@media (min-width: 400px) {
+  .cafe-image-tile {
+    height: 200px;
+    overflow: hidden;
+  }
+  .cafe-image-tile-image-wrapper {
+    float: left;
+    width: 200px;
+    height: 100%;
+    overflow: hidden;
+    margin-right: 1rem;
+  }
+  .cafe-image-tile-content {
+    padding-right: 1rem;
+  }
+}
+@media (min-width: 768px) {
+  /* md size */
+  .cafe-image-tile {
+    height: 220px;
+  }
+  .cafe-image-tile-image-wrapper {
+    width: 150px;
+  }
+  .cafe-image-tile-image {
+    max-width: 150px;
+    height: auto;
+  }
+}
+@media (min-width: 1112px) {
+  /* lg size */
+  .cafe-image-tile {
+    height: 200px;
+  }
+  .cafe-image-tile-image-wrapper {
+    width: 200px;
+  }
+  .cafe-image-tile-image {
+    height: 200px;
+    max-width: 200px;
+  }
+}
 /*# Page wrap #*/
 html,
 body {

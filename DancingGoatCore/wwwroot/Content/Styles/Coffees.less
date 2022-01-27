@@ -1,0 +1,72 @@
+﻿.coffee-tile {
+    overflow: hidden;
+}
+
+.coffee-tile-small {
+    margin-bottom: .5rem;
+}
+
+.coffees-listing {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 1rem;
+
+    a{
+        text-decoration:none;
+    }
+}
+
+@media (min-width: 768px) {
+    .coffee-tile-small {
+        align-self: stretch;
+        padding-right: .25rem;
+
+        &.last {
+            padding-right: 0;
+        }
+    }
+
+    .coffee-tile-small + .coffee-tile-small {
+        padding-left: .25rem;
+    }
+
+    .coffee-tile-small.last {
+        padding-right: 0;
+    }
+
+}
+
+@media (min-width: 1112px) {
+    .coffees-listing {
+        padding: 0 3rem;
+    }
+
+    .coffee-tile-small {
+        margin-bottom: 1rem;
+        padding-right: .75rem;
+    }
+
+    .coffee-tile-small + .coffee-tile-small {
+        padding-left: .75rem;
+    }
+
+    .coffee-tile-small.last {
+        padding-right: 0;
+    }
+
+}
+
+.coffee-card {
+    background: @color-white;
+    padding: 1rem;
+    height: 100%;
+    margin-bottom: 1rem;
+
+    img {
+        max-width: 100%;
+    }
+
+    @media (min-width: 768px) {
+        margin-bottom: 0;
+    }
+}

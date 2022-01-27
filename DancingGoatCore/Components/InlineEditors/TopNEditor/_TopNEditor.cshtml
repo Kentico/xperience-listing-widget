@@ -8,10 +8,10 @@
 @using (Html.Kentico().BeginInlineEditor("topn-editor", Model.PropertyName, new { @class = "listing-property-editor" }))
 {
 	<div class="listing-property-label">
-		<label asp-for="@Model.TopN">@HtmlLocalizer["Select top N items"].Value:</label>
+		<label asp-for="@Model.TopN">@HtmlLocalizer["Select top N pages"].Value:</label>
 	</div>
 
 	<div class="listing-property-value">
-		<input asp-for="@Model.TopN" type="text">
+		<input class="topn-input" asp-for="@Model.TopN" type="text">
 	</div>
 }

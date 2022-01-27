@@ -11,3 +11,12 @@
 .listing-inline-editor .listing-property-editor .listing-property-label .order-direction-label {
     margin-bottom: auto;
 }
+
+.listing-inline-editor form {
+    margin: 0;
+    text-align: left;
+}
+
+.listing-inline-editor form label {
+    margin-right: 0;
+}

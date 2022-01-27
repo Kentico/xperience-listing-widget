@@ -18,18 +18,18 @@ namespace DancingGoat.Widgets
         /// </summary>
         /// <param name="pageType">Page type for options to be retrieved.</param>
         /// <param name="orderByField">Order by field.</param>
-        public DropdownEditorViewModel GetDropDownModel(string pageType, string orderByField)
+        public DropDownEditorViewModel GetDropDownModel(string pageType, string orderByField)
         {
             var fields = GetFields(pageType);
             var validOrderByFieldSelected = fields.Any(item => item.Value == orderByField);
-            return new DropdownEditorViewModel(nameof(ListingWidgetProperties.OrderByField),
+            return new DropDownEditorViewModel(nameof(ListingWidgetProperties.OrderByField),
                 fields,
                 validOrderByFieldSelected ? orderByField : string.Empty,
                 "Order by field"
                 );
         }
 
-  
+
         /// <summary>
         /// Verifies that field could be selected for provided page type.
         /// </summary>
@@ -42,7 +42,7 @@ namespace DancingGoat.Widgets
         }
 
 
-        private IEnumerable<DropdownOptionViewModel> GetFields(string pageType)
+        private IEnumerable<DropDownOptionViewModel> GetFields(string pageType)
         {
             if (!string.IsNullOrEmpty(pageType))
             {
@@ -54,24 +54,24 @@ namespace DancingGoat.Widgets
                 {
                     if (field.DataType == FieldDataType.Integer)
                     {
-                        yield return new DropdownOptionViewModel(field.Name, field.GetDisplayName(null));
+                        yield return new DropDownOptionViewModel(field.Name, field.GetDisplayName(null));
                     }
                     if (field.DataType == FieldDataType.Text)
                     {
                         if (field.GetControlName() == "TextBoxControl")
                         {
-                            yield return new DropdownOptionViewModel(field.Name, field.GetDisplayName(null));
+                            yield return new DropDownOptionViewModel(field.Name, field.GetDisplayName(null));
                         }
                     }
                 }
 
                 if (dataClassInfo.ClassUsePublishFromTo)
                 {
-                    yield return new DropdownOptionViewModel("DocumentPublishFrom", "DocumentPublishFrom");
+                    yield return new DropDownOptionViewModel("DocumentPublishFrom", "DocumentPublishFrom");
                 }
             }
-            yield return new DropdownOptionViewModel("DocumentCreatedWhen", "DocumentCreatedWhen");
-            yield return new DropdownOptionViewModel("NodeOrder", "NodeOrder");
+            yield return new DropDownOptionViewModel("DocumentCreatedWhen", "DocumentCreatedWhen");
+            yield return new DropDownOptionViewModel("NodeOrder", "NodeOrder");
         }
     }
 }
