@@ -14,11 +14,11 @@ namespace DancingGoat.Widgets
     /// </summary>
     public class ListingWidgetViewComponent : ViewComponent
     {
-        private readonly TransformationDropDownService transformationDropdownService;
-        private readonly PageTypesDropDownService pageTypeDropdownService;
+        private readonly ITransformationEditorService transformationEditorService;
+        private readonly IPageTypesEditorService pageTypeEditorService;
         private readonly IPageBuilderDataContextRetriever pageBuilderDataContextRetriever;
+        private readonly IOrderByFieldEditorService orderByFieldEditorService;
         private readonly SupportedTransformations supportedTransformations;
-        private readonly IOrderByFieldService orderByFieldService;
 
 
         /// <summary>
@@ -31,16 +31,16 @@ namespace DancingGoat.Widgets
         /// Creates an instance of <see cref="ListingWidgetViewComponent"/> class.
         /// </summary>
         /// <param name="pageBuilderDataContextRetriever">Page builder data context retriever.</param>
-        /// <param name="transformationDropdownService">Transformation drop-down service.</param>
-        /// <param name="pageTypeDropdownService">Page repository.</param>
+        /// <param name="transformationEditorService">Transformation drop-down editor service.</param>
+        /// <param name="pageTypeEditorService">Page type drop-down editor service.</param>
+        /// <param name="orderByFieldEditorService">Order by field editor service.</param>
         /// <param name="supportedTransformations">Supported transformations.</param>
-        /// <param name="orderByFieldService">Order by field service.</param>
-        public ListingWidgetViewComponent(IPageBuilderDataContextRetriever pageBuilderDataContextRetriever, TransformationDropDownService transformationDropdownService, PageTypesDropDownService pageTypeDropdownService, SupportedTransformations supportedTransformations, IOrderByFieldService orderByFieldService)
+        public ListingWidgetViewComponent(IPageBuilderDataContextRetriever pageBuilderDataContextRetriever, ITransformationEditorService transformationEditorService, IPageTypesEditorService pageTypeEditorService, IOrderByFieldEditorService orderByFieldEditorService, SupportedTransformations supportedTransformations)
         {
             this.pageBuilderDataContextRetriever = pageBuilderDataContextRetriever;
-            this.orderByFieldService = orderByFieldService;
-            this.transformationDropdownService = transformationDropdownService;
-            this.pageTypeDropdownService = pageTypeDropdownService;
+            this.orderByFieldEditorService = orderByFieldEditorService;
+            this.transformationEditorService = transformationEditorService;
+            this.pageTypeEditorService = pageTypeEditorService;
             this.supportedTransformations = supportedTransformations;
         }
 
@@ -56,7 +56,7 @@ namespace DancingGoat.Widgets
             var selectedOrderByField = widgetProperties.OrderByField;
             var selectedTransformation = viewModel.Properties.SelectedTransformationPath;
             selectedTransformation = supportedTransformations.IsTransformationSupportedForPageType(selectedTransformation, selectedPageType) ? selectedTransformation : null;
-            selectedOrderByField = orderByFieldService.IsValidField(selectedPageType, selectedOrderByField) ? selectedOrderByField : string.Empty;
+            selectedOrderByField = orderByFieldEditorService.IsValidField(selectedPageType, selectedOrderByField) ? selectedOrderByField : string.Empty;
 
             var model = new ListingWidgetViewModel
             {
@@ -75,9 +75,9 @@ namespace DancingGoat.Widgets
             {
                 model.EditorsModels = new ListingWidgetInlineEditorsViewModel
                 {
-                    OrderFieldSelectorViewModel = orderByFieldService.GetDropDownModel(selectedPageType, viewModel.Properties.OrderByField),
-                    PageTypeSelectorViewModel = pageTypeDropdownService.GetDropDownModel(selectedPageType),
-                    TransformationSelectorViewModel = transformationDropdownService.GetDropDownModel(viewModel.Properties.SelectedTransformationPath, selectedPageType),
+                    OrderFieldSelectorViewModel = orderByFieldEditorService.GetEditorModel(selectedPageType, viewModel.Properties.OrderByField),
+                    PageTypeSelectorViewModel = pageTypeEditorService.GetEditorModel(selectedPageType),
+                    TransformationSelectorViewModel = transformationEditorService.GetEditorModel(viewModel.Properties.SelectedTransformationPath, selectedPageType),
                 };
             }
 

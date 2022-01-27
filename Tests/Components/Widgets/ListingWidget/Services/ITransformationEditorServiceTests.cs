@@ -17,10 +17,10 @@ namespace DancingGoat.Widgets
 {
     [TestFixture]
     [Category.Unit]
-    public class TransformationDropDownServiceTests
+    public class ITransformationEditorServiceTests
     {
         private SupportedTransformations supportedTransformations;
-        private TransformationDropDownService service;
+        private ITransformationEditorService service;
 
 
         [SetUp]
@@ -37,18 +37,18 @@ namespace DancingGoat.Widgets
             localizer[supportedTransformations.Cafes.ToolTip].Returns(new LocalizedString(supportedTransformations.Cafes.ToolTip, supportedTransformations.Cafes.ToolTip));
             localizer[supportedTransformations.Coffees.ToolTip].Returns(new LocalizedString(supportedTransformations.Coffees.ToolTip, supportedTransformations.Coffees.ToolTip));
 
-            service = new TransformationDropDownService(localizer, supportedTransformations);
+            service = new TransformationEditorService(localizer, supportedTransformations);
         }
 
 
         [Test]
-        public void GetDrowDownModel_ArticlesWithNoSelectedOption_ReturnsArticleModelWithPagesAndTooltip()
+        public void GetEditorModel_ArticlesWithNoSelectedOption_ReturnsArticleModelWithPagesAndTooltip()
         {
             var expectedTooltip = $"{supportedTransformations.Articles.Name}:\n{supportedTransformations.Articles.ToolTip}\n\n{supportedTransformations.ArticlesWithHeading.Name}:\n{supportedTransformations.ArticlesWithHeading.ToolTip}";
             var articleOption = new SelectListItem(supportedTransformations.Articles.Name, supportedTransformations.Articles.View);
             var articleWithHeadingOption = new SelectListItem(supportedTransformations.ArticlesWithHeading.Name, supportedTransformations.ArticlesWithHeading.View);
 
-            var articlesModel = service.GetDropDownModel(null, Article.CLASS_NAME);
+            var articlesModel = service.GetEditorModel(null, Article.CLASS_NAME);
 
             Assert.Multiple(() =>
             {
@@ -61,13 +61,13 @@ namespace DancingGoat.Widgets
 
 
         [Test]
-        public void GetDrowDownModel_ArticlesWithSelectedOption_ReturnsArticlesModelWithPagesAndTooltip()
+        public void GetEditorModel_ArticlesWithSelectedOption_ReturnsArticlesModelWithPagesAndTooltip()
         {
             var expectedTooltip = $"{supportedTransformations.Articles.Name}:\n{supportedTransformations.Articles.ToolTip}\n\n{supportedTransformations.ArticlesWithHeading.Name}:\n{supportedTransformations.ArticlesWithHeading.ToolTip}";
             var articleOption = new SelectListItem(supportedTransformations.Articles.Name, supportedTransformations.Articles.View);
             var articleWithHeadingOption = new SelectListItem(supportedTransformations.ArticlesWithHeading.Name, supportedTransformations.ArticlesWithHeading.View);
 
-            var articlesModel = service.GetDropDownModel(supportedTransformations.Articles.View, Article.CLASS_NAME);
+            var articlesModel = service.GetEditorModel(supportedTransformations.Articles.View, Article.CLASS_NAME);
 
             Assert.Multiple(() =>
             {
@@ -81,12 +81,12 @@ namespace DancingGoat.Widgets
 
 
         [Test]
-        public void GetDrowDownModel_CafesWithNoSelectedOption_ReturnsCafesModelWithPagesAndTooltip()
+        public void GetEditorModel_CafesWithNoSelectedOption_ReturnsCafesModelWithPagesAndTooltip()
         {
             var expectedTooltip = $"{supportedTransformations.Cafes.Name}:\n{supportedTransformations.Cafes.ToolTip}";
             var cafeOption = new SelectListItem(supportedTransformations.Cafes.Name, supportedTransformations.Cafes.View);
 
-            var cafesModel = service.GetDropDownModel(null, Cafe.CLASS_NAME);
+            var cafesModel = service.GetEditorModel(null, Cafe.CLASS_NAME);
 
             Assert.Multiple(() =>
             {
@@ -98,12 +98,12 @@ namespace DancingGoat.Widgets
 
 
         [Test]
-        public void GetDrowDownModel_CafesWithSelectedOption_ReturnsCafesModelWithPagesAndTooltip()
+        public void GetEditorModel_CafesWithSelectedOption_ReturnsCafesModelWithPagesAndTooltip()
         {
             var expectedTooltip = $"{supportedTransformations.Cafes.Name}:\n{supportedTransformations.Cafes.ToolTip}";
             var cafeOption = new SelectListItem(supportedTransformations.Cafes.Name, supportedTransformations.Cafes.View);
 
-            var cafesModel = service.GetDropDownModel(supportedTransformations.Cafes.View, Cafe.CLASS_NAME);
+            var cafesModel = service.GetEditorModel(supportedTransformations.Cafes.View, Cafe.CLASS_NAME);
 
             Assert.Multiple(() =>
             {
@@ -116,12 +116,12 @@ namespace DancingGoat.Widgets
 
 
         [Test]
-        public void GetDrowDownModel_CoffeesWithNoSelectedOption_ReturnsCoffeesModelWithPagesAndTooltip()
+        public void GetEditorModel_CoffeesWithNoSelectedOption_ReturnsCoffeesModelWithPagesAndTooltip()
         {
             var expectedTooltip = $"{supportedTransformations.Coffees.Name}:\n{supportedTransformations.Coffees.ToolTip}";
             var coffeeOption = new SelectListItem(supportedTransformations.Coffees.Name, supportedTransformations.Coffees.View);
 
-            var coffeesModel = service.GetDropDownModel(null, Coffee.CLASS_NAME);
+            var coffeesModel = service.GetEditorModel(null, Coffee.CLASS_NAME);
 
             Assert.Multiple(() =>
             {
@@ -133,12 +133,12 @@ namespace DancingGoat.Widgets
 
 
         [Test]
-        public void GetDrowDownModel_CoffeesWithSelectedOption_ReturnsCoffeesModelWithPagesAndTooltip()
+        public void GetEditorModel_CoffeesWithSelectedOption_ReturnsCoffeesModelWithPagesAndTooltip()
         {
             var expectedTooltip = $"{supportedTransformations.Coffees.Name}:\n{supportedTransformations.Coffees.ToolTip}";
             var coffeeOption = new SelectListItem(supportedTransformations.Coffees.Name, supportedTransformations.Coffees.View);
 
-            var coffeesModel = service.GetDropDownModel(supportedTransformations.Coffees.View, Coffee.CLASS_NAME);
+            var coffeesModel = service.GetEditorModel(supportedTransformations.Coffees.View, Coffee.CLASS_NAME);
 
             Assert.Multiple(() =>
             {

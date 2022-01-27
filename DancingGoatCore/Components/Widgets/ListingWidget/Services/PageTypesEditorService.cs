@@ -9,27 +9,26 @@ using DancingGoat.InlineEditors;
 namespace DancingGoat.Widgets
 {
     /// <summary>
-    /// Provides methods to get options for page type drop-down selector.
+    /// <inheritdoc/>
     /// </summary>
-    public class PageTypesDropDownService
+    public class PageTypesEditorService : IPageTypesEditorService
     {
         private readonly SupportedTransformations supportedTransformations;
 
         /// <summary>
-        /// Creates an instance of <see cref="PageTypesDropDownService"/> class.
+        /// Creates an instance of <see cref="PageTypesEditorService"/> class.
         /// </summary>
         /// <param name="supportedTransformations">Supported transformations.</param>
-        public PageTypesDropDownService(SupportedTransformations supportedTransformations)
+        public PageTypesEditorService(SupportedTransformations supportedTransformations)
         {
             this.supportedTransformations = supportedTransformations;
         }
 
 
         /// <summary>
-        /// Gets drop-down editor view model for page type drop-down selector.
+        /// <inheritdoc/>
         /// </summary>
-        /// <param name="selectedOption">Selected option from drop-down selector.</param>
-        public DropDownEditorViewModel GetDropDownModel(string selectedOption)
+        public DropDownEditorViewModel GetEditorModel(string selectedOption)
         {
             return new DropDownEditorViewModel(nameof(ListingWidgetProperties.SelectedPageType), GetOptions(), selectedOption, "Page type");
         }
