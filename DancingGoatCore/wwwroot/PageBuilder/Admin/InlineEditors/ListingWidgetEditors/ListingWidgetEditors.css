@@ -9,7 +9,7 @@
     margin-right: 1em;
     display: flex;
     align-items: flex-end;
-    justify-content: end;
+    justify-content: flex-end;
 }
 
 .listing-inline-editor .listing-property-editor .listing-property-value {
