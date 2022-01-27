@@ -12,7 +12,7 @@ namespace DancingGoat.Widgets
         /// </summary>
         /// <param name="pageType">Page type for options to be retrieved.</param>
         /// <param name="orderByField">Order by field.</param>
-        DropdownEditorViewModel GetDropDownModel(string pageType, string orderByField);
+        DropDownEditorViewModel GetDropDownModel(string pageType, string orderByField);
 
 
         /// <summary>

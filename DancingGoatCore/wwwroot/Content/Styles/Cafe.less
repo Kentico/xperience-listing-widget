@@ -1,0 +1,82 @@
+﻿/*# Cafe image tile #*/
+.cafe-image-tile {
+    background: @color-lightbrown;
+    color: #FFF;
+}
+
+.cafe-image-tile-address {
+    font-style: normal;
+    padding-bottom: 1rem;
+}
+
+.cafe-image-tile-address-anchor,
+.cafe-image-tile-address-anchor:hover,
+.cafe-image-tile-address-anchor:focus,
+.cafe-image-tile-address-anchor:active {
+    color: #FFF;
+}
+
+.cafe-image-tile-image {
+    height: 200px;
+    max-width: 200px;
+    position: absolute;
+    bottom: 1px;
+}
+
+.cafe-image-tile-content {
+    padding: 0 1rem 1rem 1rem;
+
+    .cafe-image-tile-name {
+        color: @color-gold;
+    }
+}
+
+@media (min-width: 400px) {
+    .cafe-image-tile {
+        height: 200px;
+        overflow: hidden;
+    }
+
+    .cafe-image-tile-image-wrapper {
+        float: left;
+        width: 200px;
+        height: 100%;
+        overflow: hidden;
+        margin-right: 1rem;
+    }
+
+    .cafe-image-tile-content {
+        padding-right: 1rem;
+    }
+}
+
+@media (min-width: 768px) { /* md size */
+    .cafe-image-tile {
+        height: 220px;
+    }
+
+    .cafe-image-tile-image-wrapper {
+        width: 150px;
+    }
+
+    .cafe-image-tile-image {
+        max-width: 150px;
+        height: auto;
+    }
+
+}
+
+@media (min-width: 1112px) { /* lg size */
+    .cafe-image-tile {
+        height: 200px;
+    }
+
+    .cafe-image-tile-image-wrapper {
+        width: 200px;
+    }
+
+    .cafe-image-tile-image {
+        height: 200px;
+        max-width: 200px;
+    }
+}

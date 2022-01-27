@@ -1,13 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-using CMS.DataEngine;
-using CMS.DocumentEngine;
-using CMS.DocumentEngine.Types.DancingGoatCore;
-
-using DancingGoat.InlineEditors;
-using DancingGoat.Models;
-using DancingGoat.Widgets;
+﻿using DancingGoat.Widgets;
 
 using Kentico.PageBuilder.Web.Mvc;
 
@@ -23,28 +14,34 @@ namespace DancingGoat.Widgets
     /// </summary>
     public class ListingWidgetViewComponent : ViewComponent
     {
+        private readonly TransformationDropDownService transformationDropdownService;
+        private readonly PageTypesDropDownService pageTypeDropdownService;
+        private readonly IPageBuilderDataContextRetriever pageBuilderDataContextRetriever;
+        private readonly SupportedTransformations supportedTransformations;
+        private readonly IOrderByFieldService orderByFieldService;
+
+
         /// <summary>
         /// Widget identifier.
         /// </summary>
         public const string IDENTIFIER = "DancingGoat.General.ListingWidget";
 
 
-        private readonly IPageRepository repository;
-        private readonly IPageBuilderDataContextRetriever pageBuilderDataContextRetriever;
-        private readonly IOrderByFieldService orderByFieldService;
-
-
         /// <summary>
         /// Creates an instance of <see cref="ListingWidgetViewComponent"/> class.
         /// </summary>
-        /// <param name="repository">Page repository.</param>
         /// <param name="pageBuilderDataContextRetriever">Page builder data context retriever.</param>
+        /// <param name="transformationDropdownService">Transformation drop-down service.</param>
+        /// <param name="pageTypeDropdownService">Page repository.</param>
+        /// <param name="supportedTransformations">Supported transformations.</param>
         /// <param name="orderByFieldService">Order by field service.</param>
-        public ListingWidgetViewComponent(IPageRepository repository, IPageBuilderDataContextRetriever pageBuilderDataContextRetriever, IOrderByFieldService orderByFieldService)
+        public ListingWidgetViewComponent(IPageBuilderDataContextRetriever pageBuilderDataContextRetriever, TransformationDropDownService transformationDropdownService, PageTypesDropDownService pageTypeDropdownService, SupportedTransformations supportedTransformations, IOrderByFieldService orderByFieldService)
         {
-            this.repository = repository;
             this.pageBuilderDataContextRetriever = pageBuilderDataContextRetriever;
             this.orderByFieldService = orderByFieldService;
+            this.transformationDropdownService = transformationDropdownService;
+            this.pageTypeDropdownService = pageTypeDropdownService;
+            this.supportedTransformations = supportedTransformations;
         }
 
 
@@ -57,44 +54,34 @@ namespace DancingGoat.Widgets
             var widgetProperties = viewModel.Properties;
             var selectedPageType = widgetProperties.SelectedPageType;
             var selectedOrderByField = widgetProperties.OrderByField;
-            var orderDirection = widgetProperties.OrderDirection;
+            var selectedTransformation = viewModel.Properties.SelectedTransformationPath;
+            selectedTransformation = supportedTransformations.IsTransformationSupportedForPageType(selectedTransformation, selectedPageType) ? selectedTransformation : null;
+            selectedOrderByField = orderByFieldService.IsValidField(selectedPageType, selectedOrderByField) ? selectedOrderByField : string.Empty;
 
             var model = new ListingWidgetViewModel
             {
-                SelectedPage = widgetProperties.SelectedPage,
+                SelectedValues = new ListingWidgetSelectedValuesModel
+                {
+                    TopN = widgetProperties.TopN,
+                    OrderDirection = widgetProperties.OrderDirection,
+                    OrderByField = selectedOrderByField,
+                    TransformationPath = selectedTransformation,
+                    PageType = selectedPageType,
+                    ParentPage = widgetProperties.SelectedPage,
+                }
             };
 
             if (pageBuilderDataContextRetriever.Retrieve().EditMode)
             {
-                model.PageTypeSelectorViewModel = new DropdownEditorViewModel(nameof(ListingWidgetProperties.SelectedPageType), GetSupportedPageTypes(), selectedPageType, "Page type");
-                model.OrderFieldSelectorViewModel = orderByFieldService.GetDropDownModel(selectedPageType, viewModel.Properties.OrderByField);
-                model.TopN = widgetProperties.TopN;
-                model.OrderDirection = orderDirection;
-
+                model.EditorsModels = new ListingWidgetInlineEditorsViewModel
+                {
+                    OrderFieldSelectorViewModel = orderByFieldService.GetDropDownModel(selectedPageType, selectedOrderByField),
+                    PageTypeSelectorViewModel = pageTypeDropdownService.GetDropDownModel(selectedPageType),
+                    TransformationSelectorViewModel = transformationDropdownService.GetDropDownModel(selectedTransformation, selectedPageType),
+                };
             }
 
-            selectedOrderByField = orderByFieldService.IsValidField(selectedPageType, selectedOrderByField) ? selectedOrderByField : string.Empty;
-
-            var pages = string.IsNullOrEmpty(selectedPageType)
-               ? new List<TreeNode>()
-               : repository.GetPages(selectedPageType, widgetProperties.SelectedPage?.Path, widgetProperties.TopN, selectedOrderByField, orderDirection);
-
-            model.Pages = pages.Select(page => new ListingWidgetPageViewModel(page.DocumentName));
-            model.SelectedOrderByField = selectedOrderByField;
-            
-
             return View("~/Components/Widgets/ListingWidget/_ListingWidget.cshtml", model);
-        }
-
-
-        private IEnumerable<DropdownOptionViewModel> GetSupportedPageTypes()
-        {
-            var SupportedPageTypes = new List<string> { Article.CLASS_NAME, Cafe.CLASS_NAME, Coffee.CLASS_NAME };
-            var classes = DataClassInfoProvider.GetClasses()
-                .WhereIn("ClassName", SupportedPageTypes)
-                .Columns("ClassName", "ClassDisplayName")
-                .ToDictionary(c => c.ClassName, c => c.ClassDisplayName);
-            return classes.Select(dataType => new DropdownOptionViewModel(dataType.Key, dataType.Value));
         }
     }
 }

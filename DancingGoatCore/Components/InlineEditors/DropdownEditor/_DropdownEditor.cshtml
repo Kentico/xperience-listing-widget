@@ -1,4 +1,4 @@
-﻿@model DancingGoat.InlineEditors.DropdownEditorViewModel
+﻿@model DancingGoat.InlineEditors.DropDownEditorViewModel
 
 @using (Html.Kentico().BeginInlineEditor("dropdown-editor", Model.PropertyName, new { @class = "listing-property-editor" }))
 {
@@ -12,11 +12,11 @@
         <select asp-for="@Model.SelectedOption" asp-items="@Model.Options" class="dropdown-selector">
             <option value="">@optionLabel</option>
         </select>
-    </div>
-    @if (!string.IsNullOrEmpty(Model.Tooltip))
-    {
         <div class="listing-property-tooltip">
-            <span class="icon-question-circle" title="@Model.Tooltip"></span>
+            @if (!string.IsNullOrEmpty(Model.Tooltip))
+            {
+                <span class="icon-question-circle" title="@Model.Tooltip"></span>
+            }
         </div>
-    }
+    </div>
 }

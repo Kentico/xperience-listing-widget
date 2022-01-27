@@ -18,6 +18,12 @@ namespace DancingGoat.Widgets
 
 
         /// <summary>
+        /// Path of the selected transformation view.
+        /// </summary>
+        public string SelectedTransformationPath { get; set; }
+
+
+        /// <summary>
         /// Page from which to retrieve child pages excluding the selected page.
         /// </summary>
         public SelectedPage SelectedPage { get; set; }
@@ -39,6 +45,5 @@ namespace DancingGoat.Widgets
         /// Order direction of pages.
         /// </summary>
         public OrderDirection OrderDirection { get; set; } = OrderDirection.Ascending;
-
     }
 }

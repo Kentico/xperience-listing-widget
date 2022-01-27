@@ -9,7 +9,7 @@ namespace DancingGoat.Models
     /// <summary>
     /// Represents a collection of countries and states.
     /// </summary>
-    public class CountryRepository
+    public class CountryRepository : ICountryRepository
     {
         private readonly ICountryInfoProvider countryInfoProvider;
         private readonly IStateInfoProvider stateInfoProvider;

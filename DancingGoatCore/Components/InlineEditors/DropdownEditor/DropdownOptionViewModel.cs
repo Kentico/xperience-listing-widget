@@ -3,7 +3,7 @@
     /// <summary>
     /// View model for a drop-down option.
     /// </summary>
-    public class DropdownOptionViewModel
+    public class DropDownOptionViewModel
     {
         /// <summary>
         /// Value of a drop-down option. 
@@ -18,11 +18,11 @@
 
 
         /// <summary>
-        /// Creates an instance of <see cref="DropdownOptionViewModel"/> class.
+        /// Creates an instance of <see cref="DropDownOptionViewModel"/> class.
         /// </summary>
         /// <param name="value">Value of a drop-down option.</param>
         /// <param name="text">Text of a drop-down option.</param> 
-        public DropdownOptionViewModel(string value, string text)
+        public DropDownOptionViewModel(string value, string text)
         {
             Value = value;
             Text = text;

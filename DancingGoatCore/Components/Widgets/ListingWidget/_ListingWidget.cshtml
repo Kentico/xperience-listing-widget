@@ -5,30 +5,25 @@
 
 @if (Context.Kentico().PageBuilder().EditMode)
 {
-	<div class="listing-inline-editor">
-        <partial name="~/Components/InlineEditors/DropdownEditor/_DropdownEditor.cshtml" model="@Model.PageTypeSelectorViewModel" />
-        <vc:path-editor property-name="@nameof(ListingWidgetProperties.SelectedPage)" page="@Model.SelectedPage" />
-        <partial name="~/Components/InlineEditors/DropdownEditor/_DropdownEditor.cshtml" model="@Model.OrderFieldSelectorViewModel" />
+    var dropDownEditorPath = "~/Components/InlineEditors/DropDownEditor/_DropDownEditor.cshtml";
+    <div class="listing-inline-editor">
+        <partial name="@dropDownEditorPath" model="@Model.EditorsModels.PageTypeSelectorViewModel" />
+        <partial name="@dropDownEditorPath" model="@Model.EditorsModels.TransformationSelectorViewModel" />
+        <vc:path-editor property-name="@nameof(ListingWidgetProperties.SelectedPage)" page="@Model.SelectedValues.ParentPage" />
 		<partial name="~/Components/InlineEditors/TopNEditor/_TopNEditor.cshtml"
 			 model="new TopNEditorViewModel
                     {
                         PropertyName = nameof(ListingWidgetProperties.TopN),
-                        TopN = Model.TopN
+                        TopN = Model.SelectedValues.TopN
                     }" />
+        <partial name="@dropDownEditorPath" model="@Model.EditorsModels.OrderFieldSelectorViewModel" />
         <partial name="~/Components/InlineEditors/OrderDirectionEditor/_OrderDirectionEditor.cshtml" 
             model="new OrderDirectionViewModel
                 {
                     PropertyName = nameof(ListingWidgetProperties.OrderDirection), 
-                    Order = Model.OrderDirection
+                    Order = Model.SelectedValues.OrderDirection
                 }" />
     </div>
 }
 
-<ul>
-	@{
-		foreach(var listingPage in Model.Pages)
-		{
-			<li>@listingPage.DocumentName</li>
-		}
-	}
-</ul>
+ <vc:transformation model="@Model.SelectedValues"/>

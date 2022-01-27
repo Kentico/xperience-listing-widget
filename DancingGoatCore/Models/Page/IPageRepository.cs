@@ -1,12 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 using CMS.DataEngine;
 using CMS.DocumentEngine;
 
+using Kentico.Content.Web.Mvc;
+
 namespace DancingGoat.Models
 {
     /// <summary>
-    /// Provides methods for retrieving pages.
+    /// Encapsulates access to pages for listing widget.
     /// </summary>
     public interface IPageRepository
     {
@@ -25,6 +28,9 @@ namespace DancingGoat.Models
         /// <param name="topN">The number of pages to be retrieved.</param>
         /// <param name="orderByField">The field by which retrieved pages will be sorted.</param>
         /// <param name="orderDirection">Order direction of retrieved pages.</param>
-        public IEnumerable<TreeNode> GetPages(string className, string parentPageAliasPath = null, int topN = 0, string orderByField = null, OrderDirection orderDirection = OrderDirection.Default);
+        /// <param name="customQuery">Action for applying custom query parameters.</param>
+        /// <param name="customDependencyKey">Custom cache dependency key.</param>
+        /// <param name="customDependency">Action for applying custom cache dependency.</param>
+        public IEnumerable<TreeNode> GetPages(string pageType, string parentPageAliasPath = null, int topN = 0, string orderByField = null, OrderDirection orderDirection = OrderDirection.Default, Action<DocumentQuery> customQuery = null, string customDependencyKey = null, Action<IPageCacheDependencyBuilder<TreeNode>, IEnumerable<TreeNode>> customDependency = null);
     }
 }

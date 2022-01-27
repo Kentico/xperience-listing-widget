@@ -9,16 +9,14 @@
 		<label asp-for="@Model.Order" class="order-direction-label">@HtmlLocalizer["Order"].Value:</label>
 	</div>
 
-	<div class="order-direction-radios listing-property-value">
-		<form>
-			<label class="order-direction-option">
-				<input asp-for="@Model.Order" type="radio" value="@OrderDirection.Ascending" />
-				@HtmlLocalizer["Ascending"].Value
-			</label>
-			<label class="order-direction-option">
-				<input asp-for="@Model.Order" type="radio" value="@OrderDirection.Descending" />
-				@HtmlLocalizer["Descending"].Value
-			</label>
-		</form>
-	</div>
+	<form class="order-direction-radios listing-property-value">
+		<label class="order-direction-option">
+			<input asp-for="@Model.Order" type="radio" value="@OrderDirection.Ascending" />
+			@HtmlLocalizer["Ascending"].Value
+		</label>
+		<label class="order-direction-option">
+			<input asp-for="@Model.Order" type="radio" value="@OrderDirection.Descending" />
+			@HtmlLocalizer["Descending"].Value
+		</label>
+	</form>
 }

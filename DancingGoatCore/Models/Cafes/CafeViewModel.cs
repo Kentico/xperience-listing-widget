@@ -17,7 +17,7 @@ namespace DancingGoat.Models
         public ContactViewModel Contact { get; set; }
 
 
-        public static CafeViewModel GetViewModel(Cafe cafe, CountryRepository countryRepository, IStringLocalizer<SharedResources> localizer, IPageAttachmentUrlRetriever attachmentUrlRetriever)
+        public static CafeViewModel GetViewModel(Cafe cafe, ICountryRepository countryRepository, IStringLocalizer<SharedResources> localizer, IPageAttachmentUrlRetriever attachmentUrlRetriever)
         {
             return new CafeViewModel
             {

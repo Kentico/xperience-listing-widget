@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 using CMS.DataEngine;
@@ -8,18 +9,16 @@ using Kentico.Content.Web.Mvc;
 
 namespace DancingGoat.Models
 {
-    /// <summary>
-    /// Provides methods for retrieving pages.
-    /// </summary>
+    /// <inheritdoc/>
     public class PageRepository : IPageRepository
     {
         private readonly IPageRetriever pageRetriever;
 
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PageRepository"/> class that returns pages. 
+        /// Creates a new instance of the <see cref="PageRepository"/> class that returns pages. 
         /// </summary>
-        /// <param name="pageRetriever">Retriever for pages based on given parameters.</param>
+        /// <param name="pageRetriever">Retriever for pages.</param>
         public PageRepository(IPageRetriever pageRetriever)
         {
             this.pageRetriever = pageRetriever;
@@ -43,27 +42,29 @@ namespace DancingGoat.Models
         }
 
 
-        /// <summary>
-        /// Retrieves pages of specified type.
-        /// </summary>
-        /// <param name="pageType">Page type of pages to be retrieved.</param>
-        /// <param name="parentPageAliasPath">Parent path for child pages to be retrieved. If not specified, all pages will be retrieved for the current site.</param>
-        /// <param name="topN">The number of pages to be retrieved.</param>
-        /// <param name="orderByField">The field by which retrieved pages will be sorted.</param>
-        /// <param name="orderDirection">Order direction of retrieved pages.</param>
-        public IEnumerable<TreeNode> GetPages(string pageType, string parentPageAliasPath = null, int topN = 0, string orderByField = null, OrderDirection orderDirection = OrderDirection.Default)
+        /// <inheritdoc/>
+        public IEnumerable<TreeNode> GetPages(string pageType, string parentPageAliasPath = null, int topN = 0, string orderByField = null, OrderDirection orderDirection = OrderDirection.Default, Action<DocumentQuery> customQuery = null, string customDependencyKey = null, Action<IPageCacheDependencyBuilder<TreeNode>, IEnumerable<TreeNode>> customDependency = null)
         {
             return pageRetriever.Retrieve(
                 pageType,
-                query => query
-                    .Path(parentPageAliasPath, PathTypeEnum.Children)
-                    .TopN(topN)
-                    .OrderBy(orderDirection, orderByField)
-                    .FilterDuplicates(),
+                query =>
+                    {
+                        customQuery?.Invoke(query);
+                        query
+                         .Path(parentPageAliasPath, PathTypeEnum.Children)
+                         .TopN(topN)
+                         .OrderBy(orderDirection, orderByField)
+                         .FilterDuplicates();
+                    },
                 cache => cache
-                    .Key($"{nameof(PageRepository)}|{nameof(GetPages)}|{pageType}|{parentPageAliasPath}|{topN}|{orderByField}|{orderDirection}")
+                    .Key($"{nameof(PageRepository)}|{nameof(GetPages)}|{pageType}|{parentPageAliasPath}|{topN}|{orderByField}|{orderDirection}{(customDependencyKey == null ? "|" + customDependencyKey : "")}")
                     // Includes dependency to flush cache when any page of selected page type is edited/created/deleted.
-                    .Dependencies((_, builder) => builder.Pages(pageType)));
+                    .Dependencies((pages, builder) =>
+                        {
+                            builder.Pages(pageType);
+                            customDependency?.Invoke(builder, pages);
+                        }
+                    ));
         }
     }
 }
