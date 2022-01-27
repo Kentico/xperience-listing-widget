@@ -12,14 +12,14 @@ namespace DancingGoat.Widgets
     /// <summary>
     /// Provides methods to get data for order by field editor.
     /// </summary>
-    internal class OrderByFieldService : IOrderByFieldService
+    internal class OrderByFieldEditorService : IOrderByFieldEditorService
     {
         /// <summary>
         /// Gets model for order by field drop-down editor.
         /// </summary>
         /// <param name="pageType">Page type for options to be retrieved.</param>
         /// <param name="orderByField">Order by field.</param>
-        public DropDownEditorViewModel GetDropDownModel(string pageType, string orderByField)
+        public DropDownEditorViewModel GetEditorModel(string pageType, string orderByField)
         {
             var fields = GetFields(pageType);
             var validOrderByFieldSelected = fields.Any(item => item.Value == orderByField);

@@ -8,20 +8,20 @@ using Microsoft.Extensions.Localization;
 namespace DancingGoat.Widgets
 {
     /// <summary>
-    /// Provides methods to get options and tooltip for transformation drop-down selector.
+    /// <inheritdoc/>
     /// </summary>
-    public class TransformationDropDownService
+    public class TransformationEditorService : ITransformationEditorService
     {
         private readonly SupportedTransformations supportedTransformations;
         private readonly IStringLocalizer<SharedResources> localizer;
 
 
         /// <summary>
-        /// Creates an instance of <see cref="TransformationDropDownService"/> class.
+        /// Creates an instance of <see cref="TransformationEditorService"/> class.
         /// </summary>
         /// <param name="localizer">Represents an <see cref="IStringLocalizer"/> that provides localized strings.</param>
         /// <param name="supportedTransformations">Supported transformations.</param>
-        public TransformationDropDownService(IStringLocalizer<SharedResources> localizer, SupportedTransformations supportedTransformations)
+        public TransformationEditorService(IStringLocalizer<SharedResources> localizer, SupportedTransformations supportedTransformations)
         {
             this.localizer = localizer;
             this.supportedTransformations = supportedTransformations;
@@ -29,11 +29,9 @@ namespace DancingGoat.Widgets
 
 
         /// <summary>
-        /// Gets drop-down editor view model for transformation drop-down selector.
+        /// <inheritdoc/>
         /// </summary>
-        /// <param name="selectedOption">Selected option from drop-down selector.</param>
-        /// <param name="pageType">Page type.</param>
-        public DropDownEditorViewModel GetDropDownModel(string selectedOption, string pageType)
+        public DropDownEditorViewModel GetEditorModel(string selectedOption, string pageType)
         {
             var reset = !string.IsNullOrEmpty(selectedOption) && !supportedTransformations.IsTransformationSupportedForPageType(selectedOption, pageType);
             return new DropDownEditorViewModel(nameof(ListingWidgetProperties.SelectedTransformationPath), GetOptions(pageType), selectedOption, "Transformation", GetTooltip(pageType), reset);

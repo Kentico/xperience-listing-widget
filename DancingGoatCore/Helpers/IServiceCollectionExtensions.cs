@@ -26,16 +26,16 @@ namespace DancingGoat
         private static void AddRepositories(IServiceCollection services)
         {
             services.AddSingleton<IPageRepository, PageRepository>();
-            services.AddSingleton<IOrderByFieldService, OrderByFieldService>();
-            
+            services.AddSingleton<IOrderByFieldEditorService, OrderByFieldEditorService>();
+
             services.AddSingleton<ArticleRepository>();
             services.AddSingleton<CafeRepository>();
             services.AddSingleton<ContactRepository>();
             services.AddSingleton<CountryRepository>();
             services.AddSingleton<ICountryRepository, CountryRepository>();
             services.AddSingleton<ITransformationStrategy, TransformationStrategy>();
-            services.AddSingleton<TransformationDropDownService>();
-            services.AddSingleton<PageTypesDropDownService>();
+            services.AddSingleton<ITransformationEditorService, TransformationEditorService>();
+            services.AddSingleton<IPageTypesEditorService, PageTypesEditorService>();
             services.AddSingleton<ITransformationService, ArticlesTransformationService>();
             services.AddSingleton<ITransformationService, CafesTransformationService>();
             services.AddSingleton<ITransformationService, CoffeesTransformationService>();
