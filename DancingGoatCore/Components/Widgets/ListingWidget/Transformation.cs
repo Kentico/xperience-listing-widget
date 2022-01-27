@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DancingGoat.Widgets
+﻿namespace DancingGoat.Widgets
 {
     /// <summary>
     /// Class representing transformation.
@@ -20,14 +18,8 @@ namespace DancingGoat.Widgets
 
 
         /// <summary>
-        /// Transformation tooltip to be shown in transformation selector.
+        /// Description of the transformation.
         /// </summary>
-        public string ToolTip { get; set; }
-
-
-        /// <summary>
-        /// Type of service providing view models for transformation.
-        /// </summary>
-        public Type ServiceType { get; set; }
+        public string Description { get; set; }
     }
 }

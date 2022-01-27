@@ -13,6 +13,18 @@ namespace DancingGoat.Widgets
     public interface ITransformationService
     {
         /// <summary>
+        /// Supported page type for transformations.
+        /// </summary>
+        public string PageType { get; }
+
+
+        /// <summary>
+        /// Supported transformations.
+        /// </summary>
+        public IEnumerable<Transformation> Transformations { get; }
+
+
+        /// <summary>
         /// Returns hydrated <see cref="ITransformationViewModel"/> for pages.
         /// </summary>
         /// <param name="pages">Pages to be listed in view model.</param>

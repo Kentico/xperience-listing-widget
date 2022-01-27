@@ -39,7 +39,8 @@ namespace DancingGoat
             services.AddSingleton<ITransformationService, ArticlesTransformationService>();
             services.AddSingleton<ITransformationService, CafesTransformationService>();
             services.AddSingleton<ITransformationService, CoffeesTransformationService>();
-            services.AddSingleton<SupportedTransformations>();
+            services.AddSingleton<SupportedTransformationsRetriever>();
+            services.AddSingleton<SupportedPageTypesRetriever>();
             services.AddSingleton<NavigationRepository>();
             services.AddSingleton<SocialLinkRepository>();
             services.AddSingleton<BrewerRepository>();

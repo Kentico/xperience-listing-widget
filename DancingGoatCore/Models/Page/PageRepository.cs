@@ -50,8 +50,7 @@ namespace DancingGoat.Models
                 query =>
                     {
                         customQuery?.Invoke(query);
-                        query
-                         .Path(parentPageAliasPath, PathTypeEnum.Children)
+                        query.Path(parentPageAliasPath, PathTypeEnum.Children)
                          .TopN(topN)
                          .OrderBy(orderDirection, orderByField)
                          .FilterDuplicates();

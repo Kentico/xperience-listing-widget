@@ -13,6 +13,14 @@ namespace DancingGoat.Widgets
     public abstract class BaseTransformationService : ITransformationService
     {
         /// <inheritdoc/>
+        public abstract string PageType { get; }
+
+
+        /// <inheritdoc/>
+        public abstract IEnumerable<Transformation> Transformations { get; }
+
+
+        /// <inheritdoc/>
         public abstract ITransformationViewModel GetModel(IEnumerable<TreeNode> pages);
 
 

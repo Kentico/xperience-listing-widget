@@ -8,11 +8,25 @@ using Kentico.Content.Web.Mvc;
 
 namespace DancingGoat.Widgets
 {
-    /// <summary>
-    /// Provides methods to get coffees transformation model and custom parametrization for page retriever.
-    /// </summary>
+    /// <inheritdoc/>
     public class CoffeesTransformationService : BaseTransformationService
     {
+        /// <inheritdoc/>
+        public override string PageType { get; } = Coffee.CLASS_NAME;
+
+
+        /// <inheritdoc/>
+        public override IEnumerable<Transformation> Transformations { get; } = new List<Transformation>
+        {
+            new Transformation
+            {
+                Name = "Coffees",
+                View = "Transformations/Coffees/_Coffees.cshtml",
+                Description = "Transformation displays coffees in 4 column grid.",
+            }
+        };
+
+
         private readonly IPageUrlRetriever pageUrlRetriever;
 
 
@@ -34,7 +48,7 @@ namespace DancingGoat.Widgets
         {
             if (pages == null)
             {
-                return new CoffeesTransformationViewModel { Coffees = Enumerable.Empty<CoffeeCardViewModel>() };
+                return new CoffeesTransformationViewModel();
             }
             var coffeesList = pages.Select(coffee => CoffeeCardViewModel.GetViewModel(coffee as Coffee, pageUrlRetriever));
             return new CoffeesTransformationViewModel { Coffees = coffeesList };
