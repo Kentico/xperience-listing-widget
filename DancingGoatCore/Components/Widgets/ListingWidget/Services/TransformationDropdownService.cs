@@ -35,7 +35,8 @@ namespace DancingGoat.Widgets
         /// <param name="pageType">Page type.</param>
         public DropDownEditorViewModel GetDropDownModel(string selectedOption, string pageType)
         {
-            return new DropDownEditorViewModel(nameof(ListingWidgetProperties.SelectedTransformationPath), GetOptions(pageType), selectedOption, "Transformation", GetTooltip(pageType));
+            var update = !string.IsNullOrEmpty(selectedOption) && !supportedTransformations.IsTransformationSupportedForPageType(selectedOption, pageType);
+            return new DropDownEditorViewModel(nameof(ListingWidgetProperties.SelectedTransformationPath), GetOptions(pageType), selectedOption, "Transformation", GetTooltip(pageType), update);
         }
 
 

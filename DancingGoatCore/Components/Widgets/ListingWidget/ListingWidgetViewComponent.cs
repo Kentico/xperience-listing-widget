@@ -75,9 +75,9 @@ namespace DancingGoat.Widgets
             {
                 model.EditorsModels = new ListingWidgetInlineEditorsViewModel
                 {
-                    OrderFieldSelectorViewModel = orderByFieldService.GetDropDownModel(selectedPageType, selectedOrderByField),
+                    OrderFieldSelectorViewModel = orderByFieldService.GetDropDownModel(selectedPageType, viewModel.Properties.OrderByField),
                     PageTypeSelectorViewModel = pageTypeDropdownService.GetDropDownModel(selectedPageType),
-                    TransformationSelectorViewModel = transformationDropdownService.GetDropDownModel(selectedTransformation, selectedPageType),
+                    TransformationSelectorViewModel = transformationDropdownService.GetDropDownModel(viewModel.Properties.SelectedTransformationPath, selectedPageType),
                 };
             }
 
