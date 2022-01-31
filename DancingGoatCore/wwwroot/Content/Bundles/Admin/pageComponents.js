@@ -41,13 +41,13 @@
         init: function (options) {
             var editor = options.editor;
             var dropdown = editor.querySelector(".dropdown-selector");
-            var update = editor.dataset.updateOnInit;
+            var reset = editor.dataset.reset === "true";
 
-            // Update property in a state with a validated value from the model to keep consistent values in properties.
-            if (update == "True") {
+            // Reset property to keep consistent values in properties.
+            if (reset) {
                 var resetEvent = new CustomEvent("updateProperty", {
                     detail: {
-                        value: dropdown.value,
+                        value: null,
                         name: options.propertyName,
                         refreshMarkup: false,
                     }

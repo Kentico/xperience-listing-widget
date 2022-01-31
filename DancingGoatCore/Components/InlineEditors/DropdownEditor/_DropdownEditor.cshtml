@@ -1,6 +1,6 @@
 ﻿@model DancingGoat.InlineEditors.DropDownEditorViewModel
 
-@using (Html.Kentico().BeginInlineEditor("dropdown-editor", Model.PropertyName, new { @class = "listing-property-editor", @data_update_on_init=@Model.UpdateOnInit}))
+@using (Html.Kentico().BeginInlineEditor("dropdown-editor", Model.PropertyName, new { @class = "listing-property-editor", @data_reset=@Json.Serialize(@Model.Reset)}))
 {
     var optionLabel = Model.Options.Any() ? HtmlLocalizer["Please select an option."].Value : HtmlLocalizer["No options are available."].Value;
     var dropdownLabel = HtmlLocalizer[Model.Label].Value + ':';
