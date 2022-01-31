@@ -34,9 +34,9 @@ namespace DancingGoat.InlineEditors
 
 
         /// <summary>
-        /// If true drop-down will update related widget property with selected option in editor init to keep consistent values in properties.
+        /// If true drop-down will reset related widget property.
         /// </summary>
-        public bool UpdateOnInit { get; set; }
+        public bool Reset { get; set; }
 
 
         /// <summary>
@@ -47,15 +47,15 @@ namespace DancingGoat.InlineEditors
         /// <param name="selectedOption">Selected option.</param>
         /// <param name="label">Label of the selector.</param>
         /// <param name="tooltip">Tooltip of the selector.</param>
-        /// <param name="updateOnInit">If true drop-down will update related widget property with selected option in editor init to keep consistent values in properties.</param>
-        public DropDownEditorViewModel(string propertyName, IEnumerable<DropDownOptionViewModel> options, string selectedOption, string label, string tooltip = "", bool updateOnInit = false)
+        /// <param name="reset">If true drop-down will reset related widget property.</param>
+        public DropDownEditorViewModel(string propertyName, IEnumerable<DropDownOptionViewModel> options, string selectedOption, string label, string tooltip = "", bool reset = false)
         {
             PropertyName = propertyName;
             Options = new SelectList(options, nameof(DropDownOptionViewModel.Value), nameof(DropDownOptionViewModel.Text));
             SelectedOption = selectedOption;
             Label = label;
             Tooltip = tooltip;
-            UpdateOnInit = updateOnInit;
+            Reset = reset;
         }
     }
 }

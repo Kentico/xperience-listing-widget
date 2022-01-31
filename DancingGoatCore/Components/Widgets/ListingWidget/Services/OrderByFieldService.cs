@@ -22,12 +22,12 @@ namespace DancingGoat.Widgets
         {
             var fields = GetFields(pageType);
             var validOrderByFieldSelected = fields.Any(item => item.Value == orderByField);
-            var update = !string.IsNullOrEmpty(orderByField) && !validOrderByFieldSelected;
+            var reset = !string.IsNullOrEmpty(orderByField) && !validOrderByFieldSelected;
             return new DropDownEditorViewModel(nameof(ListingWidgetProperties.OrderByField),
                 fields,
                 validOrderByFieldSelected ? orderByField : string.Empty,
                 "Order by field",
-                updateOnInit: update
+                reset: reset
                 );
         }
 
