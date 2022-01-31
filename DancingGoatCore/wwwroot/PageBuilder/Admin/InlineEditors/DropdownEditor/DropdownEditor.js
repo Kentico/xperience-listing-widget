@@ -3,10 +3,10 @@
         init: function (options) {
             var editor = options.editor;
             var dropdown = editor.querySelector(".dropdown-selector");
-            var reset = editor.dataset.reset === "true";
-
+            var reset = editor.querySelector(".dropdown-value").dataset.reset;
+            
             // Reset property to keep consistent values in properties.
-            if (reset) {
+            if (reset != null) {
                 var resetEvent = new CustomEvent("updateProperty", {
                     detail: {
                         value: null,
