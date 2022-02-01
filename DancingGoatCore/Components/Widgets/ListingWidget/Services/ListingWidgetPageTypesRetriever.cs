@@ -4,7 +4,7 @@ using System.Linq;
 namespace DancingGoat.Widgets
 {
     /// <summary>
-    /// Retrieve supported page types for listing widget.
+    /// Provides a method for retrieving supported page types for listing widget.
     /// </summary>
     public class ListingWidgetPageTypesRetriever
     {
@@ -22,7 +22,7 @@ namespace DancingGoat.Widgets
 
 
         /// <summary>
-        /// Retrieve supported page types.
+        /// Retrieves supported page types.
         /// </summary>
         public IEnumerable<string> Retrieve()
         {

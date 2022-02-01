@@ -4,7 +4,7 @@ using System.Linq;
 namespace DancingGoat.Widgets
 {
     /// <summary>
-    /// Retrieve supported transformations for listing widget.
+    /// Provides methods for retrieving supported transformations for listing widget.
     /// </summary>
     public class ListingWidgetTransformationsRetriever
     {
@@ -22,7 +22,7 @@ namespace DancingGoat.Widgets
 
 
         /// <summary>
-        /// Checks if transformation is supported for selected page type.
+        /// Checks if transformation is supported for the page type.
         /// </summary>
         /// <param name="transformationPath">Path of the transformation view.</param>
         /// <param name="pageType">Page type.</param>
@@ -37,7 +37,7 @@ namespace DancingGoat.Widgets
 
 
         /// <summary>
-        /// Retrieve supported transformations for page type.
+        /// Retrieves supported transformations for the page type.
         /// </summary>
         /// <param name="pageType">Page type.</param>
         public IEnumerable<Transformation> Retrieve(string pageType)
