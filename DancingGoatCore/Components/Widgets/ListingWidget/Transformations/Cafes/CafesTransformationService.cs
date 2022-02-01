@@ -16,6 +16,11 @@ namespace DancingGoat.Widgets
     /// <inheritdoc/>
     public class CafesTransformationService : BaseTransformationService
     {
+        private readonly IPageAttachmentUrlRetriever attachmentUrlRetriever;
+        private readonly IStringLocalizer<SharedResources> localizer;
+        private readonly ICountryRepository countryRepository;
+
+
         /// <inheritdoc/>
         public override string PageType { get; } = Cafe.CLASS_NAME;
 
@@ -30,11 +35,6 @@ namespace DancingGoat.Widgets
                 Description = "Transformation displays our cafes in 2 column grid.",
             }
         };
-
-
-        private readonly IPageAttachmentUrlRetriever attachmentUrlRetriever;
-        private readonly IStringLocalizer<SharedResources> localizer;
-        private readonly ICountryRepository countryRepository;
 
 
         /// <summary>

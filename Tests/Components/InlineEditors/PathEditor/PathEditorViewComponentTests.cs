@@ -44,7 +44,7 @@ namespace DancingGoat.InlineEditors
         [Test]
         public void Invoke_NullPage_ReturnsModelWithNotSelectedPageState()
         {
-            var result = component.Invoke(new PathEditorProperties { PropertyName = nameof(ListingWidgetProperties.ParentPageAliasPath), PageAliasPath = null }) as ViewViewComponentResult;
+            var result = component.Invoke(nameof(ListingWidgetProperties.ParentPageAliasPath), null) as ViewViewComponentResult;
             var viewModel = result.ViewData.Model as PathEditorViewModel;
 
             Assert.Multiple(() =>
@@ -62,7 +62,7 @@ namespace DancingGoat.InlineEditors
         [Test]
         public void Invoke_NonExistingPage_ReturnsModelWithInvalidPageState()
         {
-            var result = component.Invoke(new PathEditorProperties { PropertyName = nameof(ListingWidgetProperties.ParentPageAliasPath), PageAliasPath = INVALID_PATH }) as ViewViewComponentResult;
+            var result = component.Invoke(nameof(ListingWidgetProperties.ParentPageAliasPath), INVALID_PATH) as ViewViewComponentResult;
             var viewModel = result.ViewData.Model as PathEditorViewModel;
 
             Assert.Multiple(() =>
@@ -80,7 +80,7 @@ namespace DancingGoat.InlineEditors
         [Test]
         public void Invoke_ExistingPage_ReturnsModelWithSelectedValidPageState()
         {
-            var result = component.Invoke(new PathEditorProperties { PropertyName = nameof(ListingWidgetProperties.ParentPageAliasPath), PageAliasPath = PATH }) as ViewViewComponentResult;
+            var result = component.Invoke(nameof(ListingWidgetProperties.ParentPageAliasPath), PATH) as ViewViewComponentResult;
             var viewModel = result.ViewData.Model as PathEditorViewModel;
 
             Assert.Multiple(() =>

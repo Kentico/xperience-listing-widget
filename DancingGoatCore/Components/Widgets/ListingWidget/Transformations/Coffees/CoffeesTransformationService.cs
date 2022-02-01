@@ -11,6 +11,9 @@ namespace DancingGoat.Widgets
     /// <inheritdoc/>
     public class CoffeesTransformationService : BaseTransformationService
     {
+        private readonly IPageUrlRetriever pageUrlRetriever;
+
+
         /// <inheritdoc/>
         public override string PageType { get; } = Coffee.CLASS_NAME;
 
@@ -25,9 +28,6 @@ namespace DancingGoat.Widgets
                 Description = "Transformation displays coffees in 4 column grid.",
             }
         };
-
-
-        private readonly IPageUrlRetriever pageUrlRetriever;
 
 
         /// <summary>

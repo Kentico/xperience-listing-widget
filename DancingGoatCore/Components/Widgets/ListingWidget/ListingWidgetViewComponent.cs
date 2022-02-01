@@ -23,9 +23,9 @@ namespace DancingGoat.Widgets
 
         private readonly IPageBuilderDataContextRetriever pageBuilderDataContextRetriever;
         private readonly ITransformationEditorService transformationEditorService;
-        private readonly IPageTypesEditorService pageTypeEditorService;
+        private readonly IPageTypeEditorService pageTypeEditorService;
         private readonly IOrderByFieldEditorService orderByFieldEditorService;
-        private readonly SupportedTransformationsRetriever transformationsRetriever;
+        private readonly ListingWidgetTransformationsRetriever transformationsRetriever;
 
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace DancingGoat.Widgets
         /// <param name="pageTypeEditorService">Page type editor service.</param>
         /// <param name="orderByFieldEditorService">Order by field editor service.</param>
         /// <param name="transformationsRetriever">Supported transformations retriever.</param>
-        public ListingWidgetViewComponent(IPageBuilderDataContextRetriever pageBuilderDataContextRetriever, ITransformationEditorService transformationEditorService, IPageTypesEditorService pageTypeEditorService, IOrderByFieldEditorService orderByFieldEditorService, SupportedTransformationsRetriever transformationsRetriever)
+        public ListingWidgetViewComponent(IPageBuilderDataContextRetriever pageBuilderDataContextRetriever, ITransformationEditorService transformationEditorService, IPageTypeEditorService pageTypeEditorService, IOrderByFieldEditorService orderByFieldEditorService, ListingWidgetTransformationsRetriever transformationsRetriever)
         {
             this.pageBuilderDataContextRetriever = pageBuilderDataContextRetriever;
             this.orderByFieldEditorService = orderByFieldEditorService;
@@ -54,19 +54,17 @@ namespace DancingGoat.Widgets
         {
             var widgetProperties = viewModel.Properties;
             var selectedPageType = widgetProperties.PageType;
-            var selectedTopN = widgetProperties.TopN;
-            var selectedOrderDirection = widgetProperties.OrderDirection;
             var selectedOrderByField = widgetProperties.OrderByField;
             var selectedTransformation = widgetProperties.TransformationPath;
-            selectedTransformation = transformationsRetriever.IsTransformationSupported(selectedTransformation, selectedPageType) ? selectedTransformation : null;
+            selectedTransformation = transformationsRetriever.IsSupported(selectedTransformation, selectedPageType) ? selectedTransformation : null;
             selectedOrderByField = orderByFieldEditorService.IsValidField(selectedPageType, selectedOrderByField) ? selectedOrderByField : string.Empty;
 
             var model = new ListingWidgetViewModel
             {
                 SelectedValues = new ListingWidgetSelectedValues
                 {
-                    TopN = selectedTopN,
-                    OrderDirection = selectedOrderDirection,
+                    TopN = widgetProperties.TopN,
+                    OrderDirection = widgetProperties.OrderDirection,
                     OrderByField = selectedOrderByField,
                     TransformationPath = selectedTransformation,
                     PageType = selectedPageType,
@@ -78,23 +76,18 @@ namespace DancingGoat.Widgets
             {
                 model.InlineEditors = new ListingWidgetInlineEditors
                 {
-                    OrderFieldSelector = orderByFieldEditorService.GetEditorModel(selectedPageType, widgetProperties.OrderByField),
-                    PageTypeSelector = pageTypeEditorService.GetEditorModel(selectedPageType),
-                    TransformationSelector = transformationEditorService.GetEditorModel(widgetProperties.TransformationPath, selectedPageType),
+                    OrderByFieldEditor = orderByFieldEditorService.GetEditorModel(selectedPageType, widgetProperties.OrderByField),
+                    PageTypeEditor = pageTypeEditorService.GetEditorModel(selectedPageType),
+                    TransformationEditor = transformationEditorService.GetEditorModel(widgetProperties.TransformationPath, selectedPageType),
                     TopNEditor = new TopNEditorViewModel
                     {
                         PropertyName = nameof(ListingWidgetProperties.TopN),
-                        TopN = selectedTopN
+                        TopN = widgetProperties.TopN
                     },
                     OrderDirectionEditor = new OrderDirectionViewModel
                     {
                         PropertyName = nameof(ListingWidgetProperties.OrderDirection),
-                        Order = selectedOrderDirection
-                    },
-                    PathEditor = new PathEditorProperties
-                    {
-                        PropertyName = nameof(ListingWidgetProperties.ParentPageAliasPath),
-                        PageAliasPath = widgetProperties.ParentPageAliasPath
+                        Order = widgetProperties.OrderDirection
                     }
                 };
             }

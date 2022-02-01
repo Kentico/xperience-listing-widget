@@ -5,7 +5,7 @@ namespace DancingGoat.Widgets
     /// <summary>
     /// Provides methods to get data for page type editor.
     /// </summary>
-    public interface IPageTypesEditorService
+    public interface IPageTypeEditorService
     {
         /// <summary>
         /// Gets drop-down editor view model for page type editor.

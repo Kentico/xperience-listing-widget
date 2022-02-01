@@ -13,9 +13,9 @@ namespace DancingGoat.Widgets
 {
     [TestFixture]
     [Category.Unit]
-    public class SupportedPageTypesRetrieverTests
+    public class ListingWidgetPageTypesRetrieverTests
     {
-        private SupportedPageTypesRetriever pageTypesRetriever;
+        private ListingWidgetPageTypesRetriever pageTypesRetriever;
 
 
         [SetUp]
@@ -33,14 +33,14 @@ namespace DancingGoat.Widgets
             cafesTransformationService.PageType.Returns(Cafe.CLASS_NAME);
             cafesTransformationService.Transformations.Returns(new List<Transformation> { TransformationsMock.Cafes });
 
-            pageTypesRetriever = new SupportedPageTypesRetriever(new List<ITransformationService> { articlesTransformationService, coffeesTransformationService, cafesTransformationService });
+            pageTypesRetriever = new ListingWidgetPageTypesRetriever(new List<ITransformationService> { articlesTransformationService, coffeesTransformationService, cafesTransformationService });
         }
 
 
         [Test]
-        public void GetSupportedPagetypes_ReturnsAllPageTypes()
+        public void Retrieve_ReturnsAllPageTypes()
         {
-            var pageTypes = pageTypesRetriever.GetSupportedPageTypes();
+            var pageTypes = pageTypesRetriever.Retrieve();
 
             Assert.That(pageTypes.Count(), Is.EqualTo(3));
             Assert.That(pageTypes.Contains(Article.CLASS_NAME), Is.True);
