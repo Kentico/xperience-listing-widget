@@ -32,7 +32,7 @@ namespace DancingGoat.Widgets
         /// <summary>
         /// Number of pages to retrieve.
         /// </summary>
-        public int TopN { get; set; }
+        public int TopN { get; set; } = 10;
 
 
         /// <summary>
