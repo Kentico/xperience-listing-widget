@@ -294,14 +294,16 @@ if("FORM"===this.element.tagName)for(var b=this.element.querySelectorAll("input,
         init: function (options) {
             var editor = options.editor;
             var input = editor.querySelector("input");
+            var defaultValue = 10;
+            var maxValidValue = 2147483647;
             input.addEventListener("change", function () {
-                if (!/^\d+$/.test(input.value)) {
-                    input.value = 10;
+                if (!/^\d+$/.test(input.value) || parseInt(input.value) > maxValidValue) {
+                    input.value = defaultValue;
                 }
 
                 var event = new CustomEvent("updateProperty", {
                     detail: {
-                        value: input.value,
+                        value: parseInt(input.value),
                         name: options.propertyName,
                         refreshMarkup: true,
                     }

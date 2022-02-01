@@ -1,6 +1,4 @@
-﻿using DancingGoat.InlineEditors;
-
-namespace DancingGoat.InlineEditors
+﻿namespace DancingGoat.InlineEditors
 {
     /// <summary>
     /// View model for top N editor.
