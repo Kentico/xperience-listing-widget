@@ -15,40 +15,40 @@ namespace DancingGoat.Widgets
         /// <summary>
         /// Supported page type for transformations.
         /// </summary>
-        public string PageType { get; }
+        string PageType { get; }
 
 
         /// <summary>
         /// Supported transformations.
         /// </summary>
-        public IEnumerable<Transformation> Transformations { get; }
+        IEnumerable<Transformation> Transformations { get; }
 
 
         /// <summary>
         /// Returns hydrated <see cref="ITransformationViewModel"/> for pages.
         /// </summary>
         /// <param name="pages">Pages to be listed in view model.</param>
-        public ITransformationViewModel GetModel(IEnumerable<TreeNode> pages);
+        ITransformationViewModel GetModel(IEnumerable<TreeNode> pages);
 
 
         /// <summary>
         /// Returns Action for applying custom cache dependency for page retriever.
         /// </summary>
         /// <param name="transformationView">Transformation view path.</param>
-        public Action<IPageCacheDependencyBuilder<TreeNode>, IEnumerable<TreeNode>> GetCustomCacheDependency(string transformationView);
+        Action<IPageCacheDependencyBuilder<TreeNode>, IEnumerable<TreeNode>> GetCustomCacheDependency(string transformationView);
 
 
         /// <summary>
         /// Returns custom cache dependency key for page retriever.
         /// </summary>
         /// <param name="transformationView">Transformation view path.</param>
-        public string GetCustomCacheDependencyKey(string transformationView);
+        string GetCustomCacheDependencyKey(string transformationView);
 
 
         /// <summary>
         /// Returns Action for applying custom query parameters for page retriever.
         /// </summary>
         /// <param name="transformationView">Transformation view path.</param>
-        public Action<DocumentQuery> GetCustomQueryParametrization(string transformationView);
+        Action<DocumentQuery> GetCustomQueryParametrization(string transformationView);
     }
 }

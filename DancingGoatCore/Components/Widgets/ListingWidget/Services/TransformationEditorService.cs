@@ -8,9 +8,9 @@ using Microsoft.Extensions.Localization;
 namespace DancingGoat.Widgets
 {
     /// <inheritdoc/>
-    public class TransformationEditorService : ITransformationEditorService
+    internal class TransformationEditorService : ITransformationEditorService
     {
-        private readonly SupportedTransformationsRetriever transformationsRetriever;
+        private readonly ListingWidgetTransformationsRetriever transformationsRetriever;
         private readonly IStringLocalizer<SharedResources> localizer;
 
 
@@ -19,7 +19,7 @@ namespace DancingGoat.Widgets
         /// </summary>
         /// <param name="localizer">Represents an <see cref="IStringLocalizer"/> that provides localized strings.</param>
         /// <param name="transformationsRetriever">Supported transformations retriever.</param>
-        public TransformationEditorService(IStringLocalizer<SharedResources> localizer, SupportedTransformationsRetriever transformationsRetriever)
+        public TransformationEditorService(IStringLocalizer<SharedResources> localizer, ListingWidgetTransformationsRetriever transformationsRetriever)
         {
             this.localizer = localizer;
             this.transformationsRetriever = transformationsRetriever;
@@ -29,7 +29,7 @@ namespace DancingGoat.Widgets
         /// <inheritdoc/>
         public DropDownEditorViewModel GetEditorModel(string selectedOption, string pageType)
         {
-            var reset = !string.IsNullOrEmpty(selectedOption) && !transformationsRetriever.IsTransformationSupported(selectedOption, pageType);
+            var reset = !string.IsNullOrEmpty(selectedOption) && !transformationsRetriever.IsSupported(selectedOption, pageType);
             return new DropDownEditorViewModel(nameof(ListingWidgetProperties.TransformationPath), GetOptions(pageType), selectedOption, "Transformation", GetTooltip(pageType), reset);
         }
 
@@ -40,7 +40,7 @@ namespace DancingGoat.Widgets
             {
                 return Enumerable.Empty<DropDownOptionViewModel>();
             }
-            return transformationsRetriever.GetTransformations(pageType).Select(transformation => new DropDownOptionViewModel(transformation.View, localizer[transformation.Name]));
+            return transformationsRetriever.Retrieve(pageType).Select(transformation => new DropDownOptionViewModel(transformation.View, localizer[transformation.Name]));
         }
 
 
@@ -50,7 +50,7 @@ namespace DancingGoat.Widgets
             {
                 return string.Empty;
             }
-            var tooltips = transformationsRetriever.GetTransformations(pageType)
+            var tooltips = transformationsRetriever.Retrieve(pageType)
                 .Select(transformation => GetTransformationTooltip(transformation))
                 .Where(tooltip => !string.IsNullOrWhiteSpace(tooltip));
             var joinedTooltip = string.Join("\n\n", tooltips);

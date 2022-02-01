@@ -9,16 +9,16 @@ using DancingGoat.InlineEditors;
 namespace DancingGoat.Widgets
 {
     /// <inheritdoc/>
-    public class PageTypesEditorService : IPageTypesEditorService
+    internal class PageTypeEditorService : IPageTypeEditorService
     {
-        private readonly SupportedPageTypesRetriever pageTypesRetriever;
+        private readonly ListingWidgetPageTypesRetriever pageTypesRetriever;
 
 
         /// <summary>
-        /// Creates an instance of <see cref="PageTypesEditorService"/> class.
+        /// Creates an instance of <see cref="PageTypeEditorService"/> class.
         /// </summary>
         /// <param name="supportedTransformations">Supported transformations.</param>
-        public PageTypesEditorService(SupportedPageTypesRetriever pageTypesRetriever)
+        public PageTypeEditorService(ListingWidgetPageTypesRetriever pageTypesRetriever)
         {
             this.pageTypesRetriever = pageTypesRetriever;
         }
@@ -33,7 +33,7 @@ namespace DancingGoat.Widgets
 
         private IEnumerable<DropDownOptionViewModel> GetOptions()
         {
-            var SupportedPageTypes = pageTypesRetriever.GetSupportedPageTypes();
+            var SupportedPageTypes = pageTypesRetriever.Retrieve();
             var classes = DataClassInfoProvider.GetClasses()
                 .WhereIn("ClassName", SupportedPageTypes.ToList())
                 .Columns("ClassName", "ClassDisplayName")

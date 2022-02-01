@@ -35,12 +35,12 @@ namespace DancingGoat
             services.AddSingleton<ICountryRepository, CountryRepository>();
             services.AddSingleton<ITransformationStrategy, TransformationStrategy>();
             services.AddSingleton<ITransformationEditorService, TransformationEditorService>();
-            services.AddSingleton<IPageTypesEditorService, PageTypesEditorService>();
+            services.AddSingleton<IPageTypeEditorService, PageTypeEditorService>();
             services.AddSingleton<ITransformationService, ArticlesTransformationService>();
             services.AddSingleton<ITransformationService, CafesTransformationService>();
             services.AddSingleton<ITransformationService, CoffeesTransformationService>();
-            services.AddSingleton<SupportedTransformationsRetriever>();
-            services.AddSingleton<SupportedPageTypesRetriever>();
+            services.AddSingleton<ListingWidgetTransformationsRetriever>();
+            services.AddSingleton<ListingWidgetPageTypesRetriever>();
             services.AddSingleton<NavigationRepository>();
             services.AddSingleton<SocialLinkRepository>();
             services.AddSingleton<BrewerRepository>();

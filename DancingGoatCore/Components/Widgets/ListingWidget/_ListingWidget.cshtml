@@ -7,11 +7,11 @@
 {
     var dropDownEditorPath = "~/Components/InlineEditors/DropDownEditor/_DropDownEditor.cshtml";
     <div class="listing-inline-editor">
-        <partial name="@dropDownEditorPath" model="@Model.InlineEditors.PageTypeSelector" />
-        <partial name="@dropDownEditorPath" model="@Model.InlineEditors.TransformationSelector" />
-        <vc:path-editor properties="@Model.InlineEditors.PathEditor" />
+        <partial name="@dropDownEditorPath" model="@Model.InlineEditors.PageTypeEditor" />
+        <partial name="@dropDownEditorPath" model="@Model.InlineEditors.TransformationEditor" />
+        <vc:path-editor property-name="@nameof(ListingWidgetProperties.ParentPageAliasPath)" page-alias-path="@Model.SelectedValues.ParentPageAliasPath" />
 		<partial name="~/Components/InlineEditors/TopNEditor/_TopNEditor.cshtml" model="@Model.InlineEditors.TopNEditor" />
-        <partial name="@dropDownEditorPath" model="@Model.InlineEditors.OrderFieldSelector" />
+        <partial name="@dropDownEditorPath" model="@Model.InlineEditors.OrderByFieldEditor" />
         <partial name="~/Components/InlineEditors/OrderDirectionEditor/_OrderDirectionEditor.cshtml" model="@Model.InlineEditors.OrderDirectionEditor" />
     </div>
 }

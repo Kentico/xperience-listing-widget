@@ -9,6 +9,6 @@
         /// Gets <see cref="ITransformationService"/> for specified transformation.
         /// </summary>
         /// <param name="transformationView">Transformation view path.</param>
-        public ITransformationService GetService(string transformationView);
+        ITransformationService GetService(string transformationView);
     }
 }

@@ -10,19 +10,19 @@ namespace DancingGoat.Widgets
         /// <summary>
         /// View model for page type selector drop-down.
         /// </summary>
-        public DropDownEditorViewModel PageTypeSelector { get; set; }
+        public DropDownEditorViewModel PageTypeEditor { get; set; }
 
 
         /// <summary>
         /// View model for transformation selector drop-down.
         /// </summary>
-        public DropDownEditorViewModel TransformationSelector { get; set; }
+        public DropDownEditorViewModel TransformationEditor { get; set; }
 
 
         /// <summary>
         /// View model for order by field selector drop-down.
         /// </summary>
-        public DropDownEditorViewModel OrderFieldSelector { get; set; }
+        public DropDownEditorViewModel OrderByFieldEditor { get; set; }
 
 
         /// <summary>
@@ -35,11 +35,5 @@ namespace DancingGoat.Widgets
         /// View model for order direction inline editor.
         /// </summary>
         public OrderDirectionViewModel OrderDirectionEditor { get; set; }
-
-
-        /// <summary>
-        /// Properties for path editor.
-        /// </summary>
-        public PathEditorProperties PathEditor { get; set; }
     }
 }

@@ -4,27 +4,27 @@ using System.Linq;
 namespace DancingGoat.Widgets
 {
     /// <summary>
-    /// Retriever of supported page types for listing widget.
+    /// Retrieve supported page types for listing widget.
     /// </summary>
-    public class SupportedPageTypesRetriever
+    public class ListingWidgetPageTypesRetriever
     {
-        private IEnumerable<ITransformationService> transformationsServices;
+        private readonly IEnumerable<ITransformationService> transformationsServices;
 
 
         /// <summary>
-        /// Creates an instance of <see cref="SupportedPageTypesRetriever"/> class.
+        /// Creates an instance of <see cref="ListingWidgetPageTypesRetriever"/> class.
         /// </summary>
         /// <param name="transformationsServices">Transformation services for supported transformations.</param>
-        public SupportedPageTypesRetriever(IEnumerable<ITransformationService> transformationsServices)
+        public ListingWidgetPageTypesRetriever(IEnumerable<ITransformationService> transformationsServices)
         {
             this.transformationsServices = transformationsServices;
         }
 
 
         /// <summary>
-        /// Gets supported page types.
+        /// Retrieve supported page types.
         /// </summary>
-        public IEnumerable<string> GetSupportedPageTypes()
+        public IEnumerable<string> Retrieve()
         {
             return transformationsServices.Select(service => service.PageType);
         }

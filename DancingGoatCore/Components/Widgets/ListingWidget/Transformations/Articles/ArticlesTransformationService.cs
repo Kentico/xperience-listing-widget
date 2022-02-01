@@ -13,6 +13,10 @@ namespace DancingGoat.Widgets
     /// <inheritdoc/>
     public class ArticlesTransformationService : BaseTransformationService
     {
+        private readonly IPageUrlRetriever pageUrlRetriever;
+        private readonly IPageAttachmentUrlRetriever attachmentUrlRetriever;
+
+
         /// <inheritdoc/>
         public override string PageType { get; } = Article.CLASS_NAME;
 
@@ -33,10 +37,6 @@ namespace DancingGoat.Widgets
                 Description = "Transformation displays articles in 4 column grid with first large heading article.",
             }
         };
-
-
-        private readonly IPageUrlRetriever pageUrlRetriever;
-        private readonly IPageAttachmentUrlRetriever attachmentUrlRetriever;
 
 
         /// <summary>

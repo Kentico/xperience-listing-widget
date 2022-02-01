@@ -8,7 +8,7 @@ namespace DancingGoat.Widgets
     /// </summary>
     internal class TransformationStrategy : ITransformationStrategy
     {
-        private IEnumerable<ITransformationService> transformationsServices;
+        private readonly IEnumerable<ITransformationService> transformationsServices;
 
 
         /// <summary>

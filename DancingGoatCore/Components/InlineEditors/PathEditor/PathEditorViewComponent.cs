@@ -29,12 +29,13 @@ namespace DancingGoat.InlineEditors
         /// <summary>
         /// Returns instance of Path inline editors view.
         /// </summary>
-        /// <param name="properties">Properties of path editor.</param>
-        public IViewComponentResult Invoke(PathEditorProperties properties)
+        /// <param name="propertyName">Name of property edited by inline editor.</param>
+        /// <param name="pageAliasPath">Parent page alias path.</param>
+        public IViewComponentResult Invoke(string propertyName, string pageAliasPath)
         {
             var model = new PathEditorViewModel();
-            InitializeEditorViewModel(properties.PageAliasPath, model);
-            model.PropertyName = properties.PropertyName;
+            InitializeEditorViewModel(pageAliasPath, model);
+            model.PropertyName = propertyName;
 
             return View("~/Components/InlineEditors/PathEditor/_PathEditor.cshtml", model);
         }
@@ -42,7 +43,7 @@ namespace DancingGoat.InlineEditors
 
         private void InitializeEditorViewModel(string pageAliasPath, PathEditorViewModel viewModel)
         {
-            if (pageAliasPath == null)
+            if (string.IsNullOrEmpty(pageAliasPath))
             {
                 viewModel.PageSelectionState = PageSelectionState.NotSelected;
                 viewModel.Value = localizer["No page selected"].Value;
