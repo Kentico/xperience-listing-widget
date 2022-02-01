@@ -3,14 +3,14 @@
 namespace DancingGoat.Widgets
 {
     /// <summary>
-    /// Provides methods to get options for page type drop-down selector.
+    /// Provides methods to get data for page type editor.
     /// </summary>
     public interface IPageTypesEditorService
     {
         /// <summary>
-        /// Gets drop-down editor view model for page type drop-down selector.
+        /// Gets drop-down editor view model for page type editor.
         /// </summary>
-        /// <param name="selectedOption">Selected option from drop-down selector.</param>
+        /// <param name="selectedOption">Selected option from drop-down editor.</param>
         DropDownEditorViewModel GetEditorModel(string selectedOption);
     }
 }

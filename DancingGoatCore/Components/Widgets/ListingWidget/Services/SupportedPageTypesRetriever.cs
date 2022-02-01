@@ -12,7 +12,7 @@ namespace DancingGoat.Widgets
 
 
         /// <summary>
-        /// Creates an instance of <see cref="SupportedTransformationsRetriever"/> class.
+        /// Creates an instance of <see cref="SupportedPageTypesRetriever"/> class.
         /// </summary>
         /// <param name="transformationsServices">Transformation services for supported transformations.</param>
         public SupportedPageTypesRetriever(IEnumerable<ITransformationService> transformationsServices)

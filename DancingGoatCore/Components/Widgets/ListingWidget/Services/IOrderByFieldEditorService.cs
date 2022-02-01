@@ -8,7 +8,7 @@ namespace DancingGoat.Widgets
     public interface IOrderByFieldEditorService
     {
         /// <summary>
-        /// Gets model for order by field drop-down editor.
+        /// Gets drop-down editor view model for order by field editor.
         /// </summary>
         /// <param name="pageType">Page type for options to be retrieved.</param>
         /// <param name="orderByField">Order by field.</param>

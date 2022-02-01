@@ -12,14 +12,12 @@ using NSubstitute;
 
 using NUnit.Framework;
 
-
 namespace DancingGoat.Widgets
 {
     [TestFixture]
     [Category.Unit]
     public class ITransformationEditorServiceTests
     {
-        private SupportedTransformationsRetriever transformationsRetriever;
         private ITransformationEditorService service;
 
 
@@ -38,7 +36,7 @@ namespace DancingGoat.Widgets
             cafesTransformationService.PageType.Returns(Cafe.CLASS_NAME);
             cafesTransformationService.Transformations.Returns(new List<Transformation> { TransformationsMock.Cafes });
 
-            transformationsRetriever = new SupportedTransformationsRetriever(new List<ITransformationService> { articlesTransformationService, coffeesTransformationService, cafesTransformationService });
+            var transformationsRetriever = new SupportedTransformationsRetriever(new List<ITransformationService> { articlesTransformationService, coffeesTransformationService, cafesTransformationService });
 
             var localizer = Substitute.For<IStringLocalizer<SharedResources>>();
             localizer[TransformationsMock.Articles.Name].Returns(new LocalizedString(TransformationsMock.Articles.Name, TransformationsMock.Articles.Name));
