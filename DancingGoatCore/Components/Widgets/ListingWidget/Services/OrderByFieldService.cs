@@ -3,6 +3,7 @@ using System.Linq;
 
 using CMS.DataEngine;
 using CMS.FormEngine;
+using CMS.Helpers;
 
 using DancingGoat.InlineEditors;
 
@@ -56,13 +57,13 @@ namespace DancingGoat.Widgets
                 {
                     if (field.DataType == FieldDataType.Integer)
                     {
-                        yield return new DropDownOptionViewModel(field.Name, field.GetDisplayName(null));
+                        yield return new DropDownOptionViewModel(field.Name, ResHelper.GetString(field.GetDisplayName(null)));
                     }
                     if (field.DataType == FieldDataType.Text)
                     {
                         if (field.GetControlName() == "TextBoxControl")
                         {
-                            yield return new DropDownOptionViewModel(field.Name, field.GetDisplayName(null));
+                            yield return new DropDownOptionViewModel(field.Name, ResHelper.GetString(field.GetDisplayName(null)));
                         }
                     }
                 }
