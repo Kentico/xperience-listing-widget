@@ -6,7 +6,7 @@ namespace DancingGoat.Widgets
     /// <summary>
     /// Provides strategy for selecting <see cref="ITransformationService"/>.
     /// </summary>
-    public class TransformationStrategy : ITransformationStrategy
+    internal class TransformationStrategy : ITransformationStrategy
     {
         private IEnumerable<ITransformationService> transformationsServices;
 

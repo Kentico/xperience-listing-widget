@@ -51,9 +51,9 @@ namespace DancingGoat.Models
                     {
                         customQuery?.Invoke(query);
                         query.Path(parentPageAliasPath, PathTypeEnum.Children)
-                         .TopN(topN)
-                         .OrderBy(orderDirection, orderByField)
-                         .FilterDuplicates();
+                            .TopN(topN)
+                            .OrderBy(orderDirection, orderByField)
+                            .FilterDuplicates();
                     },
                 cache => cache
                     .Key($"{nameof(PageRepository)}|{nameof(GetPages)}|{pageType}|{parentPageAliasPath}|{topN}|{orderByField}|{orderDirection}{(customDependencyKey == null ? "|" + customDependencyKey : "")}")

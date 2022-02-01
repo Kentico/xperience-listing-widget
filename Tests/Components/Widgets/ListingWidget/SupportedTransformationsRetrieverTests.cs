@@ -14,7 +14,7 @@ namespace DancingGoat.Widgets
     [Category.Unit]
     public class SupportedTransformationsRetrieverTests
     {
-        private SupportedTransformationsRetriever supportedTransformations;
+        private SupportedTransformationsRetriever transformationsRetriever;
 
 
         [SetUp]
@@ -32,14 +32,14 @@ namespace DancingGoat.Widgets
             cafesTransformationService.PageType.Returns(Cafe.CLASS_NAME);
             cafesTransformationService.Transformations.Returns(new List<Transformation> { TransformationsMock.Cafes });
 
-            supportedTransformations = new SupportedTransformationsRetriever(new List<ITransformationService> { articlesTransformationService, coffeesTransformationService, cafesTransformationService });
+            transformationsRetriever = new SupportedTransformationsRetriever(new List<ITransformationService> { articlesTransformationService, coffeesTransformationService, cafesTransformationService });
         }
 
 
         [Test]
         public void GetTransformations_Article_ReturnsArticlesTransformations()
         {
-            var transformations = supportedTransformations.GetTransformations(Article.CLASS_NAME);
+            var transformations = transformationsRetriever.GetTransformations(Article.CLASS_NAME);
 
             Assert.That(transformations.Count, Is.EqualTo(2));
             Assert.That(transformations.Contains(TransformationsMock.Articles), Is.True);
@@ -50,7 +50,7 @@ namespace DancingGoat.Widgets
         [Test]
         public void GetTransformations_Cafe_ReturnsCafesTransformations()
         {
-            var transformations = supportedTransformations.GetTransformations(Cafe.CLASS_NAME);
+            var transformations = transformationsRetriever.GetTransformations(Cafe.CLASS_NAME);
 
             Assert.That(transformations.Count, Is.EqualTo(1));
             Assert.That(transformations.Contains(TransformationsMock.Cafes), Is.True);
@@ -60,7 +60,7 @@ namespace DancingGoat.Widgets
         [Test]
         public void GetTransformations_Coffee_ReturnsCoffeesTransformations()
         {
-            var transformations = supportedTransformations.GetTransformations(Coffee.CLASS_NAME);
+            var transformations = transformationsRetriever.GetTransformations(Coffee.CLASS_NAME);
 
             Assert.That(transformations.Count, Is.EqualTo(1));
             Assert.That(transformations.Contains(TransformationsMock.Coffees), Is.True);
@@ -70,7 +70,7 @@ namespace DancingGoat.Widgets
         [Test]
         public void GetTransformations_Brewer_ReturnsEmpty()
         {
-            var transformations = supportedTransformations.GetTransformations(Brewer.CLASS_NAME);
+            var transformations = transformationsRetriever.GetTransformations(Brewer.CLASS_NAME);
 
             Assert.That(transformations, Is.Empty);
         }
@@ -79,7 +79,7 @@ namespace DancingGoat.Widgets
         [Test]
         public void IsTransformationSupported_ArticlesTransformationAndArticlePageType_ReturnsTrue()
         {
-            var supported = supportedTransformations.IsTransformationSupported(TransformationsMock.Articles.View, Article.CLASS_NAME);
+            var supported = transformationsRetriever.IsTransformationSupported(TransformationsMock.Articles.View, Article.CLASS_NAME);
 
             Assert.That(supported, Is.True);
         }
@@ -88,25 +88,25 @@ namespace DancingGoat.Widgets
         [Test]
         public void IsTransformationSupported_ArticlesWithHeadingTransformationAndArticlePageType_ReturnsTrue()
         {
-            var supported = supportedTransformations.IsTransformationSupported(TransformationsMock.ArticlesWithHeading.View, Article.CLASS_NAME);
+            var supported = transformationsRetriever.IsTransformationSupported(TransformationsMock.ArticlesWithHeading.View, Article.CLASS_NAME);
 
             Assert.That(supported, Is.True);
         }
 
 
         [Test]
-        public void IsTransformationSupported_CafesTransformationAndArticlePageType_ReturnsTrue()
+        public void IsTransformationSupported_CafesTransformationAndCafePageType_ReturnsTrue()
         {
-            var supported = supportedTransformations.IsTransformationSupported(TransformationsMock.Cafes.View, Cafe.CLASS_NAME);
+            var supported = transformationsRetriever.IsTransformationSupported(TransformationsMock.Cafes.View, Cafe.CLASS_NAME);
 
             Assert.That(supported, Is.True);
         }
 
 
         [Test]
-        public void IsTransformationSupported_CoffeesTransformationAndArticlePageType_ReturnsTrue()
+        public void IsTransformationSupported_CoffeesTransformationAndCoffeePageType_ReturnsTrue()
         {
-            var supported = supportedTransformations.IsTransformationSupported(TransformationsMock.Coffees.View, Coffee.CLASS_NAME);
+            var supported = transformationsRetriever.IsTransformationSupported(TransformationsMock.Coffees.View, Coffee.CLASS_NAME);
 
             Assert.That(supported, Is.True);
         }
@@ -115,9 +115,9 @@ namespace DancingGoat.Widgets
         [Test]
         public void IsTransformationSupported_SupportedTransformationAndWrongPageType_ReturnsFalse()
         {
-            var supportedForArticle = supportedTransformations.IsTransformationSupported(TransformationsMock.Coffees.View, Article.CLASS_NAME);
-            var supportedForCafe = supportedTransformations.IsTransformationSupported(TransformationsMock.Coffees.View, Cafe.CLASS_NAME);
-            var supportedForBrewer = supportedTransformations.IsTransformationSupported(TransformationsMock.Coffees.View, Brewer.CLASS_NAME);
+            var supportedForArticle = transformationsRetriever.IsTransformationSupported(TransformationsMock.Coffees.View, Article.CLASS_NAME);
+            var supportedForCafe = transformationsRetriever.IsTransformationSupported(TransformationsMock.Coffees.View, Cafe.CLASS_NAME);
+            var supportedForBrewer = transformationsRetriever.IsTransformationSupported(TransformationsMock.Coffees.View, Brewer.CLASS_NAME);
 
             Assert.Multiple(() =>
             {
@@ -131,7 +131,7 @@ namespace DancingGoat.Widgets
         [Test]
         public void IsTransformationSupported_NotSupportedTransformation_ReturnsFalse()
         {
-            var supported = supportedTransformations.IsTransformationSupported("~Brewers/_default.cshtml", Brewer.CLASS_NAME);
+            var supported = transformationsRetriever.IsTransformationSupported("~Brewers/_default.cshtml", Brewer.CLASS_NAME);
 
             Assert.That(supported, Is.False);
         }
@@ -140,7 +140,7 @@ namespace DancingGoat.Widgets
         [Test]
         public void IsTransformationSupported_EmptyTransformationParameter_ReturnsFalse()
         {
-            var supported = supportedTransformations.IsTransformationSupported("", Article.CLASS_NAME);
+            var supported = transformationsRetriever.IsTransformationSupported("", Article.CLASS_NAME);
 
             Assert.That(supported, Is.False);
         }
@@ -149,7 +149,7 @@ namespace DancingGoat.Widgets
         [Test]
         public void IsTransformationSupported_EmptyPageTypeParameter_ReturnsFalse()
         {
-            var supported = supportedTransformations.IsTransformationSupported(TransformationsMock.Articles.View, "");
+            var supported = transformationsRetriever.IsTransformationSupported(TransformationsMock.Articles.View, "");
 
             Assert.That(supported, Is.False);
         }

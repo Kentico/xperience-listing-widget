@@ -18,7 +18,7 @@ namespace DancingGoat.Widgets
         /// Creates an instance of <see cref="TransformationEditorService"/> class.
         /// </summary>
         /// <param name="localizer">Represents an <see cref="IStringLocalizer"/> that provides localized strings.</param>
-        /// <param name="transformationsRetriever">Supported transformations.</param>
+        /// <param name="transformationsRetriever">Supported transformations retriever.</param>
         public TransformationEditorService(IStringLocalizer<SharedResources> localizer, SupportedTransformationsRetriever transformationsRetriever)
         {
             this.localizer = localizer;
@@ -66,8 +66,6 @@ namespace DancingGoat.Widgets
             }
 
             return $"{localizer[transformation.Name]}:\n{localizer[transformation.Description]}";
-
-
         }
     }
 }

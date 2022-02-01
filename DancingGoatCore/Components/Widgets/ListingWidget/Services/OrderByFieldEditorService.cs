@@ -14,11 +14,7 @@ namespace DancingGoat.Widgets
     /// </summary>
     internal class OrderByFieldEditorService : IOrderByFieldEditorService
     {
-        /// <summary>
-        /// Gets model for order by field drop-down editor.
-        /// </summary>
-        /// <param name="pageType">Page type for options to be retrieved.</param>
-        /// <param name="orderByField">Order by field.</param>
+        /// <inheritdoc/>
         public DropDownEditorViewModel GetEditorModel(string pageType, string orderByField)
         {
             var fields = GetFields(pageType);
@@ -33,11 +29,7 @@ namespace DancingGoat.Widgets
         }
 
 
-        /// <summary>
-        /// Verifies that field could be selected for provided page type.
-        /// </summary>
-        /// <param name="pageType">Page type.</param>
-        /// <param name="orderByField">Order by field.</param>
+        /// <inheritdoc/>
         public bool IsValidField(string pageType, string orderByField)
         {
             var fields = GetFields(pageType);

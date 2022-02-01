@@ -32,10 +32,10 @@ namespace DancingGoat.Widgets
         /// Creates an instance of <see cref="ListingWidgetViewComponent"/> class.
         /// </summary>
         /// <param name="pageBuilderDataContextRetriever">Page builder data context retriever.</param>
-        /// <param name="transformationEditorService">Transformation drop-down editor service.</param>
-        /// <param name="pageTypeEditorService">Page type drop-down editor service.</param>
+        /// <param name="transformationEditorService">Transformation editor service.</param>
+        /// <param name="pageTypeEditorService">Page type editor service.</param>
         /// <param name="orderByFieldEditorService">Order by field editor service.</param>
-        /// <param name="transformationsRetriever">Supported transformations.</param>
+        /// <param name="transformationsRetriever">Supported transformations retriever.</param>
         public ListingWidgetViewComponent(IPageBuilderDataContextRetriever pageBuilderDataContextRetriever, ITransformationEditorService transformationEditorService, IPageTypesEditorService pageTypeEditorService, IOrderByFieldEditorService orderByFieldEditorService, SupportedTransformationsRetriever transformationsRetriever)
         {
             this.pageBuilderDataContextRetriever = pageBuilderDataContextRetriever;
