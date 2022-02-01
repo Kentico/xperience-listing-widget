@@ -2,6 +2,7 @@
 using System.Linq;
 
 using CMS.DataEngine;
+using CMS.Helpers;
 
 using DancingGoat.InlineEditors;
 
@@ -41,7 +42,7 @@ namespace DancingGoat.Widgets
                 .WhereIn("ClassName", SupportedPageTypes)
                 .Columns("ClassName", "ClassDisplayName")
                 .ToDictionary(c => c.ClassName, c => c.ClassDisplayName);
-            return classes.Select(dataType => new DropDownOptionViewModel(dataType.Key, dataType.Value));
+            return classes.Select(dataType => new DropDownOptionViewModel(dataType.Key, ResHelper.GetString(dataType.Value)));
         }
     }
 }

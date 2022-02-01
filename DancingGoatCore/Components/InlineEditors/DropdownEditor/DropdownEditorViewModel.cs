@@ -43,10 +43,10 @@ namespace DancingGoat.InlineEditors
         /// Creates an instance of <see cref="DropdownEditorViewModel"/> class.
         /// </summary>
         /// <param name="propertyName">Name of related widget property.</param>
-        /// <param name="options">All options of the selector.</param>
+        /// <param name="options">All options of the selector with localized values.</param>
         /// <param name="selectedOption">Selected option.</param>
         /// <param name="label">Label of the selector.</param>
-        /// <param name="tooltip">Tooltip of the selector.</param>
+        /// <param name="tooltip">Localized tooltip of the selector.</param>
         /// <param name="reset">If true drop-down will reset related widget property.</param>
         public DropDownEditorViewModel(string propertyName, IEnumerable<DropDownOptionViewModel> options, string selectedOption, string label, string tooltip = "", bool reset = false)
         {
