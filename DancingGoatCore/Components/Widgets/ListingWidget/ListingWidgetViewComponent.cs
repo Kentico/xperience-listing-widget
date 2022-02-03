@@ -1,4 +1,6 @@
-﻿using DancingGoat.InlineEditors;
+﻿using CMS.Core;
+
+using DancingGoat.InlineEditors;
 using DancingGoat.Widgets;
 
 using Kentico.PageBuilder.Web.Mvc;
@@ -26,6 +28,7 @@ namespace DancingGoat.Widgets
         private readonly IPageTypeEditorService pageTypeEditorService;
         private readonly IOrderByFieldEditorService orderByFieldEditorService;
         private readonly ListingWidgetTransformationsRetriever transformationsRetriever;
+        private readonly IEventLogService eventLogService;
 
 
         /// <summary>
@@ -36,13 +39,15 @@ namespace DancingGoat.Widgets
         /// <param name="pageTypeEditorService">Page type editor service.</param>
         /// <param name="orderByFieldEditorService">Order by field editor service.</param>
         /// <param name="transformationsRetriever">Supported transformations retriever.</param>
-        public ListingWidgetViewComponent(IPageBuilderDataContextRetriever pageBuilderDataContextRetriever, ITransformationEditorService transformationEditorService, IPageTypeEditorService pageTypeEditorService, IOrderByFieldEditorService orderByFieldEditorService, ListingWidgetTransformationsRetriever transformationsRetriever)
+        /// <param name="eventLogService">Event log service.</param>
+        public ListingWidgetViewComponent(IPageBuilderDataContextRetriever pageBuilderDataContextRetriever, ITransformationEditorService transformationEditorService, IPageTypeEditorService pageTypeEditorService, IOrderByFieldEditorService orderByFieldEditorService, ListingWidgetTransformationsRetriever transformationsRetriever, IEventLogService eventLogService)
         {
             this.pageBuilderDataContextRetriever = pageBuilderDataContextRetriever;
             this.orderByFieldEditorService = orderByFieldEditorService;
             this.transformationEditorService = transformationEditorService;
             this.pageTypeEditorService = pageTypeEditorService;
             this.transformationsRetriever = transformationsRetriever;
+            this.eventLogService = eventLogService;
         }
 
 
@@ -58,6 +63,11 @@ namespace DancingGoat.Widgets
             var selectedTransformation = widgetProperties.TransformationPath;
             selectedTransformation = transformationsRetriever.IsSupported(selectedTransformation, selectedPageType) ? selectedTransformation : null;
             selectedOrderByField = orderByFieldEditorService.IsValidField(selectedPageType, selectedOrderByField) ? selectedOrderByField : string.Empty;
+
+            if (!string.IsNullOrEmpty(widgetProperties.TransformationPath) && !transformationsRetriever.IsRegistered(widgetProperties.TransformationPath))
+            {
+                eventLogService.LogError("ListingWidget", "RenderTransformations", $"The '{widgetProperties.TransformationPath}' transformation is not registered.");
+            }
 
             var model = new ListingWidgetViewModel
             {
