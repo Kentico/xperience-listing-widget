@@ -37,6 +37,17 @@ namespace DancingGoat.Widgets
 
 
         /// <summary>
+        /// Checks if transformation is registered in any transformation service.
+        /// </summary>
+        /// <param name="transformationPath">Path of the transformation view.</param>
+        public bool IsRegistered(string transformationPath)
+        {
+            return transformationsServices.Select(service => service.Transformations)
+                .Any(transformations => transformations.Any(transformation => transformation.View == transformationPath));
+        }
+
+
+        /// <summary>
         /// Retrieves supported transformations for the page type.
         /// </summary>
         /// <param name="pageType">Page type.</param>
