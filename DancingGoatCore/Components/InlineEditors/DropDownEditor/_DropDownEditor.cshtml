@@ -2,6 +2,7 @@
 
 @using (Html.Kentico().BeginInlineEditor("dropdown-editor", Model.PropertyName, new { @class = "listing-property-editor" }))
 {
+    var maxOptionLength = 40;
     var optionLabel = Model.Options.Any() ? HtmlLocalizer["Please select an option."].Value : HtmlLocalizer["No options are available."].Value;
     var dropdownLabel = HtmlLocalizer[Model.Label].Value + ':';
 
@@ -9,8 +10,13 @@
         <label asp-for="@Model.SelectedOption">@dropdownLabel</label>
     </div>
     <div class="listing-property-value dropdown-value" @(Model.Reset ? "data-reset" : null)>
-        <select asp-for="@Model.SelectedOption" asp-items="@Model.Options" class="dropdown-selector">
-            <option value="">@optionLabel</option>
+        <select asp-for="@Model.SelectedOption" class="dropdown-selector">
+            <option value="" title="@optionLabel">@optionLabel</option>
+            @foreach(var option in Model.Options)
+            {
+                var truncatedValue = option.Text.Length > maxOptionLength ? option.Text[..maxOptionLength] + "..." : option.Text;
+                <option value="@option.Value" selected="@option.Selected" title="@option.Text">@truncatedValue</option> 
+            }
         </select>
         <div class="listing-property-tooltip">
             @if (!string.IsNullOrEmpty(Model.Tooltip))
