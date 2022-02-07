@@ -66,7 +66,7 @@ namespace DancingGoat.Widgets
 
             if (!string.IsNullOrEmpty(widgetProperties.TransformationPath) && !transformationsRetriever.IsRegistered(widgetProperties.TransformationPath))
             {
-                eventLogService.LogError("ListingWidget", "RenderTransformations", $"The '{widgetProperties.TransformationPath}' transformation is not registered.");
+                eventLogService.LogError("ListingWidget", "RenderTransformations", $"Transformation with  '{widgetProperties.TransformationPath}' view does not exist.");
             }
 
             var model = new ListingWidgetViewModel
