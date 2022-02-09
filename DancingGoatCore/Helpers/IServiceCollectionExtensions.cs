@@ -16,6 +16,8 @@ namespace DancingGoat
 
             AddRepositories(services);
 
+            AddListingWidgetServices(services);
+
             services.AddSingleton<TypedProductViewModelFactory>();
             services.AddSingleton<TypedSearchItemViewModelFactory>();
             services.AddSingleton<ICalculationService, CalculationService>();
@@ -25,22 +27,10 @@ namespace DancingGoat
 
         private static void AddRepositories(IServiceCollection services)
         {
-            services.AddSingleton<IPageRepository, PageRepository>();
-            services.AddSingleton<IOrderByFieldEditorService, OrderByFieldEditorService>();
-
             services.AddSingleton<ArticleRepository>();
             services.AddSingleton<CafeRepository>();
             services.AddSingleton<ContactRepository>();
             services.AddSingleton<CountryRepository>();
-            services.AddSingleton<ICountryRepository, CountryRepository>();
-            services.AddSingleton<ITransformationStrategy, TransformationStrategy>();
-            services.AddSingleton<ITransformationEditorService, TransformationEditorService>();
-            services.AddSingleton<IPageTypeEditorService, PageTypeEditorService>();
-            services.AddSingleton<ITransformationService, ArticlesTransformationService>();
-            services.AddSingleton<ITransformationService, CafesTransformationService>();
-            services.AddSingleton<ITransformationService, CoffeesTransformationService>();
-            services.AddSingleton<ListingWidgetTransformationsRetriever>();
-            services.AddSingleton<ListingWidgetPageTypesRetriever>();
             services.AddSingleton<NavigationRepository>();
             services.AddSingleton<SocialLinkRepository>();
             services.AddSingleton<BrewerRepository>();
@@ -64,6 +54,21 @@ namespace DancingGoat
         {
             services.AddSingleton<ArticleWithSidebarPageTemplateService>();
             services.AddSingleton<ArticlePageTemplateService>();
+        }
+
+        private static void AddListingWidgetServices(IServiceCollection services)
+        {
+            services.AddSingleton<ICountryRepository, CountryRepository>();
+            services.AddSingleton<IPageRepository, PageRepository>();
+            services.AddSingleton<IPageTypeEditorService, PageTypeEditorService>();
+            services.AddSingleton<ITransformationEditorService, TransformationEditorService>();
+            services.AddSingleton<IOrderByFieldEditorService, OrderByFieldEditorService>();
+            services.AddSingleton<ListingWidgetPageTypesRetriever>();
+            services.AddSingleton<ListingWidgetTransformationsRetriever>();
+            services.AddSingleton<ITransformationStrategy, TransformationStrategy>();
+            services.AddSingleton<ITransformationService, ArticlesTransformationService>();
+            services.AddSingleton<ITransformationService, CafesTransformationService>();
+            services.AddSingleton<ITransformationService, CoffeesTransformationService>();
         }
     }
 }
