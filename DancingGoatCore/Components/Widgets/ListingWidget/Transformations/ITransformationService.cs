@@ -25,28 +25,28 @@ namespace DancingGoat.Widgets
 
 
         /// <summary>
-        /// Returns hydrated <see cref="ITransformationViewModel"/> for pages.
+        /// Returns hydrated <see cref="ITransformationViewModel"/> for pages to be used in corresponding views.
         /// </summary>
         /// <param name="pages">Pages to be listed in view model.</param>
         ITransformationViewModel GetModel(IEnumerable<TreeNode> pages);
 
 
         /// <summary>
-        /// Returns Action for applying custom cache dependency for page retriever.
+        /// Returns Action for applying custom cache dependency for page retriever to get pages which will be listed in the corresponding transformation view.
         /// </summary>
         /// <param name="transformationView">Transformation view path.</param>
         Action<IPageCacheDependencyBuilder<TreeNode>, IEnumerable<TreeNode>> GetCustomCacheDependency(string transformationView);
 
 
         /// <summary>
-        /// Returns custom cache dependency key for page retriever.
+        /// Returns custom cache dependency key for page retriever to get pages which will be listed in the corresponding transformation view.
         /// </summary>
         /// <param name="transformationView">Transformation view path.</param>
         string GetCustomCacheDependencyKey(string transformationView);
 
 
         /// <summary>
-        /// Returns Action for applying custom query parameters for page retriever.
+        /// Returns Action for applying custom query parameters for page retriever to get pages which will be listed in the corresponding transformation view.
         /// </summary>
         /// <param name="transformationView">Transformation view path.</param>
         Action<DocumentQuery> GetCustomQueryParametrization(string transformationView);
