@@ -37,7 +37,7 @@ namespace DancingGoat.Widgets
 
 
         /// <summary>
-        /// Checks if transformation is registered in any transformation service.
+        /// Checks if the transformation path corresponds to any <see cref="Transformation"> provided by any implementations of <see cref="ITransformationService"/>. 
         /// </summary>
         /// <param name="transformationPath">Path of the transformation view.</param>
         public bool IsRegistered(string transformationPath)
