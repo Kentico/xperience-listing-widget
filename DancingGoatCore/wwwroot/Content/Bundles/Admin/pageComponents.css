@@ -253,21 +253,24 @@
 .listing-inline-editor .listing-property-editor {
     display: flex;
     padding: 0.5em;
+    flex-wrap: wrap;
 }
 
 .listing-inline-editor .listing-property-editor .listing-property-label {
     color: white;
-    width: 11em;
-    margin-right: 1em;
+    width: 10em;
+    margin: auto 1em auto 0;
+    padding-bottom: 0.25em;
     display: flex;
     align-items: flex-end;
-    justify-content: flex-end;
+    font-weight: bold;
 }
 
 .listing-inline-editor .listing-property-editor .listing-property-value {
-    margin-top: auto;
+    padding-bottom: 0.25em;
     display: flex;
     flex: 1 0 auto;
+    width: 65%;
 }
 
 .listing-inline-editor * {
@@ -279,34 +282,24 @@
     background-color: #262524;
     border: 1px solid #383838;
     padding: 0.5em 0;
-    display: table;
     margin: 1em;
     box-sizing: border-box;
+    max-width: 550px;
 }
 
-.listing-inline-editor .listing-property-editor .listing-property-tooltip {
+.listing-inline-editor .listing-property-editor .listing-property-info {
     color: white;
-    margin-top: auto;
-    margin-left: 0.5em;
+    margin: auto 0 auto 0.5em;
     width: 1em;
+    display: flex;
 }
 
 .listing-inline-editor [class^="icon-"], .listing-inline-editor [class*=" icon-"] {
     font-family: 'Core-icons';
 }
 
-@media (max-width: 768px){
-    .listing-inline-editor .listing-property-editor{
-        flex-direction: column;
-    }
-
-        .listing-inline-editor .listing-property-editor .listing-property-label {
-            justify-content: start;
-            padding-bottom: 0.5em;
-        }
-}
 .listing-inline-editor .listing-property-editor .order-direction-radios .order-direction-option + .order-direction-option {
-    margin-top: 0.5em;
+    margin-top: 0.25em;
 }
 
 .listing-inline-editor .listing-property-editor .order-direction-radios {
@@ -315,8 +308,8 @@
     flex-direction: column;
 }
 
-.listing-inline-editor .listing-property-editor .listing-property-label .order-direction-label {
-    margin-bottom: auto;
+.listing-inline-editor .listing-property-editor .order-direction-label {
+    margin-top: 0;
 }
 
 .listing-inline-editor form {
@@ -327,13 +320,14 @@
 .listing-inline-editor form label {
     margin-right: 0;
 }
-.listing-inline-editor div.listing-property-editor div.listing-property-value button.path-editor-button {
-    margin-left: 10px;
+.listing-inline-editor div.listing-property-editor div.listing-property-value button.path-editor-select-button {
+    margin-right: 0.5em;
 }
 
 .listing-inline-editor div.listing-property-editor div.listing-property-value .selected-path {
     color: white;
     width: 10em;
+    margin: auto 0.5em auto 0;
     margin-top: auto;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -345,7 +339,12 @@
 }
 
 .listing-inline-editor div.listing-property-editor .path-editor-value {
-    margin-right: 1.5em;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.listing-inline-editor div.listing-property-editor div.listing-property-value div.path-editor-controls {
+    display: flex;
 }
 .spinner-editor div.inline-editor-btn-group {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
