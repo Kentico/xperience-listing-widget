@@ -14,7 +14,10 @@
         <span class="@validationClass selected-path" title="@Model.Title">
             @Model.Value
         </span>
-        <button class="path-editor-button path-editor-select-button">@HtmlLocalizer["Select"]</button>
-        <button class="path-editor-button path-editor-clear-button">@HtmlLocalizer["Clear"]</button>
+        <div class="path-editor-controls">
+            <button class="path-editor-button path-editor-select-button">@HtmlLocalizer["Select"]</button>
+            <button class="path-editor-button path-editor-clear-button">@HtmlLocalizer["Clear"]</button>
+            <div class="listing-property-info"></div>
+        </div>
     </div>
 }

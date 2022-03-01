@@ -1,5 +1,5 @@
 ﻿.listing-inline-editor .listing-property-editor .order-direction-radios .order-direction-option + .order-direction-option {
-    margin-top: 0.5em;
+    margin-top: 0.25em;
 }
 
 .listing-inline-editor .listing-property-editor .order-direction-radios {
@@ -8,8 +8,8 @@
     flex-direction: column;
 }
 
-.listing-inline-editor .listing-property-editor .listing-property-label .order-direction-label {
-    margin-bottom: auto;
+.listing-inline-editor .listing-property-editor .order-direction-label {
+    margin-top: 0;
 }
 
 .listing-inline-editor form {

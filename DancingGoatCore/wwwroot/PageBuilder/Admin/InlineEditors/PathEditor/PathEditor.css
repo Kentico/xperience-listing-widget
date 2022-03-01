@@ -1,10 +1,11 @@
-﻿.listing-inline-editor div.listing-property-editor div.listing-property-value button.path-editor-button {
-    margin-left: 10px;
+﻿.listing-inline-editor div.listing-property-editor div.listing-property-value button.path-editor-select-button {
+    margin-right: 0.5em;
 }
 
 .listing-inline-editor div.listing-property-editor div.listing-property-value .selected-path {
     color: white;
     width: 10em;
+    margin: auto 0.5em auto 0;
     margin-top: auto;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -16,5 +17,10 @@
 }
 
 .listing-inline-editor div.listing-property-editor .path-editor-value {
-    margin-right: 1.5em;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.listing-inline-editor div.listing-property-editor div.listing-property-value div.path-editor-controls {
+    display: flex;
 }

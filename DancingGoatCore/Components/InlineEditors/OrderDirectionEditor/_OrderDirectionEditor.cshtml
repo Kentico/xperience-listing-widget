@@ -5,7 +5,7 @@
 
 @using (Html.Kentico().BeginInlineEditor("order-direction-editor", Model.PropertyName, new { @class = "listing-property-editor" }))
 {
-	<div class="listing-property-label">
+	<div class="listing-property-label order-direction-label">
 		<label asp-for="@Model.Order" class="order-direction-label">@HtmlLocalizer["Order"].Value:</label>
 	</div>
 

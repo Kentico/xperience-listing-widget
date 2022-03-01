@@ -12,7 +12,7 @@
         <select asp-for="@Model.SelectedOption" asp-items="@Model.Options" class="dropdown-selector">
             <option value="">@optionLabel</option>
         </select>
-        <div class="listing-property-tooltip">
+        <div class="listing-property-info">
             @if (!string.IsNullOrEmpty(Model.Tooltip))
             {
                 <span class="icon-question-circle" title="@Model.Tooltip"></span>
