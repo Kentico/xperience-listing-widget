@@ -8,10 +8,9 @@ using CMS.DocumentEngine.Types.DancingGoatCore;
 using DancingGoat.Models;
 
 using Kentico.Content.Web.Mvc;
+using Kentico.Xperience.ListingWidget.Transformations;
 
 using Microsoft.Extensions.Localization;
-
-using Kentico.Xperience.ListingWidget.Widgets;
 
 namespace DancingGoat.Widgets
 {
@@ -33,7 +32,7 @@ namespace DancingGoat.Widgets
             new Transformation
             {
                 Name = "Our cafes",
-                View = "Transformations/Cafes/_OurCafes.cshtml",
+                View = "~/Components/Widgets/ListingWidget/Transformations/Cafes/_OurCafes.cshtml",
                 Description = "Transformation displays our cafes in 2 column grid.",
             }
         };

@@ -94,9 +94,13 @@ namespace DancingGoat
                 kenticoServiceCollection.DisableVirtualContextSecurityForLocalhost();
             }
 
-            services.AddDancingGoatServices();
-            services.AddListingWidgetTransformationServices();
+            // Registers services for listing widget
             services.AddListingWidgetServices();
+
+            services.AddDancingGoatServices();
+
+            // Registers dancing goat transformations for listing widget
+            services.AddDancingGoatListingWidgetTransformationServices();
 
             services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
 

@@ -6,7 +6,8 @@ using DancingGoat.Widgets;
 
 using Microsoft.Extensions.DependencyInjection;
 
-using Kentico.Xperience.ListingWidget.Widgets;
+using Kentico.Xperience.ListingWidget;
+using Kentico.Xperience.ListingWidget.Transformations;
 
 namespace DancingGoat
 {
@@ -26,7 +27,7 @@ namespace DancingGoat
         }
 
 
-        public static void AddListingWidgetTransformationServices(this IServiceCollection services)
+        public static void AddDancingGoatListingWidgetTransformationServices(this IServiceCollection services)
         {
             services.AddSingleton<ITransformationService, ArticlesTransformationService>();
             services.AddSingleton<ITransformationService, CafesTransformationService>();

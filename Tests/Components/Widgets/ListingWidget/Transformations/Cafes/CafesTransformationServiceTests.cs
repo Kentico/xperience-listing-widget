@@ -17,11 +17,13 @@ using NUnit.Framework;
 
 using Tests.DocumentEngine;
 
-namespace DancingGoat.Widgets
+namespace DancingGoat.Widgets.Tests
 {
     [TestFixture]
     public class CafesTransformationServiceTests : UnitTests
     {
+        private const string CAFES_VIEW = "Transformations/Cafes/_OurCafes.cshtml";
+
         private CafesTransformationService cafesService;
         private ICountryRepository countryRepository;
 
@@ -41,7 +43,7 @@ namespace DancingGoat.Widgets
         [Test]
         public void GetCustomCacheDependency_CafesTransformation_ReturnsNull()
         {
-            var customCacheDependency = cafesService.GetCustomCacheDependency(TransformationsMock.Cafes.View);
+            var customCacheDependency = cafesService.GetCustomCacheDependency(CAFES_VIEW);
 
             Assert.That(customCacheDependency, Is.Null);
         }
@@ -50,7 +52,7 @@ namespace DancingGoat.Widgets
         [Test]
         public void GetCustomCacheDependencyKey_CafesTransformation_ReturnsNull()
         {
-            var customCacheDependencyKey = cafesService.GetCustomCacheDependencyKey(TransformationsMock.Cafes.View);
+            var customCacheDependencyKey = cafesService.GetCustomCacheDependencyKey(CAFES_VIEW);
 
             Assert.That(customCacheDependencyKey, Is.Null);
         }
@@ -59,7 +61,7 @@ namespace DancingGoat.Widgets
         [Test]
         public void GetCustomQueryParametrization_CafesTransformation_ReturnsActionForSelectingCompanyCafes()
         {
-            var customQueryParametrization = cafesService.GetCustomQueryParametrization(TransformationsMock.Cafes.View);
+            var customQueryParametrization = cafesService.GetCustomQueryParametrization(CAFES_VIEW);
             var query = new DocumentQuery(Cafe.CLASS_NAME);
             customQueryParametrization.Invoke(query);
 

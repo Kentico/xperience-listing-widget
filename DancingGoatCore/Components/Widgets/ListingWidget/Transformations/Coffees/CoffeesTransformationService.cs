@@ -5,8 +5,7 @@ using CMS.DocumentEngine;
 using CMS.DocumentEngine.Types.DancingGoatCore;
 
 using Kentico.Content.Web.Mvc;
-
-using Kentico.Xperience.ListingWidget.Widgets;
+using Kentico.Xperience.ListingWidget.Transformations;
 
 namespace DancingGoat.Widgets
 {
@@ -26,7 +25,7 @@ namespace DancingGoat.Widgets
             new Transformation
             {
                 Name = "Coffees",
-                View = "Transformations/Coffees/_Coffees.cshtml",
+                View = "~/Components/Widgets/ListingWidget/Transformations/Coffees/_Coffees.cshtml",
                 Description = "Transformation displays coffees in 4 column grid.",
             }
         };

@@ -2,7 +2,7 @@
 
 using DancingGoat.Models;
 
-using Kentico.Xperience.ListingWidget.Widgets;
+using Kentico.Xperience.ListingWidget.Transformations;
 
 namespace DancingGoat.Widgets
 {

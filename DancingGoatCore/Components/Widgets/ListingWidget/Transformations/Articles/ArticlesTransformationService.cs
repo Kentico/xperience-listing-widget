@@ -7,8 +7,7 @@ using CMS.DocumentEngine.Types.DancingGoatCore;
 using DancingGoat.Models;
 
 using Kentico.Content.Web.Mvc;
-
-using Kentico.Xperience.ListingWidget.Widgets;
+using Kentico.Xperience.ListingWidget.Transformations;
 
 namespace DancingGoat.Widgets
 {
@@ -29,13 +28,13 @@ namespace DancingGoat.Widgets
             new Transformation
             {
                 Name = "Articles",
-                View = "Transformations/Articles/_Articles.cshtml",
+                View = "~/Components/Widgets/ListingWidget/Transformations/Articles/_Articles.cshtml",
                 Description = "Transformation displays articles in 4 column grid.",
             },
             new Transformation
             {
                 Name = "Articles with heading",
-                View = "Transformations/Articles/_ArticlesWithHeading.cshtml",
+                View = "~/Components/Widgets/ListingWidget/Transformations/Articles/_ArticlesWithHeading.cshtml",
                 Description = "Transformation displays articles in 4 column grid with first large heading article.",
             }
         };
