@@ -1,8 +1,5 @@
 ﻿using CMS.Tests;
 
-using Kentico.Xperience.ListingWidget.Models;
-using Kentico.Xperience.ListingWidget.Widgets;
-
 using Microsoft.AspNetCore.Mvc.ViewComponents;
 using Microsoft.Extensions.Localization;
 
@@ -10,7 +7,7 @@ using NSubstitute;
 
 using NUnit.Framework;
 
-namespace Kentico.Xperience.ListingWidget.InlineEditors
+namespace Kentico.Xperience.ListingWidget.InlineEditors.Tests
 {
     [TestFixture]
     [Category.Unit]

@@ -1,6 +1,4 @@
-﻿using Kentico.Xperience.ListingWidget.Models;
-
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 
 namespace Kentico.Xperience.ListingWidget.InlineEditors

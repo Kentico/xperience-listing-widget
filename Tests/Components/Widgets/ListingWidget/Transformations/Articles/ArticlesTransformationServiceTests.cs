@@ -13,11 +13,14 @@ using NUnit.Framework;
 
 using Tests.DocumentEngine;
 
-namespace DancingGoat.Widgets
+namespace DancingGoat.Widgets.Tests
 {
     [TestFixture]
     public class ArticlesTransformationServiceTests : UnitTests
     {
+        private const string ARTICLE_VIEW = "Transformations/Articles/_Articles.cshtml";
+        private const string ARTICLES_WITH_HEADING_VIEW = "Transformations/Articles/_ArticlesWithHeading.cshtml";
+
         private ArticlesTransformationService articlesService;
         private IPageUrlRetriever pageUrlRetriever;
 
@@ -36,7 +39,7 @@ namespace DancingGoat.Widgets
         [Test]
         public void GetCustomCacheDependency_ArticlesTransformation_ReturnsNull()
         {
-            var customCacheDependency = articlesService.GetCustomCacheDependency(TransformationsMock.Articles.View);
+            var customCacheDependency = articlesService.GetCustomCacheDependency(ARTICLE_VIEW);
 
             Assert.That(customCacheDependency, Is.Null);
         }
@@ -45,7 +48,7 @@ namespace DancingGoat.Widgets
         [Test]
         public void GetCustomCacheDependency_ArticlesWithHeadingTransformation_ReturnsNull()
         {
-            var customCacheDependency = articlesService.GetCustomCacheDependency(TransformationsMock.ArticlesWithHeading.View);
+            var customCacheDependency = articlesService.GetCustomCacheDependency(ARTICLES_WITH_HEADING_VIEW);
 
             Assert.That(customCacheDependency, Is.Null);
         }
@@ -54,7 +57,7 @@ namespace DancingGoat.Widgets
         [Test]
         public void GetCustomCacheDependencyKey_ArticlesTransformation_ReturnsNull()
         {
-            var customCacheDependencyKey = articlesService.GetCustomCacheDependencyKey(TransformationsMock.Articles.View);
+            var customCacheDependencyKey = articlesService.GetCustomCacheDependencyKey(ARTICLE_VIEW);
 
             Assert.That(customCacheDependencyKey, Is.Null);
         }
@@ -63,7 +66,7 @@ namespace DancingGoat.Widgets
         [Test]
         public void GetCustomCacheDependencyKey_ArticlesWithHeadingTransformation_ReturnsNull()
         {
-            var customCacheDependencyKey = articlesService.GetCustomCacheDependencyKey(TransformationsMock.ArticlesWithHeading.View);
+            var customCacheDependencyKey = articlesService.GetCustomCacheDependencyKey(ARTICLES_WITH_HEADING_VIEW);
 
             Assert.That(customCacheDependencyKey, Is.Null);
         }
@@ -72,7 +75,7 @@ namespace DancingGoat.Widgets
         [Test]
         public void GetCustomQueryParametrization_ArticlesTransformation_ReturnsNull()
         {
-            var customQueryParametrization = articlesService.GetCustomQueryParametrization(TransformationsMock.Articles.View);
+            var customQueryParametrization = articlesService.GetCustomQueryParametrization(ARTICLE_VIEW);
 
             Assert.That(customQueryParametrization, Is.Null);
         }
@@ -81,7 +84,7 @@ namespace DancingGoat.Widgets
         [Test]
         public void GetCustomQueryParametrization_ArticlesWithHeadingTransformation_ReturnsNull()
         {
-            var customQueryParametrization = articlesService.GetCustomQueryParametrization(TransformationsMock.ArticlesWithHeading.View);
+            var customQueryParametrization = articlesService.GetCustomQueryParametrization(ARTICLES_WITH_HEADING_VIEW);
 
             Assert.That(customQueryParametrization, Is.Null);
         }
