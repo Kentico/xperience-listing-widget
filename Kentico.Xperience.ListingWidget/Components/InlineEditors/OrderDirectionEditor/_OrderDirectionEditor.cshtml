@@ -1,0 +1,22 @@
+﻿@using CMS.DataEngine
+@using Kentico.Xperience.ListingWidget.InlineEditors
+
+@model OrderDirectionViewModel
+
+@using (Html.Kentico().BeginInlineEditor("order-direction-editor", Model.PropertyName, new { @class = "listing-property-editor" }))
+{
+	<div class="listing-property-label order-direction-label">
+		<label asp-for="@Model.Order" class="order-direction-label">@HtmlLocalizer["Order"].Value:</label>
+	</div>
+
+	<form class="order-direction-radios listing-property-value">
+		<label class="order-direction-option">
+			<input asp-for="@Model.Order" type="radio" value="@OrderDirection.Ascending" />
+			@HtmlLocalizer["Ascending"].Value
+		</label>
+		<label class="order-direction-option">
+			<input asp-for="@Model.Order" type="radio" value="@OrderDirection.Descending" />
+			@HtmlLocalizer["Descending"].Value
+		</label>
+	</form>
+}

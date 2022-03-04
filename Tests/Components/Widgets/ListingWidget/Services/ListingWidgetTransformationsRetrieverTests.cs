@@ -8,6 +8,8 @@ using NSubstitute;
 
 using NUnit.Framework;
 
+using Kentico.Xperience.ListingWidget.Widgets;
+
 namespace DancingGoat.Widgets
 {
     [TestFixture]

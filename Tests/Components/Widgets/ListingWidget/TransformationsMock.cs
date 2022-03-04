@@ -1,4 +1,6 @@
-﻿namespace DancingGoat.Widgets
+﻿using Kentico.Xperience.ListingWidget.Widgets;
+
+namespace DancingGoat.Widgets
 {
     /// <summary>
     /// Provides transformations for tests.
