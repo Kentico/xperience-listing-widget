@@ -6,6 +6,8 @@ using DancingGoat.Widgets;
 
 using Microsoft.Extensions.DependencyInjection;
 
+using Kentico.Xperience.ListingWidget.Widgets;
+
 namespace DancingGoat
 {
     public static class IServiceCollectionExtensions
@@ -16,14 +18,21 @@ namespace DancingGoat
 
             AddRepositories(services);
 
-            AddListingWidgetServices(services);
-
             services.AddSingleton<TypedProductViewModelFactory>();
             services.AddSingleton<TypedSearchItemViewModelFactory>();
             services.AddSingleton<ICalculationService, CalculationService>();
             services.AddSingleton<ICheckoutService, CheckoutService>();
             services.AddSingleton<RepositoryCacheHelper>();
         }
+
+
+        public static void AddListingWidgetTransformationServices(this IServiceCollection services)
+        {
+            services.AddSingleton<ITransformationService, ArticlesTransformationService>();
+            services.AddSingleton<ITransformationService, CafesTransformationService>();
+            services.AddSingleton<ITransformationService, CoffeesTransformationService>();
+        }
+
 
         private static void AddRepositories(IServiceCollection services)
         {
@@ -48,27 +57,13 @@ namespace DancingGoat
             services.AddSingleton<ReferenceRepository>();
             services.AddSingleton<HomeRepository>();
             services.AddSingleton<OrderRepository>();
+            services.AddSingleton<ICountryRepository, CountryRepository>();
         }
 
         private static void AddViewComponentServices(IServiceCollection services)
         {
             services.AddSingleton<ArticleWithSidebarPageTemplateService>();
             services.AddSingleton<ArticlePageTemplateService>();
-        }
-
-        private static void AddListingWidgetServices(IServiceCollection services)
-        {
-            services.AddSingleton<ICountryRepository, CountryRepository>();
-            services.AddSingleton<IPageRepository, PageRepository>();
-            services.AddSingleton<IPageTypeEditorService, PageTypeEditorService>();
-            services.AddSingleton<ITransformationEditorService, TransformationEditorService>();
-            services.AddSingleton<IOrderByFieldEditorService, OrderByFieldEditorService>();
-            services.AddSingleton<ListingWidgetPageTypesRetriever>();
-            services.AddSingleton<ListingWidgetTransformationsRetriever>();
-            services.AddSingleton<ITransformationStrategy, TransformationStrategy>();
-            services.AddSingleton<ITransformationService, ArticlesTransformationService>();
-            services.AddSingleton<ITransformationService, CafesTransformationService>();
-            services.AddSingleton<ITransformationService, CoffeesTransformationService>();
         }
     }
 }

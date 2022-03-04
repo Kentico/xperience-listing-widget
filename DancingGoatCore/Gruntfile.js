@@ -24,11 +24,11 @@
                     // Styles - live site
                     'wwwroot/Content/Bundles/Public/pageComponents.css': ['wwwroot/PageBuilder/Public/**/*.css'],
                     // Styles - admin
-                    'wwwroot/Content/Bundles/Admin/pageComponents.css': ['wwwroot/PageBuilder/Admin/**/*.css'],
+                    'wwwroot/Content/Bundles/Admin/pageComponents.css': ['wwwroot/PageBuilder/Admin/**/*.css', '../Kentico.Xperience.ListingWidget/Assets/**/*.css'],
                     // Scripts - live site
                     'wwwroot/Content/Bundles/Public/pageComponents.js': ['wwwroot/PageBuilder/Public/**/*.js'],
                     // Scripts - admin
-                    'wwwroot/Content/Bundles/Admin/pageComponents.js': ['wwwroot/PageBuilder/Admin/**/*.js']
+                    'wwwroot/Content/Bundles/Admin/pageComponents.js': ['wwwroot/PageBuilder/Admin/**/*.js', '../Kentico.Xperience.ListingWidget/Assets/**/*.js'],
                 }
             }
         },

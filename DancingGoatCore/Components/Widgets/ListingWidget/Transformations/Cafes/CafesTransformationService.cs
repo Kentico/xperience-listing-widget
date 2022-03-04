@@ -11,6 +11,8 @@ using Kentico.Content.Web.Mvc;
 
 using Microsoft.Extensions.Localization;
 
+using Kentico.Xperience.ListingWidget.Widgets;
+
 namespace DancingGoat.Widgets
 {
     /// <inheritdoc/>

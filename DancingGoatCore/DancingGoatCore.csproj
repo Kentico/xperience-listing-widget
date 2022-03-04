@@ -21,4 +21,7 @@
     <PackageReference Include="Microsoft.jQuery.Unobtrusive.Ajax" Version="3.2.5" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Kentico.Xperience.ListingWidget\Kentico.Xperience.ListingWidget.csproj" />
+  </ItemGroup>
 </Project>

@@ -4,6 +4,7 @@ using CMS.DocumentEngine.Types.DancingGoatCore;
 using CMS.Tests;
 
 using DancingGoat.Models;
+using DancingGoat.Widgets;
 
 using Kentico.Content.Web.Mvc;
 
@@ -13,6 +14,9 @@ using NSubstitute;
 
 using NUnit.Framework;
 
+using Kentico.Xperience.ListingWidget;
+using Kentico.Xperience.ListingWidget.Widgets;
+
 namespace DancingGoat.Widgets
 {
     [TestFixture]
@@ -20,23 +24,23 @@ namespace DancingGoat.Widgets
     public class ITransformationStrategyTests
     {
         private ITransformationStrategy transformationStrategy;
-        private ArticlesTransformationService articlesService;
-        private CafesTransformationService cafesService;
-        private CoffeesTransformationService coffeesService;
+        private ITransformationService articlesService;
+        private ITransformationService cafesService;
+        private ITransformationService coffeesService;
 
 
         [SetUp]
         public void SetUp()
         {
-            articlesService = Substitute.For<ArticlesTransformationService>(Substitute.For<IPageUrlRetriever>(), Substitute.For<IPageAttachmentUrlRetriever>());
+            articlesService = Substitute.For<ITransformationService>();
             articlesService.PageType.Returns(Article.CLASS_NAME);
             articlesService.Transformations.Returns(new List<Transformation> { TransformationsMock.Articles, TransformationsMock.ArticlesWithHeading });
 
-            cafesService = Substitute.For<CafesTransformationService>(Substitute.For<IPageAttachmentUrlRetriever>(), Substitute.For<IStringLocalizer<SharedResources>>(), Substitute.For<ICountryRepository>());
+            cafesService = Substitute.For<ITransformationService>();
             cafesService.PageType.Returns(Cafe.CLASS_NAME);
             cafesService.Transformations.Returns(new List<Transformation> { TransformationsMock.Cafes });
 
-            coffeesService = Substitute.For<CoffeesTransformationService>(Substitute.For<IPageUrlRetriever>());
+            coffeesService = Substitute.For<ITransformationService>();
             coffeesService.PageType.Returns(Coffee.CLASS_NAME);
             coffeesService.Transformations.Returns(new List<Transformation> { TransformationsMock.Coffees });
 

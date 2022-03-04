@@ -1,0 +1,23 @@
+﻿@using Kentico.Xperience.ListingWidget.InlineEditors
+
+@model Kentico.Xperience.ListingWidget.InlineEditors.PathEditorViewModel
+
+@using (Html.Kentico().BeginInlineEditor("path-editor", Model.PropertyName, new { @class = "listing-property-editor" }))
+{
+    var validationClass = Model.PageSelectionState == PageSelectionState.Inaccessible ? "invalid-page" : "";
+
+    <div class="listing-property-label">
+        <label asp-for="@Model.Value" class="path-label">@HtmlLocalizer["Parent page"].Value:</label>
+    </div>
+
+    <div class="listing-property-value path-editor-value">
+        <span class="@validationClass selected-path" title="@Model.Title">
+            @Model.Value
+        </span>
+        <div class="path-editor-controls">
+            <button class="path-editor-button path-editor-select-button">@HtmlLocalizer["Select"]</button>
+            <button class="path-editor-button path-editor-clear-button">@HtmlLocalizer["Clear"]</button>
+            <div class="listing-property-info"></div>
+        </div>
+    </div>
+}

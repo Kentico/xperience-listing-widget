@@ -6,6 +6,8 @@ using CMS.DocumentEngine.Types.DancingGoatCore;
 
 using Kentico.Content.Web.Mvc;
 
+using Kentico.Xperience.ListingWidget.Widgets;
+
 namespace DancingGoat.Widgets
 {
     /// <inheritdoc/>

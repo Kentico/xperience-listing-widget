@@ -6,6 +6,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DancingGoatCore", "DancingG
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DancingGoatCore.Tests", "Tests\DancingGoatCore.Tests.csproj", "{536D8D95-564D-496F-8534-281C39420319}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kentico.Xperience.ListingWidget", "Kentico.Xperience.ListingWidget\Kentico.Xperience.ListingWidget.csproj", "{24A98F5C-6751-415F-B70F-9951FBA081F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kentico.Xperience.ListingWidget.Tests", "Kentico.Xperience.ListingWidget.Tests\Kentico.Xperience.ListingWidget.Tests.csproj", "{19D2904C-D5A0-46DC-8153-7F41B4C32893}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +44,30 @@ Global
 		{536D8D95-564D-496F-8534-281C39420319}.Release|x64.Build.0 = Release|Any CPU
 		{536D8D95-564D-496F-8534-281C39420319}.Release|x86.ActiveCfg = Release|Any CPU
 		{536D8D95-564D-496F-8534-281C39420319}.Release|x86.Build.0 = Release|Any CPU
+		{24A98F5C-6751-415F-B70F-9951FBA081F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24A98F5C-6751-415F-B70F-9951FBA081F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24A98F5C-6751-415F-B70F-9951FBA081F5}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{24A98F5C-6751-415F-B70F-9951FBA081F5}.Debug|x64.Build.0 = Debug|Any CPU
+		{24A98F5C-6751-415F-B70F-9951FBA081F5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{24A98F5C-6751-415F-B70F-9951FBA081F5}.Debug|x86.Build.0 = Debug|Any CPU
+		{24A98F5C-6751-415F-B70F-9951FBA081F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24A98F5C-6751-415F-B70F-9951FBA081F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24A98F5C-6751-415F-B70F-9951FBA081F5}.Release|x64.ActiveCfg = Release|Any CPU
+		{24A98F5C-6751-415F-B70F-9951FBA081F5}.Release|x64.Build.0 = Release|Any CPU
+		{24A98F5C-6751-415F-B70F-9951FBA081F5}.Release|x86.ActiveCfg = Release|Any CPU
+		{24A98F5C-6751-415F-B70F-9951FBA081F5}.Release|x86.Build.0 = Release|Any CPU
+		{19D2904C-D5A0-46DC-8153-7F41B4C32893}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19D2904C-D5A0-46DC-8153-7F41B4C32893}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19D2904C-D5A0-46DC-8153-7F41B4C32893}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{19D2904C-D5A0-46DC-8153-7F41B4C32893}.Debug|x64.Build.0 = Debug|Any CPU
+		{19D2904C-D5A0-46DC-8153-7F41B4C32893}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{19D2904C-D5A0-46DC-8153-7F41B4C32893}.Debug|x86.Build.0 = Debug|Any CPU
+		{19D2904C-D5A0-46DC-8153-7F41B4C32893}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19D2904C-D5A0-46DC-8153-7F41B4C32893}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19D2904C-D5A0-46DC-8153-7F41B4C32893}.Release|x64.ActiveCfg = Release|Any CPU
+		{19D2904C-D5A0-46DC-8153-7F41B4C32893}.Release|x64.Build.0 = Release|Any CPU
+		{19D2904C-D5A0-46DC-8153-7F41B4C32893}.Release|x86.ActiveCfg = Release|Any CPU
+		{19D2904C-D5A0-46DC-8153-7F41B4C32893}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

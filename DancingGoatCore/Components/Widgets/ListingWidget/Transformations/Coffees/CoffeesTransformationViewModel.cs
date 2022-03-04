@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 
+using Kentico.Xperience.ListingWidget.Widgets;
+
 namespace DancingGoat.Widgets
 {
     /// <summary>

@@ -2,6 +2,8 @@
 
 using DancingGoat.Models;
 
+using Kentico.Xperience.ListingWidget.Widgets;
+
 namespace DancingGoat.Widgets
 {
     /// <summary>

@@ -12,6 +12,9 @@ using NSubstitute;
 
 using NUnit.Framework;
 
+using Kentico.Xperience.ListingWidget;
+using Kentico.Xperience.ListingWidget.Widgets;
+
 namespace DancingGoat.Widgets
 {
     [TestFixture]
@@ -38,7 +41,7 @@ namespace DancingGoat.Widgets
 
             var transformationsRetriever = new ListingWidgetTransformationsRetriever(new List<ITransformationService> { articlesTransformationService, coffeesTransformationService, cafesTransformationService });
 
-            var localizer = Substitute.For<IStringLocalizer<SharedResources>>();
+            var localizer = Substitute.For<IStringLocalizer<ListingWidgetResources>>();
             localizer[TransformationsMock.Articles.Name].Returns(new LocalizedString(TransformationsMock.Articles.Name, TransformationsMock.Articles.Name));
             localizer[TransformationsMock.ArticlesWithHeading.Name].Returns(new LocalizedString(TransformationsMock.ArticlesWithHeading.Name, TransformationsMock.ArticlesWithHeading.Name));
             localizer[TransformationsMock.Cafes.Name].Returns(new LocalizedString(TransformationsMock.Cafes.Name, TransformationsMock.Cafes.Name));

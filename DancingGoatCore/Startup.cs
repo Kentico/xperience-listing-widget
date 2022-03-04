@@ -30,6 +30,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+using Kentico.Xperience.ListingWidget;
+
 namespace DancingGoat
 {
     public class Startup
@@ -93,6 +95,8 @@ namespace DancingGoat
             }
 
             services.AddDancingGoatServices();
+            services.AddListingWidgetTransformationServices();
+            services.AddListingWidgetServices();
 
             services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
 
