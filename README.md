@@ -15,7 +15,7 @@ Content editor can specify:
 ## How to use Listing widget
 
 1. Listing widget is placed in the **Kentico.Xperience.ListingWidget project**. Copy the project to your solution.
-2. In your project add dependency to the listing widget project.
+2. In your project, add dependency to the listing widget project.
 3. Set Xperience nugget version in the listing widget project same as it is on your live site. 
 4. Register listing widget services trough [DI](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-6.0).
     - For example you can use *AddListingWidgetServices()* extension method from *Kentico.Xperience.ListingWidget*: 
@@ -33,20 +33,20 @@ Content editor can specify:
             ...
         }
         ```
-    - If you don't want them registered as Singletons register these services yourself. 
+    - If you don't want them registered as Singletons, register these services yourself: 
         ```
-        services.AddSingleton<IPageRepository, PageRepository>();
-        services.AddSingleton<IOrderByFieldEditorService, OrderByFieldEditorService>();
-        services.AddSingleton<ITransformationStrategy, TransformationStrategy>();
-        services.AddSingleton<ITransformationEditorService, TransformationEditorService>();
-        services.AddSingleton<IPageTypeEditorService, PageTypeEditorService>();
-        services.AddSingleton<ListingWidgetTransformationsRetriever>();
-        services.AddSingleton<ListingWidgetPageTypesRetriever>();
+        IPageRepository, PageRepository
+        IOrderByFieldEditorService, OrderByFieldEditorService
+        ITransformationStrategy, TransformationStrategy
+        ITransformationEditorService, TransformationEditorService
+        IPageTypeEditorService, PageTypeEditorService
+        ListingWidgetTransformationsRetriever
+        ListingWidgetPageTypesRetriever
         ```
 5. Widget identifier is "Kentico.Xperience.ListingWidget", change your area restrictions according to it.
 6. Add transformation services to your project and register them in DI - see below "How to add a transformation". 
 7. Include css and js of the listing widget's in-line editors to your project (*Kentico.Xperience.ListingWidget/Assets/**/\*.css*, *Kentico.Xperience.ListingWidget/Assets/**/\*.js*).
-    - If you want to use Grunt (see Gruntfile.js in the **DancingGoatCore project**):
+    - If you want to use [Grunt](https://docs.xperience.io/developing-websites/developing-xperience-applications-using-asp-net-core/bundling-static-assets-of-builder-components), see *Gruntfile.js* in the **DancingGoatCore project**:
         ```
         grunt.initConfig({
             concat: {
@@ -66,7 +66,7 @@ Content editor can specify:
 
 ## How to add a transformation
 
-A preferred location for the transformation files is *{your_project}/ Components/Widgets/ListingWidget/Transformations/{TransformationPageType}*. 
+A preferred location for the transformation files is *{your_project}/Components/Widgets/ListingWidget/Transformations/{TransformationPageType}*. 
 
 1. Create a **transformation view model** implementing *ITransformationViewModel*.
 2. Create a **transformation razor view**. 
