@@ -15,24 +15,36 @@ Content editor can specify:
 ## How to use Listing widget
 
 1. Listing widget is placed in the **Kentico.Xperience.ListingWidget project**. Copy the project to your solution.
-2. Add dependency to the listing widget project.
+2. In your project add dependency to the listing widget project.
 3. Set Xperience nugget version in the listing widget project same as it is on your live site. 
-4. Ensure IoC for listing widget.
-    - For example: 
+4. Register listing widget services trough [DI](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-6.0).
+    - For example you can use *AddListingWidgetServices()* extension method from *Kentico.Xperience.ListingWidget*: 
         ```
-        public static void AddListingWidgetServices(this IServiceCollection services)
+        public class Startup
         {
-            services.AddSingleton<IPageRepository, PageRepository>();
-            services.AddSingleton<IOrderByFieldEditorService, OrderByFieldEditorService>();
-            services.AddSingleton<ITransformationStrategy, TransformationStrategy>();
-            services.AddSingleton<ITransformationEditorService, TransformationEditorService>();
-            services.AddSingleton<IPageTypeEditorService, PageTypeEditorService>();
-            services.AddSingleton<ListingWidgetTransformationsRetriever>();
-            services.AddSingleton<ListingWidgetPageTypesRetriever>();
+            ...
+            public void ConfigureServices(IServiceCollection services)
+            {
+                ...
+                // Registers services for listing widget
+                services.AddListingWidgetServices();
+                ...
+            }
+            ...
         }
         ```
+    - If you don't want them registered as Singletons register these services yourself. 
+        ```
+        services.AddSingleton<IPageRepository, PageRepository>();
+        services.AddSingleton<IOrderByFieldEditorService, OrderByFieldEditorService>();
+        services.AddSingleton<ITransformationStrategy, TransformationStrategy>();
+        services.AddSingleton<ITransformationEditorService, TransformationEditorService>();
+        services.AddSingleton<IPageTypeEditorService, PageTypeEditorService>();
+        services.AddSingleton<ListingWidgetTransformationsRetriever>();
+        services.AddSingleton<ListingWidgetPageTypesRetriever>();
+        ```
 5. Widget identifier is "Kentico.Xperience.ListingWidget", change your area restrictions according to it.
-6. Add transformation services to your project and ensure IoC for them - see below "How to add a transformation". 
+6. Add transformation services to your project and register them in DI - see below "How to add a transformation". 
 7. Include css and js of the listing widget's in-line editors to your project (*Kentico.Xperience.ListingWidget/Assets/**/\*.css*, *Kentico.Xperience.ListingWidget/Assets/**/\*.js*).
     - If you want to use Grunt (see Gruntfile.js in the **DancingGoatCore project**):
         ```
@@ -62,7 +74,55 @@ A preferred location for the transformation files is *{your_project}/ Components
     - Set the page type supported by transformation to the **PageType** field.
     - Add your new transformation to the **Transformations** collection.
     - Override other methods according to your needs.
-4. Register the transformation service to IoC.
+    - For example:
+        ```
+        public class CafesTransformationService : BaseTransformationService
+        {
+            private readonly IPageAttachmentUrlRetriever attachmentUrlRetriever;
+            private readonly IStringLocalizer<SharedResources> localizer;
+            private readonly ICountryRepository countryRepository;
+
+            public override string PageType { get; } = Cafe.CLASS_NAME;
+
+
+            public override IEnumerable<Transformation> Transformations { get; } = new List<Transformation>
+            {
+                new Transformation
+                {
+                    Name = "Our cafes",
+                    View = "Transformations/Cafes/_OurCafes.cshtml",
+                    Description = "Transformation displays our cafes in 2 column grid.",
+                }
+            };
+
+
+            public CafesTransformationService(IPageAttachmentUrlRetriever attachmentUrlRetriever,
+                IStringLocalizer<SharedResources> localizer, ICountryRepository countryRepository)
+            {
+                this.attachmentUrlRetriever = attachmentUrlRetriever;
+                this.localizer = localizer;
+                this.countryRepository = countryRepository;
+            }
+
+
+            public override Action<DocumentQuery> GetCustomQueryParametrization(string transformationView)
+            {
+                return (query) => query.WhereTrue("CafeIsCompanyCafe");
+            }
+
+
+            public override ITransformationViewModel GetModel(IEnumerable<TreeNode> pages)
+            {
+                if (pages == null)
+                {
+                    return new CafesTransformationViewModel();
+                }
+                var cafesList = pages.Select(cafe => CafeViewModel.GetViewModel(cafe as Cafe, countryRepository, localizer, attachmentUrlRetriever));
+                return new CafesTransformationViewModel { Cafes = cafesList };
+            }
+        }
+        ```
+4. Register your transformation services trough [DI](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-6.0).
     - For example (see *DancingGoatCore/Helpers/IServiceCollectionExtensions.cs*):
         ```
         public static void AddDancingGoatListingWidgetTransformationServices(this IServiceCollection services)
@@ -73,4 +133,4 @@ A preferred location for the transformation files is *{your_project}/ Components
         }
         ```
 
-See examples of the transformations in the corresponding destination in the **DancingGoatCore project**.
+See examples of the transformations in *DancingGoatCore/Components/Widgets/ListingWidget/Transformations*.
