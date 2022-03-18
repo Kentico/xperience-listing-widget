@@ -1,7 +1,7 @@
 ﻿namespace Kentico.Xperience.ListingWidget
 {
     /// <summary>
-    /// View model for Listing widget.
+    /// View model for listing widget.
     /// </summary>
     public class ListingWidgetViewModel
     {

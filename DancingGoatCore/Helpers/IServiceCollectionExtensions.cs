@@ -4,10 +4,9 @@ using DancingGoat.PageTemplates;
 using DancingGoat.Services;
 using DancingGoat.Widgets;
 
-using Microsoft.Extensions.DependencyInjection;
-
-using Kentico.Xperience.ListingWidget;
 using Kentico.Xperience.ListingWidget.Transformations;
+
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DancingGoat
 {
