@@ -1,5 +1,4 @@
-﻿
-using CMS.DataEngine;
+﻿using CMS.DataEngine;
 
 namespace Kentico.Xperience.ListingWidget.InlineEditors
 {
