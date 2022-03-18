@@ -33,16 +33,6 @@ Content editor can specify:
             ...
         }
         ```
-    - If you don't want them registered as Singletons, register these services yourself: 
-        ```
-        IPageRepository, PageRepository
-        IOrderByFieldEditorService, OrderByFieldEditorService
-        ITransformationStrategy, TransformationStrategy
-        ITransformationEditorService, TransformationEditorService
-        IPageTypeEditorService, PageTypeEditorService
-        ListingWidgetTransformationsRetriever
-        ListingWidgetPageTypesRetriever
-        ```
 5. Widget identifier is "Kentico.Xperience.ListingWidget", change your area restrictions according to it.
 6. Add transformation services to your project and register them in DI - see below "How to add a transformation". 
 7. Include css and js of the listing widget's in-line editors to your project (*Kentico.Xperience.ListingWidget/Assets/**/\*.css*, *Kentico.Xperience.ListingWidget/Assets/**/\*.js*).
