@@ -18,7 +18,7 @@ Content editor can specify:
 2. In your project, add dependency to the listing widget project.
 3. Set Xperience nugget version in the listing widget project same as it is on your live site. 
 4. Register listing widget services trough [DI](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-6.0).
-    - For example you can use *AddListingWidgetServices()* extension method from *Kentico.Xperience.ListingWidget*: 
+    - Use *AddListingWidgetServices()* extension method from *Kentico.Xperience.ListingWidget*: 
         ```
         public class Startup
         {
