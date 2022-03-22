@@ -15,9 +15,9 @@ namespace Kentico.Xperience.ListingWidget.Tests
 {
     [TestFixture]
     [Category.Unit]
-    public class ITransformationEditorServiceTests
+    public class TransformationEditorServiceTests
     {
-        private ITransformationEditorService service;
+        private TransformationEditorService service;
 
 
         [SetUp]
