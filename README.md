@@ -52,8 +52,6 @@ Content editor can specify:
         }
         ```
 
-8. Note: **Kentico.Xperience.ListingWidget project** has InternalsVisible settings for tests in the *Kentico.Xperience.ListingWidget/Properties/AssemblyInfo.cs*. 
-
 ## How to add a transformation
 
 1. Create a **transformation view model** implementing *ITransformationViewModel*.
