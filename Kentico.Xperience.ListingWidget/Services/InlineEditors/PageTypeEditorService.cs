@@ -5,8 +5,9 @@ using CMS.DataEngine;
 using CMS.Helpers;
 
 using Kentico.Xperience.ListingWidget.InlineEditors;
+using Kentico.Xperience.ListingWidget.Widgets;
 
-namespace Kentico.Xperience.ListingWidget.Services
+namespace Kentico.Xperience.ListingWidget
 {
     /// <inheritdoc/>
     internal class PageTypeEditorService : IPageTypeEditorService

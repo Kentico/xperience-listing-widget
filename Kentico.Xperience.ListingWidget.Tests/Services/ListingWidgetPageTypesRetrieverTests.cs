@@ -4,13 +4,11 @@ using System.Linq;
 
 using CMS.Tests;
 
-using Kentico.Xperience.ListingWidget.Transformations;
-
 using NSubstitute;
 
 using NUnit.Framework;
 
-namespace Kentico.Xperience.ListingWidget.Services.Tests
+namespace Kentico.Xperience.ListingWidget.Tests
 {
     [TestFixture]
     [Category.Unit]

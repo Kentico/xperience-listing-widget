@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-using Kentico.Xperience.ListingWidget.Transformations;
-
-namespace Kentico.Xperience.ListingWidget.Services
+namespace Kentico.Xperience.ListingWidget.Widgets
 {
     /// <summary>
     /// Provides strategy for selecting <see cref="ITransformationService"/>.

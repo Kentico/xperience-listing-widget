@@ -1,4 +1,4 @@
-﻿namespace Kentico.Xperience.ListingWidget
+﻿namespace Kentico.Xperience.ListingWidget.Widgets
 {
     /// <summary>
     /// View model for listing widget.

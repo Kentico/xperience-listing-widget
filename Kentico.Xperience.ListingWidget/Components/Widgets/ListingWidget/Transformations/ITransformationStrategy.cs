@@ -1,6 +1,4 @@
-﻿using Kentico.Xperience.ListingWidget.Transformations;
-
-namespace Kentico.Xperience.ListingWidget.Services
+﻿namespace Kentico.Xperience.ListingWidget.Widgets
 {
     /// <summary>
     /// Interface for strategy for selecting <see cref="ITransformationService"/>.

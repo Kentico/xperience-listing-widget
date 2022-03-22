@@ -1,6 +1,6 @@
 ﻿using CMS.DataEngine;
 
-namespace Kentico.Xperience.ListingWidget
+namespace Kentico.Xperience.ListingWidget.Widgets
 {
     /// <summary>
     /// Model with properties selected from inline editors of listing widget.

@@ -1,16 +1,15 @@
 ﻿using CMS.Core;
 
 using Kentico.PageBuilder.Web.Mvc;
-using Kentico.Xperience.ListingWidget;
 using Kentico.Xperience.ListingWidget.InlineEditors;
-using Kentico.Xperience.ListingWidget.Services;
+using Kentico.Xperience.ListingWidget.Widgets;
 
 using Microsoft.AspNetCore.Mvc;
 
 [assembly: RegisterWidget(ListingWidgetViewComponent.IDENTIFIER, typeof(ListingWidgetViewComponent), "Listing",
     typeof(ListingWidgetProperties), Description = "Displays pages from selected location.", IconClass = "icon-l-grid-3-2")]
 
-namespace Kentico.Xperience.ListingWidget
+namespace Kentico.Xperience.ListingWidget.Widgets
 {
     /// <summary>
     /// ViewComponent for listing widget.
@@ -102,7 +101,7 @@ namespace Kentico.Xperience.ListingWidget
                 };
             }
 
-            return View("~/ListingWidget/_ListingWidget.cshtml", model);
+            return View("~/Components/Widgets/ListingWidget/_ListingWidget.cshtml", model);
         }
     }
 }

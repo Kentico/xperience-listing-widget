@@ -1,5 +1,7 @@
 ﻿using CMS.Tests;
 
+using Kentico.Xperience.ListingWidget.Widgets;
+
 using Microsoft.AspNetCore.Mvc.ViewComponents;
 using Microsoft.Extensions.Localization;
 

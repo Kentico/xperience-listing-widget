@@ -4,7 +4,7 @@ using DancingGoat.PageTemplates;
 using DancingGoat.Services;
 using DancingGoat.Widgets;
 
-using Kentico.Xperience.ListingWidget.Transformations;
+using Kentico.Xperience.ListingWidget;
 
 using Microsoft.Extensions.DependencyInjection;
 

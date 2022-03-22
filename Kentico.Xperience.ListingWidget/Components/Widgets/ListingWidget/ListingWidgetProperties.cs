@@ -2,7 +2,7 @@
 
 using Kentico.PageBuilder.Web.Mvc;
 
-namespace Kentico.Xperience.ListingWidget
+namespace Kentico.Xperience.ListingWidget.Widgets
 {
     /// <summary>
     /// Listing widget properties.

@@ -1,4 +1,4 @@
-﻿namespace Kentico.Xperience.ListingWidget.Transformations
+﻿namespace Kentico.Xperience.ListingWidget
 {
     /// <summary>
     /// Interface for transformations view models.

@@ -1,6 +1,4 @@
-﻿using Kentico.Xperience.ListingWidget.Transformations;
-
-namespace Kentico.Xperience.ListingWidget.Services.Tests
+﻿namespace Kentico.Xperience.ListingWidget.Tests
 {
     /// <summary>
     /// Provides transformations for tests.

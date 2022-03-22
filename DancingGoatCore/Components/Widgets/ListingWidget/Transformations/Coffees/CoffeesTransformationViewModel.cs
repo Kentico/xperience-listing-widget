@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-using Kentico.Xperience.ListingWidget.Transformations;
+using Kentico.Xperience.ListingWidget;
 
 namespace DancingGoat.Widgets
 {
