@@ -21,16 +21,16 @@ namespace Kentico.Xperience.ListingWidget.Tests
         public void SetUp()
         {
             var articlesTransformationService = Substitute.For<ITransformationService>();
-            articlesTransformationService.PageType.Returns(TransformationsMock.ARTICLE_CLASS_NAME);
-            articlesTransformationService.Transformations.Returns(new List<Transformation> { TransformationsMock.Articles, TransformationsMock.ArticlesWithHeading });
+            articlesTransformationService.PageType.Returns(FakeTransformations.ARTICLE_CLASS_NAME);
+            articlesTransformationService.Transformations.Returns(new List<Transformation> { FakeTransformations.Articles, FakeTransformations.ArticlesWithHeading });
 
             var coffeesTransformationService = Substitute.For<ITransformationService>();
-            coffeesTransformationService.PageType.Returns(TransformationsMock.COFFEE_CLASS_NAME);
-            coffeesTransformationService.Transformations.Returns(new List<Transformation> { TransformationsMock.Coffees });
+            coffeesTransformationService.PageType.Returns(FakeTransformations.COFFEE_CLASS_NAME);
+            coffeesTransformationService.Transformations.Returns(new List<Transformation> { FakeTransformations.Coffees });
 
             var cafesTransformationService = Substitute.For<ITransformationService>();
-            cafesTransformationService.PageType.Returns(TransformationsMock.CAFE_CLASS_NAME);
-            cafesTransformationService.Transformations.Returns(new List<Transformation> { TransformationsMock.Cafes });
+            cafesTransformationService.PageType.Returns(FakeTransformations.CAFE_CLASS_NAME);
+            cafesTransformationService.Transformations.Returns(new List<Transformation> { FakeTransformations.Cafes });
 
             pageTypesRetriever = new ListingWidgetPageTypesRetriever(new List<ITransformationService> { articlesTransformationService, coffeesTransformationService, cafesTransformationService });
         }
@@ -42,9 +42,9 @@ namespace Kentico.Xperience.ListingWidget.Tests
             var pageTypes = pageTypesRetriever.Retrieve();
 
             Assert.That(pageTypes.Count(), Is.EqualTo(3));
-            Assert.That(pageTypes.Contains(TransformationsMock.ARTICLE_CLASS_NAME), Is.True);
-            Assert.That(pageTypes.Contains(TransformationsMock.CAFE_CLASS_NAME), Is.True);
-            Assert.That(pageTypes.Contains(TransformationsMock.COFFEE_CLASS_NAME), Is.True);
+            Assert.That(pageTypes.Contains(FakeTransformations.ARTICLE_CLASS_NAME), Is.True);
+            Assert.That(pageTypes.Contains(FakeTransformations.CAFE_CLASS_NAME), Is.True);
+            Assert.That(pageTypes.Contains(FakeTransformations.COFFEE_CLASS_NAME), Is.True);
         }
     }
 }

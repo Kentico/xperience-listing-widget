@@ -3,7 +3,7 @@
     /// <summary>
     /// Provides transformations for tests.
     /// </summary>
-    internal static class TransformationsMock
+    internal static class FakeTransformations
     {
         public const string ARTICLE_CLASS_NAME = "Article";
         public const string COFFEE_CLASS_NAME = "Coffee";

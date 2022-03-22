@@ -24,16 +24,16 @@ namespace Kentico.Xperience.ListingWidget.Widgets.Tests
         public void SetUp()
         {
             articlesService = Substitute.For<ITransformationService>();
-            articlesService.PageType.Returns(TransformationsMock.ARTICLE_CLASS_NAME);
-            articlesService.Transformations.Returns(new List<Transformation> { TransformationsMock.Articles, TransformationsMock.ArticlesWithHeading });
+            articlesService.PageType.Returns(FakeTransformations.ARTICLE_CLASS_NAME);
+            articlesService.Transformations.Returns(new List<Transformation> { FakeTransformations.Articles, FakeTransformations.ArticlesWithHeading });
 
             cafesService = Substitute.For<ITransformationService>();
-            cafesService.PageType.Returns(TransformationsMock.CAFE_CLASS_NAME);
-            cafesService.Transformations.Returns(new List<Transformation> { TransformationsMock.Cafes });
+            cafesService.PageType.Returns(FakeTransformations.CAFE_CLASS_NAME);
+            cafesService.Transformations.Returns(new List<Transformation> { FakeTransformations.Cafes });
 
             coffeesService = Substitute.For<ITransformationService>();
-            coffeesService.PageType.Returns(TransformationsMock.COFFEE_CLASS_NAME);
-            coffeesService.Transformations.Returns(new List<Transformation> { TransformationsMock.Coffees });
+            coffeesService.PageType.Returns(FakeTransformations.COFFEE_CLASS_NAME);
+            coffeesService.Transformations.Returns(new List<Transformation> { FakeTransformations.Coffees });
 
             transformationStrategy = new TransformationStrategy(new List<ITransformationService> { articlesService, cafesService, coffeesService });
         }
@@ -42,7 +42,7 @@ namespace Kentico.Xperience.ListingWidget.Widgets.Tests
         [Test]
         public void GetService_ArticlesTransformation_ReturnsArticlesTransformationService()
         {
-            var service = transformationStrategy.GetService(TransformationsMock.Articles.View);
+            var service = transformationStrategy.GetService(FakeTransformations.Articles.View);
             Assert.That(service, Is.EqualTo(articlesService));
         }
 
@@ -50,7 +50,7 @@ namespace Kentico.Xperience.ListingWidget.Widgets.Tests
         [Test]
         public void GetService_ArticlesWithHeadingTransformation_ReturnsArticlesTransformationService()
         {
-            var service = transformationStrategy.GetService(TransformationsMock.ArticlesWithHeading.View);
+            var service = transformationStrategy.GetService(FakeTransformations.ArticlesWithHeading.View);
             Assert.That(service, Is.EqualTo(articlesService));
         }
 
@@ -58,7 +58,7 @@ namespace Kentico.Xperience.ListingWidget.Widgets.Tests
         [Test]
         public void GetService_CafesTransformation_ReturnsCafesTransformationService()
         {
-            var service = transformationStrategy.GetService(TransformationsMock.Cafes.View);
+            var service = transformationStrategy.GetService(FakeTransformations.Cafes.View);
             Assert.That(service, Is.EqualTo(cafesService));
         }
 
@@ -66,7 +66,7 @@ namespace Kentico.Xperience.ListingWidget.Widgets.Tests
         [Test]
         public void GetService_CoffeesTransformation_ReturnsCoffeesTransformationService()
         {
-            var service = transformationStrategy.GetService(TransformationsMock.Coffees.View);
+            var service = transformationStrategy.GetService(FakeTransformations.Coffees.View);
             Assert.That(service, Is.EqualTo(coffeesService));
         }
     }
