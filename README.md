@@ -10,7 +10,7 @@ Content editor can specify:
 - **Order by field** - Field to order by the pages.
 - **Order** - Order direction of the listing.
 
-![Listing widget](./ListingWidget.gif)
+![Listing widget](./img/ListingWidget.gif)
 
 ## How to use Listing widget
 
@@ -56,8 +56,6 @@ Content editor can specify:
 
 ## How to add a transformation
 
-A preferred location for the transformation files is *{your_project}/Components/Widgets/ListingWidget/Transformations/{TransformationPageType}*. 
-
 1. Create a **transformation view model** implementing *ITransformationViewModel*.
 2. Create a **transformation razor view**. 
 3. Create a **transformation service** implementing *BaseTransformationService*. The service should handle all transformations for a concrete type. 
@@ -80,14 +78,14 @@ A preferred location for the transformation files is *{your_project}/Components/
                 new Transformation
                 {
                     Name = "Our cafes",
-                    View = "Transformations/Cafes/_OurCafes.cshtml",
+                    View = "~/Components/Widgets/ListingWidget/Transformations/Cafes/_OurCafes.cshtml",
                     Description = "Transformation displays our cafes in 2 column grid.",
                 }
             };
 
 
-            public CafesTransformationService(IPageAttachmentUrlRetriever attachmentUrlRetriever,
-                IStringLocalizer<SharedResources> localizer, ICountryRepository countryRepository)
+            public CafesTransformationService(IPageAttachmentUrlRetriever attachmentUrlRetriever, 
+            IStringLocalizer<SharedResources> localizer, ICountryRepository countryRepository)
             {
                 this.attachmentUrlRetriever = attachmentUrlRetriever;
                 this.localizer = localizer;
