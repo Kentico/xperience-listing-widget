@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-using Kentico.Xperience.ListingWidget.Transformations;
-
-namespace Kentico.Xperience.ListingWidget.Services
+namespace Kentico.Xperience.ListingWidget
 {
     /// <summary>
     /// Provides a method for retrieving supported page types for listing widget.

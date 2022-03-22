@@ -5,7 +5,8 @@ using CMS.DocumentEngine;
 using CMS.DocumentEngine.Types.DancingGoatCore;
 
 using Kentico.Content.Web.Mvc;
-using Kentico.Xperience.ListingWidget.Transformations;
+
+using Kentico.Xperience.ListingWidget;
 
 namespace DancingGoat.Widgets
 {

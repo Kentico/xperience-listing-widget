@@ -6,8 +6,9 @@ using CMS.FormEngine;
 using CMS.Helpers;
 
 using Kentico.Xperience.ListingWidget.InlineEditors;
+using Kentico.Xperience.ListingWidget.Widgets;
 
-namespace Kentico.Xperience.ListingWidget.Services
+namespace Kentico.Xperience.ListingWidget
 {
     /// <summary>
     /// Provides methods to get data for order by field editor.

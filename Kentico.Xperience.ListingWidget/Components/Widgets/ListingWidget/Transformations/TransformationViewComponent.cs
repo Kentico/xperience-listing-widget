@@ -1,9 +1,8 @@
 ﻿using Kentico.PageBuilder.Web.Mvc;
-using Kentico.Xperience.ListingWidget.Services;
 
 using Microsoft.AspNetCore.Mvc;
 
-namespace Kentico.Xperience.ListingWidget.Transformations
+namespace Kentico.Xperience.ListingWidget.Widgets
 {
     /// <summary>
     /// View component for transformation of listing widget.
@@ -39,7 +38,7 @@ namespace Kentico.Xperience.ListingWidget.Transformations
             {
                 if (pageBuilderDataContextRetriever.Retrieve().EditMode)
                 {
-                    return View("~/Components/Transformations/_NoTransformationSelected.cshtml");
+                    return View("~/Components/Widgets/ListingWidget/Transformations/_NoTransformationSelected.cshtml");
                 }
                 return Content(string.Empty);
             }

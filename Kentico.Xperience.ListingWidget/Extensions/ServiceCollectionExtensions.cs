@@ -1,10 +1,10 @@
-﻿using Kentico.Xperience.ListingWidget.Services;
+﻿using Kentico.Xperience.ListingWidget.Widgets;
 
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Kentico.Xperience.ListingWidget
 {
-    public static class ListingWidgetIServiceCollectionExtension
+    public static class ServiceCollectionExtensions
     {
         public static void AddListingWidgetServices(this IServiceCollection services)
         {

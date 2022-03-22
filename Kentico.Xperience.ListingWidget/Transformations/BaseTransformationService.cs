@@ -5,7 +5,7 @@ using CMS.DocumentEngine;
 
 using Kentico.Content.Web.Mvc;
 
-namespace Kentico.Xperience.ListingWidget.Transformations
+namespace Kentico.Xperience.ListingWidget
 {
     /// <summary>
     /// Provides methods to get transformation model and custom parametrization for page retriever.

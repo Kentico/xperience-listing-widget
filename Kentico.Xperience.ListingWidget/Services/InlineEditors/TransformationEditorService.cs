@@ -2,11 +2,11 @@
 using System.Linq;
 
 using Kentico.Xperience.ListingWidget.InlineEditors;
-using Kentico.Xperience.ListingWidget.Transformations;
+using Kentico.Xperience.ListingWidget.Widgets;
 
 using Microsoft.Extensions.Localization;
 
-namespace Kentico.Xperience.ListingWidget.Services
+namespace Kentico.Xperience.ListingWidget
 {
     /// <inheritdoc/>
     internal class TransformationEditorService : ITransformationEditorService

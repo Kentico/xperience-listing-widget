@@ -1,6 +1,6 @@
 ﻿using Kentico.Xperience.ListingWidget.InlineEditors;
 
-namespace Kentico.Xperience.ListingWidget.Services
+namespace Kentico.Xperience.ListingWidget
 {
     /// <summary>
     /// Provides methods to get data for order by field editor.

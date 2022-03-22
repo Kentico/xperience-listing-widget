@@ -1,6 +1,6 @@
 ﻿using Kentico.Xperience.ListingWidget.InlineEditors;
 
-namespace Kentico.Xperience.ListingWidget
+namespace Kentico.Xperience.ListingWidget.Widgets
 {
     /// <summary>
     /// Models for inline editors of listing widget.
