@@ -12,9 +12,9 @@ namespace Kentico.Xperience.ListingWidget.Widgets.Tests
 {
     [TestFixture]
     [Category.Unit]
-    public class ITransformationStrategyTests
+    public class TransformationStrategyTests
     {
-        private ITransformationStrategy transformationStrategy;
+        private TransformationStrategy transformationStrategy;
         private ITransformationService articlesService;
         private ITransformationService cafesService;
         private ITransformationService coffeesService;
