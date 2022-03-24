@@ -5,7 +5,6 @@ using System.Linq;
 using CMS.Tests;
 
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.Extensions.Localization;
 
 using NSubstitute;
 
@@ -36,18 +35,7 @@ namespace Kentico.Xperience.ListingWidget.Tests
             cafesTransformationService.Transformations.Returns(new List<Transformation> { FakeTransformations.Cafes });
 
             var transformationsRetriever = new ListingWidgetTransformationsRetriever(new List<ITransformationService> { articlesTransformationService, coffeesTransformationService, cafesTransformationService });
-
-            var localizer = Substitute.For<IStringLocalizer<ListingWidgetResources>>();
-            localizer[FakeTransformations.Articles.Name].Returns(new LocalizedString(FakeTransformations.Articles.Name, FakeTransformations.Articles.Name));
-            localizer[FakeTransformations.ArticlesWithHeading.Name].Returns(new LocalizedString(FakeTransformations.ArticlesWithHeading.Name, FakeTransformations.ArticlesWithHeading.Name));
-            localizer[FakeTransformations.Cafes.Name].Returns(new LocalizedString(FakeTransformations.Cafes.Name, FakeTransformations.Cafes.Name));
-            localizer[FakeTransformations.Coffees.Name].Returns(new LocalizedString(FakeTransformations.Coffees.Name, FakeTransformations.Coffees.Name));
-            localizer[FakeTransformations.Articles.Description].Returns(new LocalizedString(FakeTransformations.Articles.Description, FakeTransformations.Articles.Description));
-            localizer[FakeTransformations.ArticlesWithHeading.Description].Returns(new LocalizedString(FakeTransformations.ArticlesWithHeading.Description, FakeTransformations.ArticlesWithHeading.Description));
-            localizer[FakeTransformations.Cafes.Description].Returns(new LocalizedString(FakeTransformations.Cafes.Description, FakeTransformations.Cafes.Description));
-            localizer[FakeTransformations.Coffees.Description].Returns(new LocalizedString(FakeTransformations.Coffees.Description, FakeTransformations.Coffees.Description));
-
-            service = new TransformationEditorService(localizer, transformationsRetriever);
+            service = new TransformationEditorService(transformationsRetriever);
         }
 
 

@@ -3,7 +3,6 @@
 using Kentico.Xperience.ListingWidget.Widgets;
 
 using Microsoft.AspNetCore.Mvc.ViewComponents;
-using Microsoft.Extensions.Localization;
 
 using NSubstitute;
 
@@ -30,13 +29,9 @@ namespace Kentico.Xperience.ListingWidget.InlineEditors.Tests
         public void SetUp()
         {
             repository = Substitute.For<IPageRepository>();
-            var localizer = Substitute.For<IStringLocalizer<ListingWidgetResources>>();
-            component = new PathEditorViewComponent(repository, localizer);
+            component = new PathEditorViewComponent(repository);
             repository.GetPageName(PATH).Returns(NAME);
             repository.GetPageName(INVALID_PATH).Returns((string)null);
-            localizer[INVALID_PAGE_MESSAGE].Returns(new LocalizedString(INVALID_PAGE_MESSAGE, INVALID_PAGE_MESSAGE));
-            localizer[NO_PAGE_SELECTED_MESSAGE].Returns(new LocalizedString(NO_PAGE_SELECTED_MESSAGE, NO_PAGE_SELECTED_MESSAGE));
-            localizer[PAGE_INACCESSIBLE_MESSAGE].Returns(new LocalizedString(PAGE_INACCESSIBLE_MESSAGE, PAGE_INACCESSIBLE_MESSAGE));
         }
 
 
