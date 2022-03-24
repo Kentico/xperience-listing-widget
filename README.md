@@ -12,13 +12,17 @@ Content editor can specify:
 
 ![Listing widget](./img/ListingWidget.gif)
 
+## Prerequisites
+
+This widget is compatible with any **Kentico Xperience 13** project using the **ASP.NET Core** development model. 
+
 ## How to use Listing widget
 
 1. Listing widget is placed in the **Kentico.Xperience.ListingWidget project**. Copy the project to your solution.
-2. In your project, add dependency to the listing widget project.
-3. Set Xperience nugget version in the listing widget project same as it is on your live site. 
-4. Register listing widget services trough [DI](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-6.0).
-    - Use *AddListingWidgetServices()* extension method from *Kentico.Xperience.ListingWidget*: 
+2. In your project, add reference to the listing widget project.
+3. Set Xperience nugget (Kentico.Xperience.AspNetCore.WebApp) version in the listing widget project same as it is on your live site. 
+4. Register listing widget services in the startup of your live site in the `ConfigureServices()` method.
+    - Use `AddListingWidgetServices()` extension method from `Kentico.Xperience.ListingWidget`: 
         ```
         public class Startup
         {
@@ -33,9 +37,8 @@ Content editor can specify:
             ...
         }
         ```
-5. Widget identifier is "Kentico.Xperience.ListingWidget", change your area restrictions according to it.
-6. Add transformation services to your project and register them in DI - see below "How to add a transformation". 
-7. Include css and js of the listing widget's in-line editors to your project (*Kentico.Xperience.ListingWidget/Assets/**/\*.css*, *Kentico.Xperience.ListingWidget/Assets/**/\*.js*).
+5. Widget identifier is "Kentico.Xperience.ListingWidget", change your [area restrictions](https://docs.xperience.io/developing-websites/page-builder-development/creating-pages-with-editable-areas#Creatingpageswitheditableareas-Limitingcomponentsallowedinaneditablearea) according to it.
+6. Include css and js of the listing widget's in-line editors to your project (*Kentico.Xperience.ListingWidget/Assets/**/\*.css*, *Kentico.Xperience.ListingWidget/Assets/**/\*.js*).
     - If you want to use [Grunt](https://docs.xperience.io/developing-websites/developing-xperience-applications-using-asp-net-core/bundling-static-assets-of-builder-components), see *Gruntfile.js* in the **DancingGoatCore project**:
         ```
         grunt.initConfig({
@@ -51,14 +54,20 @@ Content editor can specify:
             },
         }
         ```
+7. Add transformations to your project. 
 
 ## How to add a transformation
 
-1. Create a **transformation view model** implementing *ITransformationViewModel*.
-2. Create a **transformation razor view**. 
-3. Create a **transformation service** implementing *BaseTransformationService*. The service should handle all transformations for a concrete type. 
-    - Set the page type supported by transformation to the **PageType** field.
-    - Add your new transformation to the **Transformations** collection.
+1. Create a **transformation view model** implementing `ITransformationViewModel` interface.
+    - This model should hold all items for your listing transformation.
+2. Create a **transformation razor view** with your listing layout.
+3. Create a **transformation service** implementing `BaseTransformationService`. The service should handle all transformations for a concrete type. 
+    - The `PageType` field set to the `CLASS_NAME` property of page type you want to support in this service.
+    - Add your new transformation to the `Transformations` collection.
+        - Name - display name of the transformation.
+        - View - path of the transformation view.
+        - Description - description of the transformation shown in the tooltip.
+    - In the `GetModel(IEnumerable<TreeNode> pages)` method return view model for your transformations.
     - Override other methods according to your needs.
     - For example:
         ```
@@ -109,6 +118,7 @@ Content editor can specify:
         }
         ```
 4. Register your transformation services trough [DI](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-6.0).
+    - Register your services as implementations of the `ITransformationService` interface.
     - For example (see *DancingGoatCore/Helpers/IServiceCollectionExtensions.cs*):
         ```
         public static void AddDancingGoatListingWidgetTransformationServices(this IServiceCollection services)
