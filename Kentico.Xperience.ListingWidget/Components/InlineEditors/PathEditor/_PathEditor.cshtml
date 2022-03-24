@@ -7,7 +7,7 @@
     var validationClass = Model.PageSelectionState == PageSelectionState.Inaccessible ? "invalid-page" : "";
 
     <div class="listing-property-label">
-        <label asp-for="@Model.Value" class="path-label">@HtmlLocalizer["Parent page"].Value:</label>
+        <label asp-for="@Model.Value" class="path-label">Parent page:</label>
     </div>
 
     <div class="listing-property-value path-editor-value">
@@ -15,8 +15,8 @@
             @Model.Value
         </span>
         <div class="path-editor-controls">
-            <button class="path-editor-button path-editor-select-button">@HtmlLocalizer["Select"]</button>
-            <button class="path-editor-button path-editor-clear-button">@HtmlLocalizer["Clear"]</button>
+            <button class="path-editor-button path-editor-select-button">Select</button>
+            <button class="path-editor-button path-editor-clear-button">Clear</button>
             <div class="listing-property-info"></div>
         </div>
     </div>

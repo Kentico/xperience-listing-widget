@@ -4,25 +4,20 @@ using System.Linq;
 using Kentico.Xperience.ListingWidget.InlineEditors;
 using Kentico.Xperience.ListingWidget.Widgets;
 
-using Microsoft.Extensions.Localization;
-
 namespace Kentico.Xperience.ListingWidget
 {
     /// <inheritdoc/>
     internal class TransformationEditorService : ITransformationEditorService
     {
         private readonly ListingWidgetTransformationsRetriever transformationsRetriever;
-        private readonly IStringLocalizer<ListingWidgetResources> localizer;
 
 
         /// <summary>
         /// Creates an instance of <see cref="TransformationEditorService"/> class.
         /// </summary>
-        /// <param name="localizer">Represents an <see cref="IStringLocalizer"/> that provides localized strings.</param>
         /// <param name="transformationsRetriever">Supported transformations retriever.</param>
-        public TransformationEditorService(IStringLocalizer<ListingWidgetResources> localizer, ListingWidgetTransformationsRetriever transformationsRetriever)
+        public TransformationEditorService(ListingWidgetTransformationsRetriever transformationsRetriever)
         {
-            this.localizer = localizer;
             this.transformationsRetriever = transformationsRetriever;
         }
 
@@ -41,7 +36,7 @@ namespace Kentico.Xperience.ListingWidget
             {
                 return Enumerable.Empty<DropDownOptionViewModel>();
             }
-            return transformationsRetriever.Retrieve(pageType).Select(transformation => new DropDownOptionViewModel(transformation.View, localizer[transformation.Name]));
+            return transformationsRetriever.Retrieve(pageType).Select(transformation => new DropDownOptionViewModel(transformation.View, transformation.Name));
         }
 
 
@@ -66,7 +61,7 @@ namespace Kentico.Xperience.ListingWidget
                 return null;
             }
 
-            return $"{localizer[transformation.Name]}:\n{localizer[transformation.Description]}";
+            return $"{transformation.Name}:\n{transformation.Description}";
         }
     }
 }

@@ -39,7 +39,7 @@ namespace Kentico.Xperience.ListingWidget
                 .WhereIn("ClassName", SupportedPageTypes.ToList())
                 .Columns("ClassName", "ClassDisplayName")
                 .ToDictionary(c => c.ClassName, c => c.ClassDisplayName);
-            return classes.Select(dataType => new DropDownOptionViewModel(dataType.Key, ResHelper.LocalizeString(dataType.Value)));
+            return classes.Select(dataType => new DropDownOptionViewModel(dataType.Key, ResHelper.LocalizeString(dataType.Value, CultureHelper.DefaultUICultureCode)));
         }
     }
 }

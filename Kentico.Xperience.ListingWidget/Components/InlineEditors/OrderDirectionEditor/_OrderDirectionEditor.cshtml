@@ -6,17 +6,17 @@
 @using (Html.Kentico().BeginInlineEditor("order-direction-editor", Model.PropertyName, new { @class = "listing-property-editor" }))
 {
 	<div class="listing-property-label order-direction-label">
-		<label asp-for="@Model.Order" class="order-direction-label">@HtmlLocalizer["Order"].Value:</label>
+		<label asp-for="@Model.Order" class="order-direction-label">Order:</label>
 	</div>
 
 	<form class="order-direction-radios listing-property-value">
 		<label class="order-direction-option">
 			<input asp-for="@Model.Order" type="radio" value="@OrderDirection.Ascending" />
-			@HtmlLocalizer["Ascending"].Value
+			Ascending
 		</label>
 		<label class="order-direction-option">
 			<input asp-for="@Model.Order" type="radio" value="@OrderDirection.Descending" />
-			@HtmlLocalizer["Descending"].Value
+			Descending
 		</label>
 	</form>
 }
