@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Localization;
 
 namespace Kentico.Xperience.ListingWidget.InlineEditors
 {
@@ -9,18 +8,15 @@ namespace Kentico.Xperience.ListingWidget.InlineEditors
     public class PathEditorViewComponent : ViewComponent
     {
         private readonly IPageRepository repository;
-        private readonly IStringLocalizer<ListingWidgetResources> localizer;
 
 
         /// <summary>
         /// Creates an instance of <see cref="PathEditorViewComponent"/> class.
         /// </summary>
         /// <param name="repository">Page repository.</param>
-        /// <param name="localizer">Represents an <see cref="IStringLocalizer"/> that provides localized strings.</param>
-        public PathEditorViewComponent(IPageRepository repository, IStringLocalizer<ListingWidgetResources> localizer)
+        public PathEditorViewComponent(IPageRepository repository)
         {
             this.repository = repository;
-            this.localizer = localizer;
         }
 
 
@@ -44,7 +40,7 @@ namespace Kentico.Xperience.ListingWidget.InlineEditors
             if (string.IsNullOrEmpty(pageAliasPath))
             {
                 viewModel.PageSelectionState = PageSelectionState.NotSelected;
-                viewModel.Value = localizer["No page selected"].Value;
+                viewModel.Value = "No page selected";
                 viewModel.Title = "";
                 return;
             }
@@ -59,8 +55,8 @@ namespace Kentico.Xperience.ListingWidget.InlineEditors
             }
 
             viewModel.PageSelectionState = PageSelectionState.Inaccessible;
-            viewModel.Value = localizer["Page does not exist"].Value;
-            viewModel.Title = localizer["The selected page has been deleted or its alias path has been changed."].Value;
+            viewModel.Value = "Page does not exist";
+            viewModel.Title = "The selected page has been deleted or its alias path has been changed.";
         }
 
 

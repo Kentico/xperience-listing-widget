@@ -2,8 +2,8 @@
 
 @using (Html.Kentico().BeginInlineEditor("dropdown-editor", Model.PropertyName, new { @class = "listing-property-editor" }))
 {
-    var optionLabel = Model.Options.Any() ? HtmlLocalizer["Please select an option."].Value : HtmlLocalizer["No options are available."].Value;
-    var dropdownLabel = HtmlLocalizer[Model.Label].Value + ':';
+    var optionLabel = Model.Options.Any() ? "Please select an option." : "No options are available.";
+    var dropdownLabel = Model.Label + ':';
 
     <div class="listing-property-label" title="@Model.Tooltip">
         <label asp-for="@Model.SelectedOption">@dropdownLabel</label>

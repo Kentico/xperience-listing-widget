@@ -50,13 +50,13 @@ namespace Kentico.Xperience.ListingWidget
                 {
                     if (field.DataType == FieldDataType.Integer)
                     {
-                        yield return new DropDownOptionViewModel(field.Name, ResHelper.LocalizeString(field.GetDisplayName(null)));
+                        yield return new DropDownOptionViewModel(field.Name, ResHelper.LocalizeString(field.GetDisplayName(null), CultureHelper.DefaultUICultureCode));
                     }
                     if (field.DataType == FieldDataType.Text)
                     {
                         if (field.GetControlName() == "TextBoxControl")
                         {
-                            yield return new DropDownOptionViewModel(field.Name, ResHelper.LocalizeString(field.GetDisplayName(null)));
+                            yield return new DropDownOptionViewModel(field.Name, ResHelper.LocalizeString(field.GetDisplayName(null), CultureHelper.DefaultUICultureCode));
                         }
                     }
                 }
