@@ -62,12 +62,12 @@ This widget is compatible with any **Kentico Xperience 13** project using the **
     - This model should hold all items for your listing transformation.
 2. Create a **transformation razor view** with your listing layout.
 3. Create a **transformation service** implementing `BaseTransformationService`. The service should handle all transformations for a concrete type. 
-    - The `PageType` field set to the `CLASS_NAME` property of page type you want to support in this service.
+    - Set the `PageType` field to the `CLASS_NAME` property of the page type you want to support in this service.
     - Add your new transformation to the `Transformations` collection.
         - Name - display name of the transformation.
         - View - path of the transformation view.
         - Description - description of the transformation shown in the tooltip.
-    - In the `GetModel(IEnumerable<TreeNode> pages)` method return view model for your transformations.
+    - In the `GetModel(IEnumerable<TreeNode> pages)` method, return view model for your transformations.
     - Override other methods according to your needs.
     - For example:
         ```
