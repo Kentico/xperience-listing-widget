@@ -61,13 +61,13 @@ This widget is compatible with any **Kentico Xperience 13** project using the **
 1. Create a **transformation view model** implementing `ITransformationViewModel` interface.
     - This model should hold all items for your listing transformation.
 2. Create a **transformation razor view** with your listing layout.
-3. Create a **transformation service** implementing `BaseTransformationService`. The service should handle all transformations for a concrete type. 
-    - Set the `PageType` field to the `CLASS_NAME` property of the page type you want to support in this service.
+3. Create a **transformation service** implementing `BaseTransformationService`. The service should handle all transformations for a specific type. 
+    - Set code name of supported page type in to the field `PageType`.
     - Add your new transformation to the `Transformations` collection.
         - Name - display name of the transformation.
         - View - path of the transformation view.
         - Description - description of the transformation shown in the tooltip.
-    - In the `GetModel(IEnumerable<TreeNode> pages)` method, return view model for your transformations.
+    - Implement GetModel(IEnumerable<TreeNode> pages)` method to return view model for your transformation view(s).
     - Override other methods according to your needs.
     - For example:
         ```
@@ -117,7 +117,7 @@ This widget is compatible with any **Kentico Xperience 13** project using the **
             }
         }
         ```
-4. Register your transformation services trough [DI](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-6.0).
+4. Register your transformation services trough [DI](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-3.1).
     - Register your services as implementations of the `ITransformationService` interface.
     - For example (see *DancingGoatCore/Helpers/IServiceCollectionExtensions.cs*):
         ```
