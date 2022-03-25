@@ -1,5 +1,6 @@
-﻿.listing-inline-editor div.listing-property-editor div.listing-property-value button.path-editor-select-button {
-    margin-right: 0.5em;
+﻿.listing-inline-editor div.listing-property-editor .path-editor-value {
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .listing-inline-editor div.listing-property-editor div.listing-property-value .selected-path {
@@ -16,11 +17,10 @@
     color: indianred;
 }
 
-.listing-inline-editor div.listing-property-editor .path-editor-value {
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
-
 .listing-inline-editor div.listing-property-editor div.listing-property-value div.path-editor-controls {
     display: flex;
+}
+
+.listing-inline-editor div.listing-property-editor div.listing-property-value button.path-editor-select-button {
+    margin-right: 0.5em;
 }
