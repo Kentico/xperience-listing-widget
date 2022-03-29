@@ -20,7 +20,7 @@ This widget is compatible with any **Kentico Xperience 13** project using the **
 
 1. Listing widget is placed in the **Kentico.Xperience.ListingWidget project**. Copy the project to your solution.
 2. In your project, add reference to the listing widget project.
-3. Set Xperience nugget (Kentico.Xperience.AspNetCore.WebApp) version in the listing widget project same as it is on your live site. 
+3. Set Xperience nugget (Kentico.Xperience.AspNetCore.WebApp) version and target framework in the listing widget project same as it is on your live site.  
 4. Register listing widget services in the startup of your live site in the `ConfigureServices()` method.
     - Use `AddListingWidgetServices()` extension method from `Kentico.Xperience.ListingWidget`: 
         ```
@@ -130,3 +130,7 @@ This widget is compatible with any **Kentico Xperience 13** project using the **
         ```
 
 See examples of the transformations in *DancingGoatCore/Components/Widgets/ListingWidget/Transformations*.
+    
+## Questions & Support
+
+See the [Kentico home repository](https://github.com/Kentico/Home/blob/master/README.md) for more information about the product(s) and general advice on submitting questions.
