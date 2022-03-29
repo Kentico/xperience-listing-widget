@@ -1,0 +1,47 @@
+﻿.listing-inline-editor {
+    background-color: #262524;
+    border: 1px solid #383838;
+    padding: 0.5em 0;
+    margin: 1em;
+    box-sizing: border-box;
+    max-width: 550px;
+}
+
+.listing-inline-editor * {
+    font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-size: 16px;
+}
+
+.listing-inline-editor .icon-question-circle {
+    font-family: 'Core-icons';
+}
+
+.listing-inline-editor .listing-property-editor {
+    display: flex;
+    padding: 0.5em;
+    flex-wrap: wrap;
+}
+
+.listing-inline-editor .listing-property-editor .listing-property-label {
+    color: white;
+    width: 10em;
+    margin: auto 1em auto 0;
+    padding-bottom: 0.25em;
+    display: flex;
+    align-items: flex-end;
+    font-weight: bold;
+}
+
+.listing-inline-editor .listing-property-editor .listing-property-value {
+    padding-bottom: 0.25em;
+    display: flex;
+    flex: 1 0 auto;
+    width: 65%;
+}
+
+.listing-inline-editor .listing-property-editor .listing-property-info {
+    color: white;
+    margin: auto 0 auto 0.5em;
+    width: 1em;
+    display: flex;
+}

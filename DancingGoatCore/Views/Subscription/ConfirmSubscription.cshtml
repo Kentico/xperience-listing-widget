@@ -1,0 +1,29 @@
+﻿@model DancingGoat.Models.ConfirmSubscriptionModel
+@{
+    ViewBag.Title = HtmlLocalizer["Newsletter subscription"];
+    ViewData["PageClass"] = "inverted";
+}
+
+<section class="row text-and-image">
+    <div class="col-md-6">
+        <div class="text-and-image-text">
+            <img class="img-responsive" src="@Url.Content(ViewData.ModelState.IsValid ? "~/Content/Images/default-image-cafe.jpg" : "~/Content/Images/empty_cup.jpg")" />
+        </div>
+    </div>
+    <div class="col-md-6">
+        <h2>@HtmlLocalizer[ViewData.ModelState.IsValid ? "Subscription confirmed" : "Subscription confirmation error"]</h2>
+        <p>
+            <span class="InfoLabel">
+                @if (ViewData.ModelState.IsValid)
+                {
+                    @Model.ConfirmationResult
+                }
+                else
+                {
+                    @Html.ValidationMessage("ErrorMessage")
+                }
+            </span>
+        </p>
+    </div>
+</section>
+

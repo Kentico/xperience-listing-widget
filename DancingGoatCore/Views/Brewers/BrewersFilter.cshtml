@@ -1,0 +1,16 @@
+﻿@model DancingGoat.Models.BrewerFilterViewModel
+
+<h4>@HtmlLocalizer["Manufacturer"]</h4>
+@Html.EditorFor(model => Model.Manufacturers)
+
+<h4>@HtmlLocalizer["Price"]</h4>
+@Html.EditorFor(model => Model.Prices)
+
+<h4>@HtmlLocalizer["Status"]</h4>
+@Html.EditorFor(model => Model.PublicStatuses)
+
+<h4>@HtmlLocalizer["Availability"]</h4>
+<span class="checkbox js-postback">
+    <input asp-for="OnlyInStock" />
+    <label asp-for="OnlyInStock"></label>
+</span>

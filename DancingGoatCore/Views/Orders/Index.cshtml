@@ -1,0 +1,42 @@
+﻿@model IEnumerable<DancingGoat.Models.OrdersListViewModel>
+
+@{
+    ViewBag.Title = HtmlLocalizer["Your orders"].Value;
+    ViewData["PageClass"] = "inverted no-bg";
+}
+
+<a asp-controller="Account" asp-action="YourAccount">&larr; @HtmlLocalizer["back to Your Account"]</a>
+
+<h2>@HtmlLocalizer["Your orders"]</h2>
+
+<div id="no-more-tables">
+    <table class="orders-table">
+        <thead>
+            <tr>
+                <th class="column-id">@HtmlLocalizer["Order ID"]</th>
+                <th class="column-date">@HtmlLocalizer["Order date"]</th>
+                <th class="column-status">@HtmlLocalizer["Status"]</th>
+                <th class="column-total">@HtmlLocalizer["Total"]</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model)
+            {
+                <tr>
+                    <td class="column-id">
+                        <span class="strong">@order.OrderInvoiceNumber</span>
+                        <a asp-action="OrderDetail" asp-route-orderID="@order.OrderID" class="btn btn-terciary">@HtmlLocalizer["Order Detail"]</a>
+                    </td>
+                    <td class="column-date">@order.OrderDate</td>
+                    <td class="column-status">
+                        <span class="status">
+                            @HtmlLocalizer[order.StatusName]
+                        </span>
+                    </td>
+                    <td class="column-total">@order.FormattedTotalPrice</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

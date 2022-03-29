@@ -1,0 +1,15 @@
+﻿@model DancingGoat.Widgets.ProductCardViewModel
+<div class="product-card">
+    <div style="text-align: center">
+        @if (!string.IsNullOrEmpty(Model.ImagePath))
+        {
+            <img src="@Model.ImagePath" alt="@Model.Heading" title="@Model.Heading" />
+        }
+        <h3>@Model.Heading</h3>
+
+        @if (!string.IsNullOrEmpty(Model.Text))
+        {
+            <p>@Html.Raw(@Model.Text)</p>
+        }
+    </div>
+</div>

@@ -1,0 +1,14 @@
+﻿@model DancingGoat.Models.ButtonViewModel
+
+<form asp-action="@Model.ActionName" asp-controller="Generator" asp-antiforgery="true">
+    <page-data />
+    <div id="@($"Action{Model.ActionName}")" class="form-group">
+        <p class="loader hidden">
+            <span>Generating&hellip;</span>
+            <i class="icon-spinner spinner" aria-hidden="true"></i>
+        </p>
+        <input type="submit"
+               value="Generate"
+               class="btn @(Model.IsDisabled ? "btn-disabled" : "btn-primary")" @(Model.IsDisabled ? "disabled='disabled'" : "") />
+    </div>
+</form>

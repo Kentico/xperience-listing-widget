@@ -1,0 +1,45 @@
+﻿@using DancingGoat.Widgets
+
+@model CoffeesTransformationViewModel
+
+@{
+    var i = 1;
+}
+
+<div class="row coffees-listing">
+    @foreach (var coffee in Model.Coffees)
+    {
+        var lastInRow = "";
+        if (i % 4 == 0)
+        {
+            lastInRow = "last";
+        }
+
+        <div class="col-md-3 coffee-tile coffee-tile-small @lastInRow">
+            <div class="coffee-card">
+                <div style="text-align: center">
+                    @if (!string.IsNullOrEmpty(coffee.ImagePath))
+                    {
+                        <a href="@coffee.Url">
+                            <img src="@coffee.ImagePath" alt="@coffee.Heading" title="@coffee.Heading" />
+                        </a>
+                    }
+                    <a href="@coffee.Url">
+                        <h3>@coffee.Heading</h3>
+                    </a>
+
+                    @if (!string.IsNullOrEmpty(coffee.Text))
+                    {
+                        <p>@Html.Raw(@coffee.Text)</p>
+                    }
+                </div>
+            </div>
+        </div>
+        if (i % 4 == 0)
+        {
+            <div class="clear"></div>
+        }
+        i++;
+            
+    }
+</div>

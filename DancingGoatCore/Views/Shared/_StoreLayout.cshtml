@@ -1,0 +1,29 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="product-page-container">
+    <nav class="sub-menu row" data-ktc-search-exclude>
+        <div class="store-menu-list row">
+            <ul>
+                <li>
+                    <a href="@Url.Kentico().PageUrl(ContentItemIdentifiers.COFFEES)">@HtmlLocalizer["Coffees"]</a>
+                </li>
+                <li>
+                    <a href="@Url.Kentico().PageUrl(ContentItemIdentifiers.BREWERS)">@HtmlLocalizer["Brewers"]</a>
+                </li>
+                <li>
+                    <a href="@Url.Kentico().PageUrl(ContentItemIdentifiers.ACCESSORIES)">@HtmlLocalizer["Accessories"]</a>
+                </li>
+                <li>
+                    <a href="@Url.Kentico().PageUrl(ContentItemIdentifiers.GRINDERS)">@HtmlLocalizer["Grinders"]</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    @RenderBody()
+</div>
+
+@section Scripts {
+    @RenderSection("scripts", required: false)
+}

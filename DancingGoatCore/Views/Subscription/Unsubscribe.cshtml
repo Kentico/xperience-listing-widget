@@ -1,0 +1,29 @@
+﻿@model DancingGoat.Models.UnsubscriptionModel
+@{
+    ViewBag.Title = HtmlLocalizer["Newsletter unsubscription"];
+    ViewData["PageClass"] = "inverted";
+}
+
+<section class="row text-and-image">
+    <div class="col-md-6">
+        <div class="text-and-image-text">
+            <img class="img-responsive" src="@Url.Content("~/Content/Images/empty_cup.jpg")" />
+        </div>
+    </div>
+    <div class="col-md-6">
+        <h2>@HtmlLocalizer[ViewData.ModelState.IsValid ? "Goodbye!" : "Oops!"]</h2>
+        <p>
+            <span class="InfoLabel">
+                @if (!string.IsNullOrEmpty(Model.UnsubscriptionResult))
+                {
+                    @Model.UnsubscriptionResult
+                }
+                else
+                {
+                    @Html.ValidationMessage("ErrorMessage");
+                }
+            </span>
+</p>
+    </div>
+</section>
+

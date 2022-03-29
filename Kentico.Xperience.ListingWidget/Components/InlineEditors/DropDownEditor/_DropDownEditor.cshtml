@@ -1,0 +1,22 @@
+﻿@model Kentico.Xperience.ListingWidget.InlineEditors.DropDownEditorViewModel
+
+@using (Html.Kentico().BeginInlineEditor("dropdown-editor", Model.PropertyName, new { @class = "listing-property-editor" }))
+{
+    var optionLabel = Model.Options.Any() ? "Please select an option." : "No options are available.";
+    var dropdownLabel = Model.Label + ':';
+
+    <div class="listing-property-label" title="@Model.Tooltip">
+        <label asp-for="@Model.SelectedOption">@dropdownLabel</label>
+    </div>
+    <div class="listing-property-value dropdown-value" @(Model.Reset ? "data-reset" : null)>
+        <select asp-for="@Model.SelectedOption" asp-items="@Model.Options" class="dropdown-selector">
+            <option value="">@optionLabel</option>
+        </select>
+        <div class="listing-property-info">
+            @if (!string.IsNullOrEmpty(Model.Tooltip))
+            {
+                <span class="icon-question-circle" title="@Model.Tooltip"></span>
+            }
+        </div>
+    </div>
+}

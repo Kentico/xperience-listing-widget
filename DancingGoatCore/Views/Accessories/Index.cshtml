@@ -1,0 +1,26 @@
+﻿@model DancingGoat.Models.ProductListViewModel
+
+@{
+    Layout = "~/Views/Shared/_StoreLayout.cshtml";
+    ViewData["PageClass"] = "inverted";
+}
+
+<div class="product-page row">
+    <div class="flex">
+        <aside class="col-md-4 col-lg-3 product-filter">
+            <form asp-controller="Accessories" asp-action="Filter">
+                <partial name="AccessoriesFilter" model="Model.Filter" />
+            </form>
+        </aside>
+
+        <div id="product-list" class="col-md-8 col-lg-9 product-list">
+            <partial name="AccessoriesList" model="Model.Items" />
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/Scripts/formAutoPost.js"></script>
+
+    <script>$(".js-postback input:checkbox").formAutoPost({ targetContainerSelector: "#product-list" });</script>
+}
