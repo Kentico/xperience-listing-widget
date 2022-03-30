@@ -1,3 +1,5 @@
+[![Build and test](https://github.com/Kentico/xperience-listing-widget/actions/workflows/dotnet_build_and_test.yml/badge.svg)](https://github.com/Kentico/xperience-listing-widget/actions/workflows/dotnet_build_and_test.yml)
+
 # General listing widget 
 
 The general listing widget enables a content editor to display a customizable list of pages. 
