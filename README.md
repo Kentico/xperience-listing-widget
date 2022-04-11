@@ -1,50 +1,60 @@
 [![Build and test](https://github.com/Kentico/xperience-listing-widget/actions/workflows/dotnet_build_and_test.yml/badge.svg)](https://github.com/Kentico/xperience-listing-widget/actions/workflows/dotnet_build_and_test.yml)
 
-# General listing widget 
+# Page listing widget 
 
-The general listing widget enables a content editor to display a customizable list of pages. 
+This repository provides a Listing widget for the Kentico Xperience [page builder](https://docs.xperience.io/x/Pg2RBg). The widget enables content editors to display a configurable list of content, loaded from the fields of structured pages on the website. The appearance of the list and the displayed data is based on transformations, which are implemented in advance by developers for individual page types.
 
-Content editor can specify: 
-- **Page type** - Type of pages to be displayed.
-- **Transformation** - Layout of the listing.
-- **Parent page** - Path to a page to display children for. The parent page itself is not included in the listing.
-- **Select top N pages** - Number of pages to be displayed.
-- **Order by field** - Field to order by the pages.
-- **Order** - Order direction of the listing.
+Content editors can configure the following options for the widget:
+- **Page type** - the [page type](https://docs.xperience.io/x/Vw2RBg) displayed in the list. Only one page type can be selected (you cannot mix multiple types in a single Listing widget).
+- **Transformation** - the layout of the overall listing and the content of individual pages in the list. Hover over the help icon to read the description of the selected transformation.
+- **Parent page** - the section of the site's content tree displayed in the listing. Only pages located under the selected parent page are included (direct child pages and further descendants). The parent page itself is not included in the listing. If the parent page is not selected, all pages of the specified page type on the site are listed.
+- **Select top N pages** - the maximum number of pages in the list.
+- **Order by field** - the field used to order pages in the list.
+- **Order** - the ordering direction (ascending or descending).
 
 ![Listing widget](./img/ListingWidget.gif)
 
+The repository also contains a demonstration web project based on the Dancing Goat sample site: [DancingGoatCore](https://github.com/Kentico/xperience-listing-widget/tree/master/DancingGoatCore). The project includes modifications that integrate the Listing widget.
+
 ## Prerequisites
 
-This widget is compatible with any **Kentico Xperience 13** project using the **ASP.NET Core** development model. 
+The Listing widget is compatible with any **Kentico Xperience 13** project using the **ASP.NET Core** development model. 
 
-## How to use Listing widget
+## Add the Listing widget to your project
 
-1. Listing widget is placed in the **Kentico.Xperience.ListingWidget project**. Copy the project to your solution.
-2. In your project, add reference to the listing widget project.
-3. Set Xperience nugget (Kentico.Xperience.AspNetCore.WebApp) version and target framework in the listing widget project same as it is on your live site.  
-4. Register listing widget services in the startup of your live site in the `ConfigureServices()` method.
-    - Use `AddListingWidgetServices()` extension method from `Kentico.Xperience.ListingWidget`: 
+Developers need to integrate and set up the Listing widget before it can be used on your website.
+
+1. Download this repository.
+2. Copy the **Kentico.Xperience.ListingWidget** folder to your working directory.
+3. Open your Xperience solution in Visual Studio and add the **Kentico.Xperience.ListingWidget** project.
+4. Reference the project from your main web project.
+5. Ensure that your web project and the *Kentico.Xperience.ListingWidget* project use the same:
+    - **Kentico.Xperience.AspNetCore.WebApp** NuGet package version
+    - **Target framework**
+6. Edit your web project's startup class (**Startup.cs** by default).
+7. Register services for the Listing widget in the `ConfigureServices` method.
+    - Call the `AddListingWidgetServices()` extension method (`Kentico.Xperience.ListingWidget` namespace) for the `IServiceCollection`:
         ```
-        public class Startup
+        public void ConfigureServices(IServiceCollection services)
         {
             ...
-            public void ConfigureServices(IServiceCollection services)
-            {
-                ...
-                // Registers services for listing widget
-                services.AddListingWidgetServices();
-                ...
-            }
+            // Registers services for the Listing widget
+            services.AddListingWidgetServices();
             ...
-        }
+        }               
         ```
-5. Widget identifier is "Kentico.Xperience.ListingWidget", change your [area restrictions](https://docs.xperience.io/developing-websites/page-builder-development/creating-pages-with-editable-areas#Creatingpageswitheditableareas-Limitingcomponentsallowedinaneditablearea) according to it.
-6. Include css and js of the listing widget's in-line editors to your project (*Kentico.Xperience.ListingWidget/Assets/**/\*.css*, *Kentico.Xperience.ListingWidget/Assets/**/\*.js*).
-    - If you want to use [Grunt](https://docs.xperience.io/developing-websites/developing-xperience-applications-using-asp-net-core/bundling-static-assets-of-builder-components), see *Gruntfile.js* in the **DancingGoatCore project**:
+8. Adjust your Page Builder restrictions for [editable areas](https://docs.xperience.io/developing-websites/page-builder-development/creating-pages-with-editable-areas#Creatingpageswitheditableareas-Limitingcomponentsallowedinaneditablearea.2) and [widget zones](https://docs.xperience.io/developing-websites/page-builder-development/developing-page-builder-sections#Developingpagebuildersections-Limitingwidgetsallowedinzones) to allow the Listing widget.  
+    - The Listing widget's identifier is: **Kentico.Xperience.ListingWidget**
+9. Link the CSS and JavaScript files required by the Listing widget's inline editors to your website's pages.
+    - We recommend setting up [bundling](https://docs.xperience.io/x/m4HvBg) for the following assets: 
+        - *Kentico.Xperience.ListingWidget/Assets/**/\*.css*
+        - *Kentico.Xperience.ListingWidget/Assets/**/\*.js*
+    - For example, see the bundling process based on the [Grunt](https://gruntjs.com/) task runner in [DancingGoatCore/Gruntfile.js](https://github.com/Kentico/xperience-listing-widget/blob/master/DancingGoatCore/Gruntfile.js).
         ```
         grunt.initConfig({
+            ...         
             concat: {
+                ...             
                 pageBuilder: {
                     files: {
                         // Styles - admin
@@ -56,20 +66,65 @@ This widget is compatible with any **Kentico Xperience 13** project using the **
             },
         }
         ```
-7. Add transformations to your project. 
+10. Add transformations for your website's page types.
 
-## How to add a transformation
+## Add transformations
 
-1. Create a **transformation view model** implementing `ITransformationViewModel` interface.
-    - This model should hold all items for your listing transformation.
-2. Create a **transformation razor view** with your listing layout.
-3. Create a **transformation service** implementing `BaseTransformationService`. The service should handle all transformations for a specific type. 
-    - Set code name of supported page type in to the field `PageType`.
-    - Add your new transformation to the `Transformations` collection.
-        - Name - display name of the transformation.
-        - View - path of the transformation view.
-        - Description - description of the transformation shown in the tooltip.
-    - Implement GetModel(IEnumerable<TreeNode> pages)` method to return view model for your transformation view(s).
+The output of the Listing widget is defined by transformations, which need to be created by developers for every [page type](https://docs.xperience.io/x/Vw2RBg) that you wish to display in the listing. Transformations control both the overall layout of the listing and the content of individual pages in the list.
+
+Use the following process to create a transformation for a page type:
+
+1. Prepare a folder for Listing widget transformations in your Xperience web project. For example: *Components/Widgets/ListingWidget/Transformations/*
+2. Create a **transformation view model** class implementing the `ITransformationViewModel` interface.
+    - The model needs to hold a collection of items with the data of the pages displayed in the listing.
+    - Tip: You can reuse the view models from your main web project for the items in the collection, if you already display pages of the given type.
+        ```
+        public class CafesTransformationViewModel : ITransformationViewModel
+        {
+            public IEnumerable<CafeViewModel> Cafes { get; set; }
+        }
+        ```
+3. Create a **transformation view** with the output of the listing.
+    - Display the data from your transformation view model.
+    - The transformation view is rendered only once for the Listing widget, so you need to ensure the iteration of items (e.g., using a `foreach` statement).
+        ```
+        @model CafesTransformationViewModel
+
+        <div class="row">
+        @foreach (var cafe in Model.Cafes)
+        {
+            <div class="col-md-6">
+                <div class="cafe-image-tile">
+                    <div class="cafe-image-tile-image-wrapper">
+                        @if (!string.IsNullOrEmpty(cafe.PhotoPath))
+                        {
+                            <img src="@cafe.PhotoPath" alt="@cafe.Contact.Name"  title="@cafe.Contact.Name" class="cafe-image-tile-image" />
+                        }
+                    </div>
+                    <div class="cafe-image-tile-content">
+                        <h3 class="cafe-image-tile-name">@cafe.Contact.Name</h3>
+                        <address class="cafe-tile-address">
+                            <div class="cafe-tile-address-anchor">
+                                @cafe.Contact.Street, @cafe.Contact.City
+                                <br />
+                                @cafe.Contact.ZIP, @cafe.Contact.Country, @cafe.Contact.State
+                            </div>
+                        </address>
+                        <p>@cafe.Contact.Phone</p>
+                        <p>@cafe.Note</p>
+                    </div>
+                </div>
+            </div>
+        }
+        </div>
+        ```
+4. Create a **transformation service** class inheriting from `BaseTransformationService`. The service should handle all transformations for a specific page type. 
+    - Override the `PageType` property and assign the code name of the supported page type.
+    - Override the `Transformations` property and assign a collection with one or more `Transformation` objects. Set the following properties for each transformation:
+        - `Name` - the name of the transformation displayed to users by the Listing widget.
+        - `View` - the path to the transformation's view.
+        - `Description` - a description displayed to users as a tooltip when they select the transformation.
+    - Override the `GetModel(IEnumerable<TreeNode> pages)` method and convert the collection of `TreeNode` objects (pages) to your transformation view model.
     - Override other methods according to your needs.
     - For example:
         ```
@@ -88,7 +143,7 @@ This widget is compatible with any **Kentico Xperience 13** project using the **
                 {
                     Name = "Our cafes",
                     View = "~/Components/Widgets/ListingWidget/Transformations/Cafes/_OurCafes.cshtml",
-                    Description = "Transformation displays our cafes in 2 column grid.",
+                    Description = "Displays cafes in a 2 column grid.",
                 }
             };
 
@@ -119,9 +174,9 @@ This widget is compatible with any **Kentico Xperience 13** project using the **
             }
         }
         ```
-4. Register your transformation services trough [DI](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-3.1).
-    - Register your services as implementations of the `ITransformationService` interface.
-    - For example (see *DancingGoatCore/Helpers/IServiceCollectionExtensions.cs*):
+5. Register your transformation services in your web project via [Dependency injection](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection).
+    - Add the transformation services to the `IServiceCollection` in your application's startup code, as singleton implementations of the `ITransformationService`interface.
+    - For example (see [DancingGoatCore/Helpers/IServiceCollectionExtensions.cs](https://github.com/Kentico/xperience-listing-widget/blob/master/DancingGoatCore/Helpers/IServiceCollectionExtensions.cs)):
         ```
         public static void AddDancingGoatListingWidgetTransformationServices(this IServiceCollection services)
         {
@@ -131,8 +186,10 @@ This widget is compatible with any **Kentico Xperience 13** project using the **
         }
         ```
 
-See examples of the transformations in *DancingGoatCore/Components/Widgets/ListingWidget/Transformations*.
+Repeat the process for all page types that you wish to support in the Listing widget.
 
+For examples of transformations, see this repository's [DancingGoatCore/Components/Widgets/ListingWidget/Transformations](https://github.com/Kentico/xperience-listing-widget/tree/master/DancingGoatCore/Components/Widgets/ListingWidget/Transformations) folder.
+    
 ## Questions & Support
 
-See the [Kentico home repository](https://github.com/Kentico/Home/blob/master/README.md) for more information about the product(s) and general advice on submitting questions.
+See the [Kentico home repository](https://github.com/Kentico/Home/blob/master/README.md) for more information about the products and general advice on submitting questions.
